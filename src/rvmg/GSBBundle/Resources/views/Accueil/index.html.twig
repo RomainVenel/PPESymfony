@@ -1,0 +1,17 @@
+{% extends "rvmgGSBBundle:Default:base.html.twig" %}
+
+{% block title %}
+    Accueil
+{% endblock %}
+{% block body %}
+    <h1>Galaxy Swiss Bourdin</h1>
+    <br/>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    {% endblock %}
+    <div class="well">
+        {{ form(form) }}  
+    </div>
+        
+    <br/>
+{% endblock %}

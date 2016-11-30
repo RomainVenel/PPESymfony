@@ -1,0 +1,7 @@
+rvmg_gsb_homepage:
+    path:     /
+    defaults: { _controller: rvmgGSBBundle:Accueil:connexionAccueil }
+
+rvmg_gsb_connexionVisiteur:
+    path:   /visiteur
+    defaults: { _controller: rvmgGSBBundle:Accueil:connexionAccueil }
