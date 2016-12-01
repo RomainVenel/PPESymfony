@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Lignefraishorsforfait
  *
- * @ORM\Table(name="LigneFraisHorsForfait", indexes={@ORM\Index(name="idVisiteur", columns={"idVisiteur", "mois"})})
+ * @ORM\Table(name="LigneFraisHorsForfait", indexes={@ORM\Index(name="idFicheFrais", columns={"idFicheFrais"})})
  * @ORM\Entity
  */
 class Lignefraishorsforfait
@@ -47,11 +47,10 @@ class Lignefraishorsforfait
      *
      * @ORM\ManyToOne(targetEntity="Fichefrais")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idVisiteur", referencedColumnName="idVisiteur"),
-     *   @ORM\JoinColumn(name="mois", referencedColumnName="mois")
+     *   @ORM\JoinColumn(name="idFicheFrais", referencedColumnName="idFicheFrais")
      * })
      */
-    private $idvisiteur;
+    private $idfichefrais;
 
 
 
@@ -135,25 +134,25 @@ class Lignefraishorsforfait
     }
 
     /**
-     * Set idvisiteur
+     * Set idfichefrais
      *
-     * @param \rvmg\GSBBundle\Entity\Fichefrais $idvisiteur
+     * @param \rvmg\GSBBundle\Entity\Fichefrais $idfichefrais
      * @return Lignefraishorsforfait
      */
-    public function setIdvisiteur(\rvmg\GSBBundle\Entity\Fichefrais $idvisiteur = null)
+    public function setIdfichefrais(\rvmg\GSBBundle\Entity\Fichefrais $idfichefrais = null)
     {
-        $this->idvisiteur = $idvisiteur;
+        $this->idfichefrais = $idfichefrais;
 
         return $this;
     }
 
     /**
-     * Get idvisiteur
+     * Get idfichefrais
      *
      * @return \rvmg\GSBBundle\Entity\Fichefrais 
      */
-    public function getIdvisiteur()
+    public function getIdfichefrais()
     {
-        return $this->idvisiteur;
+        return $this->idfichefrais;
     }
 }

@@ -7,17 +7,24 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Fichefrais
  *
- * @ORM\Table(name="FicheFrais", indexes={@ORM\Index(name="idEtat", columns={"idEtat"}), @ORM\Index(name="IDX_1C4987DC1D06ADE3", columns={"idVisiteur"})})
+ * @ORM\Table(name="FicheFrais", indexes={@ORM\Index(name="idEtat", columns={"idEtat"}), @ORM\Index(name="idVisiteur", columns={"idVisiteur"})})
  * @ORM\Entity
  */
 class Fichefrais
 {
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="idFicheFrais", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idfichefrais;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="mois", type="string", length=9, nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $mois;
 
@@ -55,30 +62,24 @@ class Fichefrais
     /**
      * @var \Visiteur
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Visiteur")
+     * @ORM\ManyToOne(targetEntity="Visiteur")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idVisiteur", referencedColumnName="idVisiteur")
      * })
      */
     private $idvisiteur;
 
+
+
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * Get idfichefrais
      *
-     * @ORM\ManyToMany(targetEntity="Fraisforfait", mappedBy="idvisiteur")
+     * @return integer 
      */
-    private $idfraisforfait;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
+    public function getIdfichefrais()
     {
-        $this->idfraisforfait = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this->idfichefrais;
     }
-
 
     /**
      * Set mois
@@ -201,7 +202,7 @@ class Fichefrais
      * @param \rvmg\GSBBundle\Entity\Visiteur $idvisiteur
      * @return Fichefrais
      */
-    public function setIdvisiteur(\rvmg\GSBBundle\Entity\Visiteur $idvisiteur)
+    public function setIdvisiteur(\rvmg\GSBBundle\Entity\Visiteur $idvisiteur = null)
     {
         $this->idvisiteur = $idvisiteur;
 
@@ -216,38 +217,5 @@ class Fichefrais
     public function getIdvisiteur()
     {
         return $this->idvisiteur;
-    }
-
-    /**
-     * Add idfraisforfait
-     *
-     * @param \rvmg\GSBBundle\Entity\Fraisforfait $idfraisforfait
-     * @return Fichefrais
-     */
-    public function addIdfraisforfait(\rvmg\GSBBundle\Entity\Fraisforfait $idfraisforfait)
-    {
-        $this->idfraisforfait[] = $idfraisforfait;
-
-        return $this;
-    }
-
-    /**
-     * Remove idfraisforfait
-     *
-     * @param \rvmg\GSBBundle\Entity\Fraisforfait $idfraisforfait
-     */
-    public function removeIdfraisforfait(\rvmg\GSBBundle\Entity\Fraisforfait $idfraisforfait)
-    {
-        $this->idfraisforfait->removeElement($idfraisforfait);
-    }
-
-    /**
-     * Get idfraisforfait
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getIdfraisforfait()
-    {
-        return $this->idfraisforfait;
     }
 }
