@@ -7,7 +7,7 @@
     <h1>Galaxy Swiss Bourdin</h1>
     <br/>
     {% block stylesheets %}
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+       {{ parent() }}
     {% endblock %}
     <div class="well">
         {{ form(form) }}  

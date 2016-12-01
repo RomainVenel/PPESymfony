@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/PPE_Symfony/src/rvmg/GSBBundle/Resources/views/Accueil/index.html.twig</file>
-            <file>file:/var/www/PPE_Symfony/src/rvmg/GSBBundle/Controller/AccueilController.php</file>
-            <file>file:/var/www/PPE_Symfony/src/rvmg/GSBBundle/Resources/views/Default/base.html.twig</file>
-            <file>file:/var/www/PPE_Symfony/src/rvmg/GSBBundle/Resources/config/routing.yml</file>
-            <file>file:/var/www/PPE_Symfony/src/rvmg/GSBBundle/Resources/views/Accueil/vueConnexionVisiteur.html.twig</file>
-            <file>file:/var/www/PPE_Symfony/src/rvmg/GSBBundle/Resources/config/parameters.yml</file>
+            <file>file:/var/www/PPE_Symfony2/PPESymfony/src/rvmg/GSBBundle/Resources/views/Accueil/vueConnexionVisiteur.html.twig</file>
+            <file>file:/var/www/PPE_Symfony2/PPESymfony/app/config/config.yml</file>
+            <file>file:/var/www/PPE_Symfony2/PPESymfony/src/rvmg/GSBBundle/Resources/views/Accueil/index.html.twig</file>
+            <file>file:/var/www/PPE_Symfony2/PPESymfony/src/rvmg/GSBBundle/Resources/config/routing.yml</file>
         </group>
     </open-files>
 </project-private>
