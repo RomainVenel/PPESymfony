@@ -3,6 +3,8 @@
 namespace rvmg\GSBBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use rvmg\GSBBundle\Formulaires\Data\ConnexionClass;
+use rvmg\GSBBundle\Formulaires\Type\ConnexionFormType;
 
 class AccueilController extends Controller
 {
@@ -13,15 +15,8 @@ class AccueilController extends Controller
     
     public function connexionAccueilAction(){
         
-        $form = $this->createFormBuilder()
-                ->add('login', 'text')
-                ->add('mdp', 'password')
-                ->add('profil', 'choice', array('choices'=>array('Visiteur'=>'Visiteur',
-                                                                 'Comptable'=>'Comptable'), 'expanded'=>true), array('required'=>true))
-                ->add('valider', 'submit')
-                ->add('annuler', 'reset')
-                
-                ->getForm();
+        $connexion = new ConnexionClass();
+        $form = $this->createForm(new ConnexionformType(),$connexion);        
         
         $request = $this->container->get('request');
         $form->handleRequest($request);
