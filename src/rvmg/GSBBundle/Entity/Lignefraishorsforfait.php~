@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Lignefraishorsforfait
  *
- * @ORM\Table(name="LigneFraisHorsForfait", indexes={@ORM\Index(name="idVisiteur", columns={"idVisiteur", "mois"})})
+ * @ORM\Table(name="LigneFraisHorsForfait", indexes={@ORM\Index(name="idFicheFrais", columns={"idFicheFrais"})})
  * @ORM\Entity
  */
 class Lignefraishorsforfait
@@ -47,11 +47,10 @@ class Lignefraishorsforfait
      *
      * @ORM\ManyToOne(targetEntity="Fichefrais")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idVisiteur", referencedColumnName="idVisiteur"),
-     *   @ORM\JoinColumn(name="mois", referencedColumnName="mois")
+     *   @ORM\JoinColumn(name="idFicheFrais", referencedColumnName="idFicheFrais")
      * })
      */
-    private $idvisiteur;
+    private $idfichefrais;
 
 
 }

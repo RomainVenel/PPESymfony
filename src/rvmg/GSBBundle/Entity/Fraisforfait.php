@@ -35,20 +35,6 @@ class Fraisforfait
      */
     private $montant;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Fichefrais", mappedBy="idfraisforfait")
-     */
-    private $idvisiteur;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->idvisiteur = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
 
     /**
@@ -105,38 +91,5 @@ class Fraisforfait
     public function getMontant()
     {
         return $this->montant;
-    }
-
-    /**
-     * Add idvisiteur
-     *
-     * @param \rvmg\GSBBundle\Entity\Fichefrais $idvisiteur
-     * @return Fraisforfait
-     */
-    public function addIdvisiteur(\rvmg\GSBBundle\Entity\Fichefrais $idvisiteur)
-    {
-        $this->idvisiteur[] = $idvisiteur;
-
-        return $this;
-    }
-
-    /**
-     * Remove idvisiteur
-     *
-     * @param \rvmg\GSBBundle\Entity\Fichefrais $idvisiteur
-     */
-    public function removeIdvisiteur(\rvmg\GSBBundle\Entity\Fichefrais $idvisiteur)
-    {
-        $this->idvisiteur->removeElement($idvisiteur);
-    }
-
-    /**
-     * Get idvisiteur
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getIdvisiteur()
-    {
-        return $this->idvisiteur;
     }
 }

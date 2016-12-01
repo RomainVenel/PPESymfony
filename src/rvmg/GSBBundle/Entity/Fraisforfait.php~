@@ -35,19 +35,5 @@ class Fraisforfait
      */
     private $montant;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Fichefrais", mappedBy="idfraisforfait")
-     */
-    private $idvisiteur;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->idvisiteur = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
 }
