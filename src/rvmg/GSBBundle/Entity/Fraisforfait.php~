@@ -1,0 +1,39 @@
+<?php
+
+namespace rvmg\GSBBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Fraisforfait
+ *
+ * @ORM\Table(name="FraisForfait")
+ * @ORM\Entity
+ */
+class Fraisforfait
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="idFraisForfait", type="string", length=3, nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idfraisforfait;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="libelle", type="string", length=30, nullable=true)
+     */
+    private $libelle;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="montant", type="decimal", precision=5, scale=2, nullable=true)
+     */
+    private $montant;
+
+
+}

@@ -1,0 +1,25 @@
+<! DOCTYPE html>
+<html>
+    <head>
+        {% block head %}
+            {% stylesheets '@rvmgGSBBundle/Resources/public/css/bootstrap.css'%}
+                <link rel="stylesheet" href="{{ asset_url }}" type="text/css"/>
+            {% endstylesheets %}
+            <title>
+                {% block title %}{% endblock %}
+            </title>
+        {% endblock %}
+    </head>
+    <body>
+        <div id="header">
+        </div>
+        <div id="content">
+            {% block body %}{% endblock %}
+        </div>
+        <div id="footer">
+            {% block footer %}
+                &copy; Copyright 2016 by Romain Venel & Maxime Genevier 
+            {% endblock %}
+        </div>
+    </body>
+</html>

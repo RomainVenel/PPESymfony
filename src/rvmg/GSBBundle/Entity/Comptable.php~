@@ -1,0 +1,53 @@
+<?php
+
+namespace rvmg\GSBBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Comptable
+ *
+ * @ORM\Table(name="Comptable")
+ * @ORM\Entity
+ */
+class Comptable
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="idComptable", type="string", length=4, nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idcomptable;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=30, nullable=true)
+     */
+    private $nom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prenom", type="string", length=30, nullable=true)
+     */
+    private $prenom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="login", type="string", length=20, nullable=true)
+     */
+    private $login;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mdp", type="string", length=20, nullable=true)
+     */
+    private $mdp;
+
+
+}

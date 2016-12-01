@@ -1,0 +1,56 @@
+<?php
+
+namespace rvmg\GSBBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Lignefraishorsforfait
+ *
+ * @ORM\Table(name="LigneFraisHorsForfait", indexes={@ORM\Index(name="idFicheFrais", columns={"idFicheFrais"})})
+ * @ORM\Entity
+ */
+class Lignefraishorsforfait
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idLigneFraisHorsForfait", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idlignefraishorsforfait;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="libelle", type="string", length=100, nullable=true)
+     */
+    private $libelle;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateDepense", type="date", nullable=true)
+     */
+    private $datedepense;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="montant", type="decimal", precision=10, scale=2, nullable=true)
+     */
+    private $montant;
+
+    /**
+     * @var \Fichefrais
+     *
+     * @ORM\ManyToOne(targetEntity="Fichefrais")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idFicheFrais", referencedColumnName="idFicheFrais")
+     * })
+     */
+    private $idfichefrais;
+
+
+}

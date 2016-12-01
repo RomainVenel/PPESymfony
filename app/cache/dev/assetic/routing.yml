@@ -1,0 +1,5 @@
+_assetic:
+    resource: .
+    type: assetic
+_app:
+    resource: /var/www/PPE_Symfony2/PPESymfony/app/config/routing_dev.yml
