@@ -23,6 +23,20 @@ class AccueilController extends Controller
         
         if ($form->isValid()){
             $data = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            switch($connexion->getProfil()){
+                case 'Visiteur':
+                    $repository = $em->getRepository('rvmgGSBBundle:Visiteur');
+                    $visiteur = $repository->findOneBy(array('login'=>$connexion->getLogin()));
+                    break;
+                case 'Comptable':
+                    
+                    break;
+                default:
+                    echo 'Profil inexistant';
+                    break;
+            }
+            
             return $this->render('rvmgGSBBundle:Accueil:vueConnexionVisiteur.html.twig', array('data'=>$data));
         }
         
