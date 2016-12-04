@@ -44,7 +44,7 @@ class AccueilController extends Controller
                     if(!$comptableLogin || !$comptableMdp){
                         return $this->render('rvmgGSBBundle:Accueil:vueConnexionErreur.html.twig', array('data'=>$data));
                     }else{
-                        return $this->render('rvmgGSBBundle:Visiteur:accueilComptable.html.twig', array('comptable'=>$comptableLogin));
+                        return $this->render('rvmgGSBBundle:Comptable:accueilComptable.html.twig', array('comptable'=>$comptableLogin));
                     }
                     break;
                 default:

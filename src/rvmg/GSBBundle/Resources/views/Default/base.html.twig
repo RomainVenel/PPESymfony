@@ -5,6 +5,9 @@
             {% stylesheets '@rvmgGSBBundle/Resources/public/css/bootstrap.css'%}
                 <link rel="stylesheet" href="{{ asset_url }}" type="text/css"/>
             {% endstylesheets %}
+            {% stylesheets '@rvmgGSBBundle/Resources/public/css/style.css'%}
+                <link rel="stylesheet" href="{{ asset_url }}" type="text/css"/>
+            {% endstylesheets %}
             <title>
                 {% block title %}{% endblock %}
             </title>
@@ -18,7 +21,7 @@
         </div>
         <div id="footer">
             {% block footer %}
-                &copy; Copyright 2016 by Romain Venel & Maxime Genevier 
+                <p>&copy; Copyright 2016 by Romain Venel & Maxime Genevier</p>
             {% endblock %}
         </div>
     </body>

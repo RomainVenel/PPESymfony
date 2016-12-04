@@ -6,6 +6,9 @@
             {% stylesheets '@rvmgGSBBundle/Resources/public/css/bootstrap.css'%}
                 <link rel="stylesheet" href="{{ asset_url }}" type="text/css"/>
             {% endstylesheets %}
+            {% stylesheets '@rvmgGSBBundle/Resources/public/css/style.css'%}
+                <link rel="stylesheet" href="{{ asset_url }}" type="text/css"/>
+            {% endstylesheets %}
             <title>
                 {% block title %}{% endblock %}
             </title>
@@ -17,7 +20,7 @@
                 <nav class="navbar navbar-inverse">
                     <div class="container-fluid">
                         <div class="navbar-header">
-                            <a class="navbar-brand" href="#">Gaxaly Swiss Bourdin</a>
+                            <a class="navbar-brand" href="#">Galaxy Swiss Bourdin</a>
                         </div>
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="#">Accueil</a></li>
@@ -36,7 +39,7 @@
         </div>
         <div id="footer">
             {% block footer %}
-                &copy; Copyright 2016 by Romain Venel & Maxime Genevier 
+                <p>&copy; Copyright 2016 by Romain Venel & Maxime Genevier</p> 
             {% endblock %}
         </div>
     </body>
