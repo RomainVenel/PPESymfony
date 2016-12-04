@@ -33,6 +33,8 @@ class AccueilController extends Controller
                     $visiteurMdp = $repository->findOneByMdp($connexion->getMdp());
                     if(!$visiteurLogin || !$visiteurMdp){
                         return $this->render('rvmgGSBBundle:Accueil:vueConnexionErreur.html.twig', array('data'=>$data));
+                    }else{
+                        return $this->render('rvmgGSBBundle:Visiteur:accueilVisiteur.html.twig', array('visiteur'=>$visiteurLogin));
                     }
                     break;
                 case 'Comptable':
@@ -41,6 +43,8 @@ class AccueilController extends Controller
                     $comptableMdp = $repository->findOneByMdp($connexion->getMdp());
                     if(!$comptableLogin || !$comptableMdp){
                         return $this->render('rvmgGSBBundle:Accueil:vueConnexionErreur.html.twig', array('data'=>$data));
+                    }else{
+                        return $this->render('rvmgGSBBundle:Visiteur:accueilComptable.html.twig', array('comptable'=>$comptableLogin));
                     }
                     break;
                 default:

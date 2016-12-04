@@ -1,0 +1,43 @@
+{# empty Twig template #}
+<! DOCTYPE html>
+<html>
+    <head>
+        {% block head %}
+            {% stylesheets '@rvmgGSBBundle/Resources/public/css/bootstrap.css'%}
+                <link rel="stylesheet" href="{{ asset_url }}" type="text/css"/>
+            {% endstylesheets %}
+            <title>
+                {% block title %}{% endblock %}
+            </title>
+        {% endblock %}
+    </head>
+    <body>
+        <div id="header">
+            {% block header %}
+                <nav class="navbar navbar-inverse">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="#">Gaxaly Swiss Bourdin</a>
+                        </div>
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#">Accueil</a></li>
+                            <li><a href="#">Fiches de Frais</a></li>
+                            <li><a href="#">Paramètres</a></li>
+                        </ul>
+                        {% block identite %}
+                        {% endblock %}
+                        <button class="btn btn-danger navbar-btn">Déconnexion</button>
+                    </div>
+                </nav>
+            {% endblock %}
+        </div>
+        <div id="content">
+            {% block body %}{% endblock %}
+        </div>
+        <div id="footer">
+            {% block footer %}
+                &copy; Copyright 2016 by Romain Venel & Maxime Genevier 
+            {% endblock %}
+        </div>
+    </body>
+</html>
