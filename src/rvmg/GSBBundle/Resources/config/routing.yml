@@ -4,4 +4,4 @@ rvmg_gsb_homepage:
 
 rvmg_gsb_connexionVisiteur:
     path:   /visiteur
-    defaults: { _controller: rvmgGSBBundle:Accueil:connexionAccueil }
+    defaults: { _controller: rvmgGSBBundle:Accueil:view }

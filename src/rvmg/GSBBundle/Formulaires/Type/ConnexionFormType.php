@@ -18,9 +18,8 @@ class ConnexionFormType extends AbstractType{
                 ->add('login', 'text')
                 ->add('mdp', 'password')
                 ->add('profil', 'choice', array('choices'=>array('Visiteur'=>'Visiteur',
-                                                                 'Comptable'=>'Comptable'), 'expanded'=>true), array('required'=>true))
-                ->add('valider', 'submit')
-                ->add('annuler', 'reset');
+                                                                 'Comptable'=>'Comptable'), 'expanded'=>true),
+                                                           array('required'=>true));
     }
     
     public function setDefaultOptions(OptionsResolverInterface $resolver) {

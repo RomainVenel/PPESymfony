@@ -151,7 +151,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         // rvmg_gsb_connexionVisiteur
         if ($pathinfo === '/visiteur') {
-            return array (  '_controller' => 'rvmg\\GSBBundle\\Controller\\AccueilController::connexionAccueilAction',  '_route' => 'rvmg_gsb_connexionVisiteur',);
+            return array (  '_controller' => 'rvmg\\GSBBundle\\Controller\\AccueilController::viewAction',  '_route' => 'rvmg_gsb_connexionVisiteur',);
         }
 
         // homepage

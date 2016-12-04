@@ -3,14 +3,18 @@
 {% block title %}
     Accueil
 {% endblock %}
-{% block body %}
-    <h1>Galaxy Swiss Bourdin</h1>
-    <br/>
-    {% block stylesheets %}
+{% block stylesheets %}
        {{ parent() }}
     {% endblock %}
+{% block body %}
+    <h1 align="center">Galaxy Swiss Bourdin</h1>
+    <br/>
     <div class="well">
-        {{ form(form) }}  
+        <form method="post" {{ form_enctype(form) }}>
+            {{ form_widget(form) }}
+            <input type="submit" value="Valider" class="btn btn-primary" />
+            <input type="reset" value="Annuler" class="btn btn-danger" />
+        </form>
     </div>
         
     <br/>

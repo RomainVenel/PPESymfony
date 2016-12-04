@@ -11,8 +11,8 @@ class __TwigTemplate_5459b6b7c06d99459bf994481863090446f5791b2039e6a3aed6745c504
         $this->parent = $this->loadTemplate("rvmgGSBBundle:Default:base.html.twig", "rvmgGSBBundle:Accueil:index.html.twig", 1);
         $this->blocks = array(
             'title' => array($this, 'block_title'),
-            'body' => array($this, 'block_body'),
             'stylesheets' => array($this, 'block_stylesheets'),
+            'body' => array($this, 'block_body'),
         );
     }
 
@@ -23,69 +23,72 @@ class __TwigTemplate_5459b6b7c06d99459bf994481863090446f5791b2039e6a3aed6745c504
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_c06a588e0b61bd6b8c502d3d9b977f96aed7b1eccd1d13b184b5dbda87b5f309 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_c06a588e0b61bd6b8c502d3d9b977f96aed7b1eccd1d13b184b5dbda87b5f309->enter($__internal_c06a588e0b61bd6b8c502d3d9b977f96aed7b1eccd1d13b184b5dbda87b5f309_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "rvmgGSBBundle:Accueil:index.html.twig"));
+        $__internal_a481305ff3cb91bc63d38d4d414c1c6aa39c44b4d41930f36ecbf466535b0881 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_a481305ff3cb91bc63d38d4d414c1c6aa39c44b4d41930f36ecbf466535b0881->enter($__internal_a481305ff3cb91bc63d38d4d414c1c6aa39c44b4d41930f36ecbf466535b0881_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "rvmgGSBBundle:Accueil:index.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_c06a588e0b61bd6b8c502d3d9b977f96aed7b1eccd1d13b184b5dbda87b5f309->leave($__internal_c06a588e0b61bd6b8c502d3d9b977f96aed7b1eccd1d13b184b5dbda87b5f309_prof);
+        $__internal_a481305ff3cb91bc63d38d4d414c1c6aa39c44b4d41930f36ecbf466535b0881->leave($__internal_a481305ff3cb91bc63d38d4d414c1c6aa39c44b4d41930f36ecbf466535b0881_prof);
 
     }
 
     // line 3
     public function block_title($context, array $blocks = array())
     {
-        $__internal_754dc4da2b50b79e003b1372764f62fdf6c7f9a54ed7324034c20086d2d149fb = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_754dc4da2b50b79e003b1372764f62fdf6c7f9a54ed7324034c20086d2d149fb->enter($__internal_754dc4da2b50b79e003b1372764f62fdf6c7f9a54ed7324034c20086d2d149fb_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "title"));
+        $__internal_679d7c035a4898fcf933e9983bd7a2401257373cad3971d4f7ac20df0278ecfb = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_679d7c035a4898fcf933e9983bd7a2401257373cad3971d4f7ac20df0278ecfb->enter($__internal_679d7c035a4898fcf933e9983bd7a2401257373cad3971d4f7ac20df0278ecfb_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "title"));
 
         // line 4
         echo "    Accueil
 ";
         
-        $__internal_754dc4da2b50b79e003b1372764f62fdf6c7f9a54ed7324034c20086d2d149fb->leave($__internal_754dc4da2b50b79e003b1372764f62fdf6c7f9a54ed7324034c20086d2d149fb_prof);
+        $__internal_679d7c035a4898fcf933e9983bd7a2401257373cad3971d4f7ac20df0278ecfb->leave($__internal_679d7c035a4898fcf933e9983bd7a2401257373cad3971d4f7ac20df0278ecfb_prof);
 
     }
 
     // line 6
-    public function block_body($context, array $blocks = array())
-    {
-        $__internal_2b0bee5ebdd5d6e697331ceebec6bb54511d076395c12ea2e682854e8c2eacfb = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_2b0bee5ebdd5d6e697331ceebec6bb54511d076395c12ea2e682854e8c2eacfb->enter($__internal_2b0bee5ebdd5d6e697331ceebec6bb54511d076395c12ea2e682854e8c2eacfb_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
-
-        // line 7
-        echo "    <h1>Galaxy Swiss Bourdin</h1>
-    <br/>
-    ";
-        // line 9
-        $this->displayBlock('stylesheets', $context, $blocks);
-        // line 12
-        echo "    <div class=\"well\">
-        ";
-        // line 13
-        echo         $this->env->getExtension('Symfony\Bridge\Twig\Extension\FormExtension')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form');
-        echo "  
-    </div>
-        
-    <br/>
-";
-        
-        $__internal_2b0bee5ebdd5d6e697331ceebec6bb54511d076395c12ea2e682854e8c2eacfb->leave($__internal_2b0bee5ebdd5d6e697331ceebec6bb54511d076395c12ea2e682854e8c2eacfb_prof);
-
-    }
-
-    // line 9
     public function block_stylesheets($context, array $blocks = array())
     {
-        $__internal_abbe88862f3e699e7693b1b235f693429291318a3757886ebc3285b70f4deb85 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_abbe88862f3e699e7693b1b235f693429291318a3757886ebc3285b70f4deb85->enter($__internal_abbe88862f3e699e7693b1b235f693429291318a3757886ebc3285b70f4deb85_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "stylesheets"));
+        $__internal_af59da812ae0bb6628a0eea9b07df0bc6e226852f38e19609138ea0d5732575a = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_af59da812ae0bb6628a0eea9b07df0bc6e226852f38e19609138ea0d5732575a->enter($__internal_af59da812ae0bb6628a0eea9b07df0bc6e226852f38e19609138ea0d5732575a_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "stylesheets"));
 
-        // line 10
+        // line 7
         echo "       ";
         $this->displayParentBlock("stylesheets", $context, $blocks);
         echo "
     ";
         
-        $__internal_abbe88862f3e699e7693b1b235f693429291318a3757886ebc3285b70f4deb85->leave($__internal_abbe88862f3e699e7693b1b235f693429291318a3757886ebc3285b70f4deb85_prof);
+        $__internal_af59da812ae0bb6628a0eea9b07df0bc6e226852f38e19609138ea0d5732575a->leave($__internal_af59da812ae0bb6628a0eea9b07df0bc6e226852f38e19609138ea0d5732575a_prof);
+
+    }
+
+    // line 9
+    public function block_body($context, array $blocks = array())
+    {
+        $__internal_03930c96a68cd9b1a053494e452d2c98023793a5e6ffab08965f7eb645d8f7bd = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_03930c96a68cd9b1a053494e452d2c98023793a5e6ffab08965f7eb645d8f7bd->enter($__internal_03930c96a68cd9b1a053494e452d2c98023793a5e6ffab08965f7eb645d8f7bd_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
+
+        // line 10
+        echo "    <h1 align=\"center\">Galaxy Swiss Bourdin</h1>
+    <br/>
+    <div class=\"well\">
+        <form method=\"post\" ";
+        // line 13
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\FormExtension')->renderer->searchAndRenderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'enctype');
+        echo ">
+            ";
+        // line 14
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\FormExtension')->renderer->searchAndRenderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'widget');
+        echo "
+            <input type=\"submit\" value=\"Valider\" class=\"btn btn-primary\" />
+            <input type=\"reset\" value=\"Annuler\" class=\"btn btn-danger\" />
+        </form>
+    </div>
+        
+    <br/>
+";
+        
+        $__internal_03930c96a68cd9b1a053494e452d2c98023793a5e6ffab08965f7eb645d8f7bd->leave($__internal_03930c96a68cd9b1a053494e452d2c98023793a5e6ffab08965f7eb645d8f7bd_prof);
 
     }
 
@@ -101,7 +104,7 @@ class __TwigTemplate_5459b6b7c06d99459bf994481863090446f5791b2039e6a3aed6745c504
 
     public function getDebugInfo()
     {
-        return array (  83 => 10,  77 => 9,  65 => 13,  62 => 12,  60 => 9,  56 => 7,  50 => 6,  42 => 4,  36 => 3,  11 => 1,);
+        return array (  81 => 14,  77 => 13,  72 => 10,  66 => 9,  56 => 7,  50 => 6,  42 => 4,  36 => 3,  11 => 1,);
     }
 
     public function getSource()
@@ -111,14 +114,18 @@ class __TwigTemplate_5459b6b7c06d99459bf994481863090446f5791b2039e6a3aed6745c504
 {% block title %}
     Accueil
 {% endblock %}
-{% block body %}
-    <h1>Galaxy Swiss Bourdin</h1>
-    <br/>
-    {% block stylesheets %}
+{% block stylesheets %}
        {{ parent() }}
     {% endblock %}
+{% block body %}
+    <h1 align=\"center\">Galaxy Swiss Bourdin</h1>
+    <br/>
     <div class=\"well\">
-        {{ form(form) }}  
+        <form method=\"post\" {{ form_enctype(form) }}>
+            {{ form_widget(form) }}
+            <input type=\"submit\" value=\"Valider\" class=\"btn btn-primary\" />
+            <input type=\"reset\" value=\"Annuler\" class=\"btn btn-danger\" />
+        </form>
     </div>
         
     <br/>
