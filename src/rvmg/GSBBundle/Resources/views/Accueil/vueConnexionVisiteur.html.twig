@@ -3,8 +3,11 @@
 {% block title %}
     Accueil
 {% endblock %}
+{% block stylesheets %}
+       {{ parent() }}
+    {% endblock %}
 {% block body %}
-    <h1>Galaxy Swiss Bourdin</h1>
+    <h1 align='center'>Galaxy Swiss Bourdin</h1>
     <br/>
     Login: {{ data.login }}</br>
     Mot de passe: {{ data.mdp }}</br>

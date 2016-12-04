@@ -29,16 +29,18 @@ class AccueilController extends Controller
             switch($connexion->getProfil()){
                 case 'Visiteur':
                     $repository = $em->getRepository('rvmgGSBBundle:Visiteur');
-                    $visiteur = $repository->findOneByLogin($connexion->getLogin());
-                    if(!$visiteur){
-                        throw $this->createNotFoundException('Visiteur inexistant!');
+                    $visiteurLogin = $repository->findOneByLogin($connexion->getLogin());
+                    $visiteurMdp = $repository->findOneByMdp($connexion->getMdp());
+                    if(!$visiteurLogin || !$visiteurMdp){
+                        return $this->render('rvmgGSBBundle:Accueil:vueConnexionErreur.html.twig', array('data'=>$data));
                     }
                     break;
                 case 'Comptable':
                     $repository = $em->getRepository('rvmgGSBBundle:Comptable');
-                    $comptable = $repository->findOneByLogin($connexion->getLogin());
-                    if(!$comptable){
-                        throw $this->createNotFoundException('Comptable inexistant!');
+                    $comptableLogin = $repository->findOneByLogin($connexion->getLogin());
+                    $comptableMdp = $repository->findOneByMdp($connexion->getMdp());
+                    if(!$comptableLogin || !$comptableMdp){
+                        return $this->render('rvmgGSBBundle:Accueil:vueConnexionErreur.html.twig', array('data'=>$data));
                     }
                     break;
                 default:

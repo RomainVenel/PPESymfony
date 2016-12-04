@@ -1,6 +1,6 @@
 <?php
 
-/* @WebProfiler/Profiler/admin.html.twig */
+/* WebProfilerBundle:Profiler:admin.html.twig */
 class __TwigTemplate_2ba998f1601f3be80a34d2c18c4835c0872a731502145112447c594653698bc3 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
@@ -15,8 +15,8 @@ class __TwigTemplate_2ba998f1601f3be80a34d2c18c4835c0872a731502145112447c5946536
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_8639aa097c4741e6720e883d849c8987a1623a2a9e37604819d712ae1a6dedf3 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_8639aa097c4741e6720e883d849c8987a1623a2a9e37604819d712ae1a6dedf3->enter($__internal_8639aa097c4741e6720e883d849c8987a1623a2a9e37604819d712ae1a6dedf3_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/admin.html.twig"));
+        $__internal_5b0789b173f1a85e326dc4c560ed0bd99b1b1f110135a23061d2cff56aa7dded = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_5b0789b173f1a85e326dc4c560ed0bd99b1b1f110135a23061d2cff56aa7dded->enter($__internal_5b0789b173f1a85e326dc4c560ed0bd99b1b1f110135a23061d2cff56aa7dded_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "WebProfilerBundle:Profiler:admin.html.twig"));
 
         // line 1
         if ( !twig_test_empty((isset($context["token"]) ? $context["token"] : $this->getContext($context, "token")))) {
@@ -35,13 +35,13 @@ class __TwigTemplate_2ba998f1601f3be80a34d2c18c4835c0872a731502145112447c5946536
 ";
         }
         
-        $__internal_8639aa097c4741e6720e883d849c8987a1623a2a9e37604819d712ae1a6dedf3->leave($__internal_8639aa097c4741e6720e883d849c8987a1623a2a9e37604819d712ae1a6dedf3_prof);
+        $__internal_5b0789b173f1a85e326dc4c560ed0bd99b1b1f110135a23061d2cff56aa7dded->leave($__internal_5b0789b173f1a85e326dc4c560ed0bd99b1b1f110135a23061d2cff56aa7dded_prof);
 
     }
 
     public function getTemplateName()
     {
-        return "@WebProfiler/Profiler/admin.html.twig";
+        return "WebProfilerBundle:Profiler:admin.html.twig";
     }
 
     public function isTraitable()

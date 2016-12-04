@@ -1,6 +1,6 @@
 <?php
 
-/* @WebProfiler/Profiler/header.html.twig */
+/* WebProfilerBundle:Profiler:header.html.twig */
 class __TwigTemplate_80f1824aa21bac40a350b6bb3c63881a2df5e049bb5572a7e158b0c30174b01b extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
@@ -15,8 +15,8 @@ class __TwigTemplate_80f1824aa21bac40a350b6bb3c63881a2df5e049bb5572a7e158b0c3017
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_4fc96a424f098ba84b1f9085eebe07c0acc7c383b64896722a5a98cc9a72e886 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_4fc96a424f098ba84b1f9085eebe07c0acc7c383b64896722a5a98cc9a72e886->enter($__internal_4fc96a424f098ba84b1f9085eebe07c0acc7c383b64896722a5a98cc9a72e886_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/header.html.twig"));
+        $__internal_14d6d9a4aefd5fc140add2b3f15211faea75eeb3aea4f0499c4c90be5fa193c9 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_14d6d9a4aefd5fc140add2b3f15211faea75eeb3aea4f0499c4c90be5fa193c9->enter($__internal_14d6d9a4aefd5fc140add2b3f15211faea75eeb3aea4f0499c4c90be5fa193c9_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "WebProfilerBundle:Profiler:header.html.twig"));
 
         // line 1
         echo "<div id=\"header\" class=\"clear-fix\">
@@ -46,13 +46,13 @@ class __TwigTemplate_80f1824aa21bac40a350b6bb3c63881a2df5e049bb5572a7e158b0c3017
 </div>
 ";
         
-        $__internal_4fc96a424f098ba84b1f9085eebe07c0acc7c383b64896722a5a98cc9a72e886->leave($__internal_4fc96a424f098ba84b1f9085eebe07c0acc7c383b64896722a5a98cc9a72e886_prof);
+        $__internal_14d6d9a4aefd5fc140add2b3f15211faea75eeb3aea4f0499c4c90be5fa193c9->leave($__internal_14d6d9a4aefd5fc140add2b3f15211faea75eeb3aea4f0499c4c90be5fa193c9_prof);
 
     }
 
     public function getTemplateName()
     {
-        return "@WebProfiler/Profiler/header.html.twig";
+        return "WebProfilerBundle:Profiler:header.html.twig";
     }
 
     public function getDebugInfo()

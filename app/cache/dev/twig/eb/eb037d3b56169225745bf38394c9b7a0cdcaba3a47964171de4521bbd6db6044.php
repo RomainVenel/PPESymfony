@@ -1,6 +1,6 @@
 <?php
 
-/* @WebProfiler/Profiler/search.html.twig */
+/* WebProfilerBundle:Profiler:search.html.twig */
 class __TwigTemplate_84248b3908d6b5d8833790025e06ea70c2de3783bb469949e1d5976c562338f0 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
@@ -15,8 +15,8 @@ class __TwigTemplate_84248b3908d6b5d8833790025e06ea70c2de3783bb469949e1d5976c562
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_68b275970660f8b5b6003b978dec46692a2ae6204d0aa5fcd4b417027b4d98b4 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_68b275970660f8b5b6003b978dec46692a2ae6204d0aa5fcd4b417027b4d98b4->enter($__internal_68b275970660f8b5b6003b978dec46692a2ae6204d0aa5fcd4b417027b4d98b4_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/search.html.twig"));
+        $__internal_96c090c71f6a3bbc2e4e4bff3c8990428a47979baf808f326a7ae08e7d041dde = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_96c090c71f6a3bbc2e4e4bff3c8990428a47979baf808f326a7ae08e7d041dde->enter($__internal_96c090c71f6a3bbc2e4e4bff3c8990428a47979baf808f326a7ae08e7d041dde_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "WebProfilerBundle:Profiler:search.html.twig"));
 
         // line 1
         echo "<div class=\"search clearfix\" id=\"searchBar\">
@@ -116,13 +116,13 @@ class __TwigTemplate_84248b3908d6b5d8833790025e06ea70c2de3783bb469949e1d5976c562
 </div>
 ";
         
-        $__internal_68b275970660f8b5b6003b978dec46692a2ae6204d0aa5fcd4b417027b4d98b4->leave($__internal_68b275970660f8b5b6003b978dec46692a2ae6204d0aa5fcd4b417027b4d98b4_prof);
+        $__internal_96c090c71f6a3bbc2e4e4bff3c8990428a47979baf808f326a7ae08e7d041dde->leave($__internal_96c090c71f6a3bbc2e4e4bff3c8990428a47979baf808f326a7ae08e7d041dde_prof);
 
     }
 
     public function getTemplateName()
     {
-        return "@WebProfiler/Profiler/search.html.twig";
+        return "WebProfilerBundle:Profiler:search.html.twig";
     }
 
     public function isTraitable()

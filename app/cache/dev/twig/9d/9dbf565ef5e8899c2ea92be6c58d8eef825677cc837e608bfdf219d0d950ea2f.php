@@ -1,6 +1,6 @@
 <?php
 
-/* @WebProfiler/Profiler/bag.html.twig */
+/* WebProfilerBundle:Profiler:bag.html.twig */
 class __TwigTemplate_33b75a6ccb6e1c35659bfce43f5613cd0a1113c3398e08cfe34efb1e11e80036 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
@@ -15,8 +15,8 @@ class __TwigTemplate_33b75a6ccb6e1c35659bfce43f5613cd0a1113c3398e08cfe34efb1e11e
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_1c268f335e05fbae697b252269ec6daa09d2beedbd1ebfae13c52a5b284f0e55 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_1c268f335e05fbae697b252269ec6daa09d2beedbd1ebfae13c52a5b284f0e55->enter($__internal_1c268f335e05fbae697b252269ec6daa09d2beedbd1ebfae13c52a5b284f0e55_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/bag.html.twig"));
+        $__internal_f7c5769e5d0df2730f465f47c7dd67625f76c75facf9fa6395f06f6367e097c5 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_f7c5769e5d0df2730f465f47c7dd67625f76c75facf9fa6395f06f6367e097c5->enter($__internal_f7c5769e5d0df2730f465f47c7dd67625f76c75facf9fa6395f06f6367e097c5_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "WebProfilerBundle:Profiler:bag.html.twig"));
 
         // line 1
         echo "<table ";
@@ -59,13 +59,13 @@ class __TwigTemplate_33b75a6ccb6e1c35659bfce43f5613cd0a1113c3398e08cfe34efb1e11e
 </table>
 ";
         
-        $__internal_1c268f335e05fbae697b252269ec6daa09d2beedbd1ebfae13c52a5b284f0e55->leave($__internal_1c268f335e05fbae697b252269ec6daa09d2beedbd1ebfae13c52a5b284f0e55_prof);
+        $__internal_f7c5769e5d0df2730f465f47c7dd67625f76c75facf9fa6395f06f6367e097c5->leave($__internal_f7c5769e5d0df2730f465f47c7dd67625f76c75facf9fa6395f06f6367e097c5_prof);
 
     }
 
     public function getTemplateName()
     {
-        return "@WebProfiler/Profiler/bag.html.twig";
+        return "WebProfilerBundle:Profiler:bag.html.twig";
     }
 
     public function isTraitable()

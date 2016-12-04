@@ -2,6 +2,6 @@ rvmg_gsb_homepage:
     path:     /
     defaults: { _controller: rvmgGSBBundle:Accueil:connexionAccueil }
 
-rvmg_gsb_connexionVisiteur:
-    path:   /visiteur
-    defaults: { _controller: rvmgGSBBundle:Accueil:view }
+rvmg_gsb_connexionErreur:
+    path:   /connexionErreur
+    defaults: { _controller: rvmgGSBBundle:Accueil:connexionAccueil }

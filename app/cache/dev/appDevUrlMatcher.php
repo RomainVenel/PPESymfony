@@ -149,9 +149,9 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'rvmg\\GSBBundle\\Controller\\AccueilController::connexionAccueilAction',  '_route' => 'rvmg_gsb_homepage',);
         }
 
-        // rvmg_gsb_connexionVisiteur
-        if ($pathinfo === '/visiteur') {
-            return array (  '_controller' => 'rvmg\\GSBBundle\\Controller\\AccueilController::viewAction',  '_route' => 'rvmg_gsb_connexionVisiteur',);
+        // rvmg_gsb_connexionErreur
+        if ($pathinfo === '/connexionErreur') {
+            return array (  '_controller' => 'rvmg\\GSBBundle\\Controller\\AccueilController::connexionAccueilAction',  '_route' => 'rvmg_gsb_connexionErreur',);
         }
 
         // homepage

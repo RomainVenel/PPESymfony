@@ -1,6 +1,6 @@
 <?php
 
-/* @WebProfiler/Profiler/profiler.css.twig */
+/* WebProfilerBundle:Profiler:profiler.css.twig */
 class __TwigTemplate_c5354287927ff3ec20511f697881393c7ee1ce94c83fb36bc3402fc909b23e88 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
@@ -15,8 +15,8 @@ class __TwigTemplate_c5354287927ff3ec20511f697881393c7ee1ce94c83fb36bc3402fc909b
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_df6b278419d63ffaf789e20a748817347b3e62edb7c230b18c1c399ead4f00bc = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_df6b278419d63ffaf789e20a748817347b3e62edb7c230b18c1c399ead4f00bc->enter($__internal_df6b278419d63ffaf789e20a748817347b3e62edb7c230b18c1c399ead4f00bc_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/profiler.css.twig"));
+        $__internal_c03adec3e2072c9bb8911a95c922af0ca751297e3ff155aae3048419930ef381 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_c03adec3e2072c9bb8911a95c922af0ca751297e3ff155aae3048419930ef381->enter($__internal_c03adec3e2072c9bb8911a95c922af0ca751297e3ff155aae3048419930ef381_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "WebProfilerBundle:Profiler:profiler.css.twig"));
 
         // line 1
         echo "/*
@@ -427,13 +427,13 @@ td.main, td.menu {
 }
 ";
         
-        $__internal_df6b278419d63ffaf789e20a748817347b3e62edb7c230b18c1c399ead4f00bc->leave($__internal_df6b278419d63ffaf789e20a748817347b3e62edb7c230b18c1c399ead4f00bc_prof);
+        $__internal_c03adec3e2072c9bb8911a95c922af0ca751297e3ff155aae3048419930ef381->leave($__internal_c03adec3e2072c9bb8911a95c922af0ca751297e3ff155aae3048419930ef381_prof);
 
     }
 
     public function getTemplateName()
     {
-        return "@WebProfiler/Profiler/profiler.css.twig";
+        return "WebProfilerBundle:Profiler:profiler.css.twig";
     }
 
     public function getDebugInfo()

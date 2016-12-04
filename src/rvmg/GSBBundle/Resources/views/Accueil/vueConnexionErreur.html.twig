@@ -1,0 +1,13 @@
+{% extends "rvmgGSBBundle:Default:base.html.twig" %}
+
+{% block title %}
+    Erreur de connexion
+{% endblock %}
+{% block stylesheets %}
+       {{ parent() }}
+    {% endblock %}
+{% block body %}
+    <h1 align="center">Galaxy Swiss Bourdin</h1>
+    <br/>
+    <p align='center'>Le {{ data.profil }} de login {{ data.login }} et de mdp {{ data.mdp }} n'existe pas !</p>
+{% endblock %}
