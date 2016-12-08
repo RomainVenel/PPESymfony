@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Visiteur
  *
  * @ORM\Table(name="Visiteur", indexes={@ORM\Index(name="idComptable", columns={"idComptable"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="rvmg\GSBBundle\Entity\VisiteurRepository")
  */
 class Visiteur
 {

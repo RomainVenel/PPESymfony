@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Fichefrais
  *
  * @ORM\Table(name="FicheFrais", indexes={@ORM\Index(name="idEtat", columns={"idEtat"}), @ORM\Index(name="idVisiteur", columns={"idVisiteur"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="rvmg\GSBBundle\Entity\FichefraisRepository")
  */
 class Fichefrais
 {

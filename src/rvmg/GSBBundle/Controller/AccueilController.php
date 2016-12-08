@@ -7,6 +7,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use rvmg\GSBBundle\Formulaires\Data\ConnexionClass;
 use rvmg\GSBBundle\Formulaires\Type\ConnexionFormType;
+use rvmg\GSBBundle\Entity\Comptable;
+use rvmg\GSBBundle\Entity\ComptableRepository;
+use rvmg\GSBBundle\Entity\Visiteur;
+use rvmg\GSBBundle\Entity\VisiteurRepository;
 
 class AccueilController extends Controller
 {
@@ -29,22 +33,21 @@ class AccueilController extends Controller
             switch($connexion->getProfil()){
                 case 'Visiteur':
                     $repository = $em->getRepository('rvmgGSBBundle:Visiteur');
-                    $visiteurLogin = $repository->findOneByLogin($connexion->getLogin());
-                    $visiteurMdp = $repository->findOneByMdp($connexion->getMdp());
-                    if(!$visiteurLogin || !$visiteurMdp){
+                    $visiteur = $repository->findByMdpAndLogin($connexion->getLogin(), $connexion->getMdp());
+                    
+                    if(!$visiteur){
                         return $this->render('rvmgGSBBundle:Accueil:vueConnexionErreur.html.twig', array('data'=>$data));
                     }else{
-                        return $this->render('rvmgGSBBundle:Visiteur:accueilVisiteur.html.twig', array('visiteur'=>$visiteurLogin));
+                        return $this->render('rvmgGSBBundle:Visiteur:accueilVisiteur.html.twig', array('visiteur'=>$visiteur));
                     }
                     break;
                 case 'Comptable':
                     $repository = $em->getRepository('rvmgGSBBundle:Comptable');
-                    $comptableLogin = $repository->findOneByLogin($connexion->getLogin());
-                    $comptableMdp = $repository->findOneByMdp($connexion->getMdp());
-                    if(!$comptableLogin || !$comptableMdp){
+                    $comptable = $repository->findOneByLogin($connexion->getLogin());
+                    if(!$comptable){
                         return $this->render('rvmgGSBBundle:Accueil:vueConnexionErreur.html.twig', array('data'=>$data));
                     }else{
-                        return $this->render('rvmgGSBBundle:Comptable:accueilComptable.html.twig', array('comptable'=>$comptableLogin));
+                        return $this->render('rvmgGSBBundle:Comptable:accueilComptable.html.twig', array('comptable'=>$comptable));
                     }
                     break;
                 default:

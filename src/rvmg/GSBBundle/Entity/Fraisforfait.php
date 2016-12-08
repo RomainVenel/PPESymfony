@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Fraisforfait
  *
  * @ORM\Table(name="FraisForfait")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="rvmg\GSBBundle\Entity\FraisforfaitRepository")
  */
 class Fraisforfait
 {
