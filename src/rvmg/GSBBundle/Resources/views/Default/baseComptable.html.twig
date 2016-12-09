@@ -9,6 +9,9 @@
             {% stylesheets '@rvmgGSBBundle/Resources/public/css/style.css'%}
                 <link rel="stylesheet" href="{{ asset_url }}" type="text/css"/>
             {% endstylesheets %}
+            {% stylesheets '@rvmgGSBBundle/Resources/public/css/font-awesome.css'%}
+                <link rel="stylesheet" href="{{ asset_url }}" type="text/css"/>
+            {% endstylesheets %}
             <title>
                 {% block title %}{% endblock %}
             </title>
@@ -23,13 +26,12 @@
                             <a class="navbar-brand" href="#">Galaxy Swiss Bourdin</a>
                         </div>
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="#">Accueil</a></li>
                             <li><a href="#">Fiches de Frais</a></li>
                             <li><a href="#">Paramètres</a></li>
-                        </ul>
                         {% block identite %}
                         {% endblock %}
-                        <button class="btn btn-danger navbar-btn">Déconnexion</button>
+                            <li id="Deco"><a href="{{ path('rvmg_gsb_homepage') }}">Déconnexion</a>
+                        </ul>
                     </div>
                 </nav>
             {% endblock %}

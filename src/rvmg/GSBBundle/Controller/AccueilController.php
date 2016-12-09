@@ -2,15 +2,11 @@
 
 namespace rvmg\GSBBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use rvmg\GSBBundle\Formulaires\Data\ConnexionClass;
 use rvmg\GSBBundle\Formulaires\Type\ConnexionFormType;
-use rvmg\GSBBundle\Entity\Comptable;
-use rvmg\GSBBundle\Entity\ComptableRepository;
-use rvmg\GSBBundle\Entity\Visiteur;
-use rvmg\GSBBundle\Entity\VisiteurRepository;
+
 
 class AccueilController extends Controller
 {
@@ -27,6 +23,8 @@ class AccueilController extends Controller
         $request = $this->container->get('request');
         $form->handleRequest($request);
         
+        $this->getRequest()->getSession()->clear();
+        
         if ($form->isValid()){
             $data = $form->getData();
             $em = $this->getDoctrine()->getManager();
@@ -38,6 +36,8 @@ class AccueilController extends Controller
                     if(!$visiteur){
                         return $this->render('rvmgGSBBundle:Accueil:vueConnexionErreur.html.twig', array('data'=>$data));
                     }else{
+                        $session = $request->getSession();
+                        $session->set('user_id', $visiteur->getIdVisiteur());
                         return $this->render('rvmgGSBBundle:Visiteur:accueilVisiteur.html.twig', array('visiteur'=>$visiteur));
                     }
                     break;
@@ -47,6 +47,8 @@ class AccueilController extends Controller
                     if(!$comptable){
                         return $this->render('rvmgGSBBundle:Accueil:vueConnexionErreur.html.twig', array('data'=>$data));
                     }else{
+                        $session = $request->getSession();
+                        $session->set('user_id', $comptable->getIdComptable());
                         return $this->render('rvmgGSBBundle:Comptable:accueilComptable.html.twig', array('comptable'=>$comptable));
                     }
                     break;

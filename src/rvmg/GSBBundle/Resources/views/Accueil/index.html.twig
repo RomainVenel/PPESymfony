@@ -9,12 +9,14 @@
 {% block body %}
     <h1 align="center">Galaxy Swiss Bourdin</h1>
     <br/>
-    <div class="well">
-        <form method="post" {{ form_enctype(form) }}>
-            {{ form_widget(form) }}
-            <input type="submit" value="Valider" class="btn btn-primary" />
-            <input type="reset" value="Annuler" class="btn btn-danger" />
-        </form>
+    <div class="container">
+        {{ form_start(form) }}
+        {{ form_row(form.login) }}
+        {{ form_row(form.mdp) }}
+        {{ form_row(form.profil) }}
+        <input type="submit" value="Valider" class="btn btn-primary" />
+        <input type="reset" value="Annuler" class="btn btn-danger" />
+        {{ form_end(form) }}
     </div>
         
     <br/>
