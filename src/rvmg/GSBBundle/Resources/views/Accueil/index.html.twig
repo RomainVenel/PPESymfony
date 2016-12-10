@@ -11,11 +11,17 @@
     <br/>
     <div class="container">
         {{ form_start(form) }}
-        {{ form_row(form.login) }}
-        {{ form_row(form.mdp) }}
-        {{ form_row(form.profil) }}
-        <input type="submit" value="Valider" class="btn btn-primary" />
-        <input type="reset" value="Annuler" class="btn btn-danger" />
+        <div class="ChampForm">{{ form_label(form.login) }}</div>
+        {{ form_widget(form.login) }}
+        {{form_errors(form.login) }}
+        <div class="ChampForm">{{ form_label(form.mdp) }}</div>
+        {{ form_widget(form.mdp) }}
+        {{form_errors(form.mdp) }}
+        <div class="ChampForm">{{ form_label(form.profil) }}</div>
+        <div class="radioButton">{{ form_widget(form.profil) }}</div>
+        {{ form_errors(form.profil) }}
+        <div class="BoutonForm"><input type="submit" value="Valider" class="btn btn-primary valider" />
+            <input type="reset" value="Annuler" class="btn btn-danger valider" /></div>
         {{ form_end(form) }}
     </div>
         

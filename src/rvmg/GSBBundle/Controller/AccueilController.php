@@ -43,7 +43,7 @@ class AccueilController extends Controller
                     break;
                 case 'Comptable':
                     $repository = $em->getRepository('rvmgGSBBundle:Comptable');
-                    $comptable = $repository->findOneByLogin($connexion->getLogin());
+                    $comptable = $repository->findByMdpAndLogin($connexion->getLogin(), $connexion->getMdp());
                     if(!$comptable){
                         return $this->render('rvmgGSBBundle:Accueil:vueConnexionErreur.html.twig', array('data'=>$data));
                     }else{

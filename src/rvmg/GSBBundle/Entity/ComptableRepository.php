@@ -13,7 +13,7 @@ use Doctrine\ORM\EntityRepository;
 class ComptableRepository extends EntityRepository
 {
     
-    public function findMdpAndLogin($login, $mdp){
+    public function findByMdpAndLogin($login, $mdp){
         
         $queryBuilder = $this->createQueryBuilder('c')->where('c.login = :login')->andWhere('c.mdp = :mdp')->setParameter('login', $login)->setParameter('mdp', $mdp);
         return $queryBuilder->getQuery()->getOneOrNullResult();
