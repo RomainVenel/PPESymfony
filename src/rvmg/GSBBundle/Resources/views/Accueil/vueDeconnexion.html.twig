@@ -1,5 +1,9 @@
 {% extends "rvmgGSBBundle:Default:base.html.twig" %}
 
+{% block head %}
+    {{ parent() }}
+    <meta http-equiv="Refresh" content="2; url={{ path('rvmg_gsb_homepage') }}">
+{% endblock %}
 {% block title %}
     Déconnexion
 {% endblock %}
@@ -9,6 +13,5 @@
 {% block body %}
     <h1 align="center">Galaxy Swiss Bourdin</h1>
     <br/>
-    <p align='center'>Vous vous êtes bien déconnecté !<br>
-    Cliquez <a href="{{ path('rvmg_gsb_homepage') }}">ici</a> pour retourner à la page d'accueil</p>
+    <p align='center'>Vous vous êtes bien déconnecté !</p>
 {% endblock %}
