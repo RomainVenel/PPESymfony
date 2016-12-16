@@ -21,8 +21,8 @@ class AccueilController extends Controller
         $form = $this->createForm(new ConnexionformType(),$connexion);        
         
         $request = $this->container->get('request');
-        $form->handleRequest($request);
         
+        $form->handleRequest($request);
         $this->getRequest()->getSession()->clear();
         
         if ($form->isValid()){
@@ -37,7 +37,10 @@ class AccueilController extends Controller
                         return $this->render('rvmgGSBBundle:Accueil:vueConnexionErreur.html.twig', array('data'=>$data));
                     }else{
                         $session = $request->getSession();
-                        $session->set('user_id', $visiteur->getIdVisiteur());
+                        $session->set('user_login', $visiteur->getLogin());
+                        $session->set('user_profil', $visiteur->getProfil());
+                        $repository->updateConnecteToTrue($connexion->getLogin());
+              
                         return $this->render('rvmgGSBBundle:Visiteur:accueilVisiteur.html.twig', array('visiteur'=>$visiteur));
                     }
                     break;
@@ -48,7 +51,10 @@ class AccueilController extends Controller
                         return $this->render('rvmgGSBBundle:Accueil:vueConnexionErreur.html.twig', array('data'=>$data));
                     }else{
                         $session = $request->getSession();
-                        $session->set('user_id', $comptable->getIdComptable());
+                        $session->set('user_login', $comptable->getLogin());
+                        $session->set('user_profil', $comptable->getProfil());
+                        $repository->updateConnecteToTrue($connexion->getLogin());
+                        
                         return $this->render('rvmgGSBBundle:Comptable:accueilComptable.html.twig', array('comptable'=>$comptable));
                     }
                     break;
@@ -57,9 +63,27 @@ class AccueilController extends Controller
                     break;
             }
             
-            return $this->render('rvmgGSBBundle:Accueil:vueConnexionVisiteur.html.twig', array('data'=>$data));
+            return $this->render('rvmgGSBBundle:Accueil:vueConnexionComptable.html.twig', array('data'=>$data));
         }
         
         return $this->render('rvmgGSBBundle:Accueil:index.html.twig', array('form'=>$form->createView()));
+    }
+    
+    public function deconnexionAction(){
+        
+        $em = $this->getDoctrine()->getManager();
+
+        $profil = $this->getRequest()->getSession()->get('user_login');
+        
+        if ($this->getRequest()->getSession()->get('user_profil') == 'Visiteur'){
+            $repository = $em->getRepository('rvmgGSBBundle:Visiteur');
+        }else{
+            $repository = $em->getRepository('rvmgGSBBundle:Comptable');
+        }
+        $repository->updateConnecteToFalse($profil);
+        
+        $this->getRequest()->getSession()->clear();
+        
+        return $this->render('rvmgGSBBundle:Accueil:vueDeconnexion.html.twig');
     }
 }

@@ -18,4 +18,26 @@ class ComptableRepository extends EntityRepository
         $queryBuilder = $this->createQueryBuilder('c')->where('c.login = :login')->andWhere('c.mdp = :mdp')->setParameter('login', $login)->setParameter('mdp', $mdp);
         return $queryBuilder->getQuery()->getOneOrNullResult();
     }
+    
+    public function updateConnecteToTrue($login){
+        
+        $qB = $this->getEntityManager()->createQueryBuilder();
+        $qB ->update('rvmgGSBBundle:Comptable', 'c')
+            ->set('c.connecte', 1)
+            ->where('c.login = :login')
+            ->setParameter('login' ,$login);
+         
+        $qB->getQuery()->execute();
+    }
+    
+    public function updateConnecteToFalse($login){
+        
+        $qB = $this->getEntityManager()->createQueryBuilder();
+        $qB ->update('rvmgGSBBundle:Comptable', 'c')
+            ->set('c.connecte', 0)
+            ->where('c.login = :login')
+            ->setParameter('login' ,$login);
+         
+        $qB->getQuery()->execute();
+    }
 }

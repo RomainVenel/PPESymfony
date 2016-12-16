@@ -5,3 +5,7 @@ rvmg_gsb_homepage:
 rvmg_gsb_connexionErreur:
     path:   /connexionErreur
     defaults: { _controller: rvmgGSBBundle:Accueil:connexionAccueil }
+    
+rvmg_gsb_deconnexion:
+    path:   /deconnexion
+    defaults: { _controller: rvmgGSBBundle:Accueil:deconnexion }

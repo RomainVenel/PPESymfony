@@ -48,6 +48,19 @@ class Comptable
      * @ORM\Column(name="mdp", type="string", length=20, nullable=true)
      */
     private $mdp;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="profil", type="string", length=20, options={"default" : "Comptable"})
+     */
+    private $profil;
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="connecte", type="boolean")
+     */
+    private $connecte;
 
 
 
@@ -151,5 +164,51 @@ class Comptable
     public function getMdp()
     {
         return $this->mdp;
+    }
+
+    /**
+     * Set connecte
+     *
+     * @param boolean $connecte
+     * @return Comptable
+     */
+    public function setConnecte($connecte)
+    {
+        $this->connecte = $connecte;
+
+        return $this;
+    }
+
+    /**
+     * Get connecte
+     *
+     * @return boolean 
+     */
+    public function getConnecte()
+    {
+        return $this->connecte;
+    }
+
+    /**
+     * Set profil
+     *
+     * @param string $profil
+     * @return Comptable
+     */
+    public function setProfil($profil)
+    {
+        $this->profil = $profil;
+
+        return $this;
+    }
+
+    /**
+     * Get profil
+     *
+     * @return string 
+     */
+    public function getProfil()
+    {
+        return $this->profil;
     }
 }

@@ -86,6 +86,20 @@ class Visiteur
      * })
      */
     private $idcomptable;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="profil", type="string", length=20, options={"default" : "Visiteur"})
+     */
+    private $profil;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="connecte", type="boolean")
+     */
+    private $connecte;
 
 
 
@@ -304,5 +318,51 @@ class Visiteur
     public function getIdcomptable()
     {
         return $this->idcomptable;
+    }
+
+    /**
+     * Set connecte
+     *
+     * @param boolean $connecte
+     * @return Visiteur
+     */
+    public function setConnecte($connecte)
+    {
+        $this->connecte = $connecte;
+
+        return $this;
+    }
+
+    /**
+     * Get connecte
+     *
+     * @return boolean 
+     */
+    public function getConnecte()
+    {
+        return $this->connecte;
+    }
+
+    /**
+     * Set profil
+     *
+     * @param string $profil
+     * @return Visiteur
+     */
+    public function setProfil($profil)
+    {
+        $this->profil = $profil;
+
+        return $this;
+    }
+
+    /**
+     * Get profil
+     *
+     * @return string 
+     */
+    public function getProfil()
+    {
+        return $this->profil;
     }
 }

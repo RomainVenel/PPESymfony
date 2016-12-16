@@ -19,4 +19,26 @@ class VisiteurRepository extends EntityRepository
         $queryBuilder->where('v.login = :login')->setParameter('login',$login)->andWhere('v.mdp = :mdp')->setParameter('mdp',$mdp);
         return $queryBuilder->getQuery()->getOneOrNullResult();
     }
+    
+    public function updateConnecteToTrue($login){
+        
+        $qB = $this->getEntityManager()->createQueryBuilder();
+        $qB ->update('rvmgGSBBundle:Visiteur', 'v')
+            ->set('v.connecte', 1)
+            ->where('v.login = :login')
+            ->setParameter('login' ,$login);
+         
+        $qB->getQuery()->execute();
+    }
+    
+    public function updateConnecteToFalse($login){
+        
+        $qB = $this->getEntityManager()->createQueryBuilder();
+        $qB ->update('rvmgGSBBundle:Visiteur', 'v')
+            ->set('v.connecte', 0)
+            ->where('v.login = :login')
+            ->setParameter('login' ,$login);
+         
+        $qB->getQuery()->execute();
+    }
 }
