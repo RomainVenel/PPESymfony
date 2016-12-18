@@ -2,15 +2,11 @@
 <html>
     <head>
         {% block head %}
-            {% stylesheets '@rvmgGSBBundle/Resources/public/css/bootstrap.css'%}
-                <link rel="stylesheet" href="{{ asset_url }}" type="text/css"/>
-            {% endstylesheets %}
-            {% stylesheets '@rvmgGSBBundle/Resources/public/css/style.css'%}
-                <link rel="stylesheet" href="{{ asset_url }}" type="text/css"/>
-            {% endstylesheets %}
-            {% stylesheets '@rvmgGSBBundle/Resources/public/css/font-awesome.css'%}
-                <link rel="stylesheet" href="{{ asset_url }}" type="text/css"/>
-            {% endstylesheets %}
+            <link href="{{ asset('bundles/rvmggsb/css/bootstrap.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('bundles/rvmggsb/css/style.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('bundles/rvmggsb/css/font-awesome.css') }}" rel="stylesheet" type="text/css" />
+            <script type="text/javascript" src="{{ asset('bundles/rvmggsb/js/jquery.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/rvmggsb/js/bootstrap.js') }}"></script>
             <title>
                 {% block title %}{% endblock %}
             </title>
@@ -25,8 +21,23 @@
                             <a class="navbar-brand" href="#">Galaxy Swiss Bourdin</a>
                         </div>
                         <ul class="nav navbar-nav">
-                            <li><a href="#">Fiches de Frais</a></li>
-                            <li><a href="#">Paramètres</a></li>
+                            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Fiches Frais <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-submenu"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Renseigner</a>
+                                        <ul class="dropdown-menu">
+                                            <li class="menu-item"><a href="#">Forfait</a></li>
+                                            <li class="menu-item"><a href="#">Hors Forfait</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Consulter</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Paramètres <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Changer MDP</a></li>
+                                    <li><a href="#">A propos</a></li>
+                                </ul>
+                            </li>
                         {% block identite %}
                         {% endblock %}
                             <li id="Deco"><a href="{{ path('rvmg_gsb_deconnexion') }}">Déconnexion</a>
@@ -40,7 +51,7 @@
         </div>
         <div id="footer">
             {% block footer %}
-                <p>&copy; Copyright 2016 by Romain Venel & Maxime Genevier</p> 
+                <p>&copy; Copyright 2016 by Romain Venel & Maxime Genevier</p>
             {% endblock %}
         </div>
     </body>

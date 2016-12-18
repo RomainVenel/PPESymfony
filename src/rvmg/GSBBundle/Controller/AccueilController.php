@@ -8,12 +8,7 @@ use rvmg\GSBBundle\Formulaires\Data\ConnexionClass;
 use rvmg\GSBBundle\Formulaires\Type\ConnexionFormType;
 
 
-class AccueilController extends Controller
-{
-    public function indexAction($name)
-    {
-        return $this->render('rvmgGSBBundle:Accueil:index.html.twig', array('name' => $name));
-    }
+class AccueilController extends Controller{
     
     public function connexionAccueilAction(){
         

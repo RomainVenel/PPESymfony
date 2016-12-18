@@ -2,15 +2,11 @@
 <html>
     <head>
         {% block head %}
-            {% stylesheets '@rvmgGSBBundle/Resources/public/css/bootstrap.css'%}
-                <link rel="stylesheet" href="{{ asset_url }}" type="text/css"/>
-            {% endstylesheets %}
-            {% stylesheets '@rvmgGSBBundle/Resources/public/css/style.css'%}
-                <link rel="stylesheet" href="{{ asset_url }}" type="text/css"/>
-            {% endstylesheets %}
-            {% stylesheets '@rvmgGSBBundle/Resources/public/css/font-awesome.css'%}
-                <link rel="stylesheet" href="{{ asset_url }}" type="text/css"/>
-            {% endstylesheets %}
+            <link href="{{ asset('bundles/rvmggsb/css/bootstrap.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('bundles/rvmggsb/css/style.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('bundles/rvmggsb/css/font-awesome.css') }}" rel="stylesheet" type="text/css" />
+            <script type="text/javascript" src="{{ asset('bundles/rvmggsb/js/jquery.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/rvmggsb/js/bootstrap.js') }}"></script>           
             <title>
                 {% block title %}{% endblock %}
             </title>
