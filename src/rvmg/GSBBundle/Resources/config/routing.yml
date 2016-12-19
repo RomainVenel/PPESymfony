@@ -9,3 +9,7 @@ rvmg_gsb_connexionErreur:
 rvmg_gsb_deconnexion:
     path:   /deconnexion
     defaults: { _controller: rvmgGSBBundle:Accueil:deconnexion }
+    
+rvmg_gsb_renseigner:
+    path:     /renseigner/{type}
+    defaults: { _controller: rvmgGSBBundle:Visiteur:renseigner }
