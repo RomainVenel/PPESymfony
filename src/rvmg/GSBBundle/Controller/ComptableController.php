@@ -1,5 +1,7 @@
 <?php
 
+namespace rvmg\GSBBundle\Controller;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
