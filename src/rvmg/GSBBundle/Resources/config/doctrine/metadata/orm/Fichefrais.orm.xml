@@ -8,7 +8,7 @@
     <id name="idfichefrais" type="integer" column="idFicheFrais">
       <generator strategy="IDENTITY"/>
     </id>
-    <field name="mois" type="string" column="mois" length="9" nullable="false"/>
+    <field name="mois" type="date" column="mois" nullable="false"/>
     <field name="nbjustificatifs" type="integer" column="nbJustificatifs" nullable="true"/>
     <field name="montantvalide" type="decimal" column="montantValide" precision="10" scale="2" nullable="true"/>
     <field name="datemodif" type="date" column="dateModif" nullable="true"/>

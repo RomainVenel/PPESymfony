@@ -15,6 +15,8 @@
     <field name="cp" type="string" column="cp" length="5" nullable="true"/>
     <field name="ville" type="string" column="ville" length="30" nullable="true"/>
     <field name="dateembauche" type="date" column="dateEmbauche" nullable="true"/>
+    <field name="profil" type="string" column="profil" length="20" nullable="true"/>
+    <field name="connecte" type="boolean" column="connecte" nullable="true"/>
     <many-to-one field="idcomptable" target-entity="Comptable">
       <join-columns>
         <join-column name="idComptable" referenced-column-name="idComptable"/>

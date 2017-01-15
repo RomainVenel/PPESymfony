@@ -22,9 +22,9 @@ class Fichefrais
     private $idfichefrais;
 
     /**
-     * @var string
+     * @var \DateTime
      *
-     * @ORM\Column(name="mois", type="string", length=9, nullable=false)
+     * @ORM\Column(name="mois", type="date", nullable=false)
      */
     private $mois;
 
@@ -84,7 +84,7 @@ class Fichefrais
     /**
      * Set mois
      *
-     * @param string $mois
+     * @param \DateTime $mois
      * @return Fichefrais
      */
     public function setMois($mois)
@@ -97,7 +97,7 @@ class Fichefrais
     /**
      * Get mois
      *
-     * @return string 
+     * @return \DateTime 
      */
     public function getMois()
     {
