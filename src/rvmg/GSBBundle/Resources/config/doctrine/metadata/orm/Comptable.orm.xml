@@ -8,5 +8,7 @@
     <field name="prenom" type="string" column="prenom" length="30" nullable="true"/>
     <field name="login" type="string" column="login" length="20" nullable="true"/>
     <field name="mdp" type="string" column="mdp" length="20" nullable="true"/>
+    <field name="profil" type="string" column="profil" length="20" nullable="true"/>
+    <field name="connecte" type="boolean" column="connecte" nullable="true"/>
   </entity>
 </doctrine-mapping>

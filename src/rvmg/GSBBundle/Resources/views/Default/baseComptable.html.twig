@@ -23,9 +23,9 @@
                         <ul class="nav navbar-nav">
                             <li><a href="#">Fiches de Frais</a></li>
                             <li><a href="#">Paramètres</a></li>
-                        {% block identite %}
-                            <div class="CouleurConnecte">{{app.request.session.get('user_prenom')~ " " ~app.request.session.get('user_nom')}}</div>
-                        {% endblock %}
+                            {% block identite %}
+                                <div class="CouleurConnecte">{{ app.session.get('user_firstname')~ " " ~app.session.get('user_lastname') }}</div>
+                            {% endblock %}
                             <li id="Deco"><a href="{{ path('rvmg_gsb_deconnexion') }}">Déconnexion</a>
                         </ul>
                     </div>

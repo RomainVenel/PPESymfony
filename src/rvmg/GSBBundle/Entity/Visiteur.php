@@ -78,6 +78,20 @@ class Visiteur
     private $dateembauche;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="profil", type="string", length=20, nullable=true)
+     */
+    private $profil;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="connecte", type="boolean", nullable=true)
+     */
+    private $connecte;
+
+    /**
      * @var \Comptable
      *
      * @ORM\ManyToOne(targetEntity="Comptable")
@@ -86,20 +100,6 @@ class Visiteur
      * })
      */
     private $idcomptable;
-    
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="profil", type="string", length=20, options={"default" : "Visiteur"})
-     */
-    private $profil;
-    
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="connecte", type="boolean")
-     */
-    private $connecte;
 
 
 
@@ -298,26 +298,26 @@ class Visiteur
     }
 
     /**
-     * Set idcomptable
+     * Set profil
      *
-     * @param \rvmg\GSBBundle\Entity\Comptable $idcomptable
+     * @param string $profil
      * @return Visiteur
      */
-    public function setIdcomptable(\rvmg\GSBBundle\Entity\Comptable $idcomptable = null)
+    public function setProfil($profil)
     {
-        $this->idcomptable = $idcomptable;
+        $this->profil = $profil;
 
         return $this;
     }
 
     /**
-     * Get idcomptable
+     * Get profil
      *
-     * @return \rvmg\GSBBundle\Entity\Comptable 
+     * @return string 
      */
-    public function getIdcomptable()
+    public function getProfil()
     {
-        return $this->idcomptable;
+        return $this->profil;
     }
 
     /**
@@ -344,25 +344,25 @@ class Visiteur
     }
 
     /**
-     * Set profil
+     * Set idcomptable
      *
-     * @param string $profil
+     * @param \rvmg\GSBBundle\Entity\Comptable $idcomptable
      * @return Visiteur
      */
-    public function setProfil($profil)
+    public function setIdcomptable(\rvmg\GSBBundle\Entity\Comptable $idcomptable = null)
     {
-        $this->profil = $profil;
+        $this->idcomptable = $idcomptable;
 
         return $this;
     }
 
     /**
-     * Get profil
+     * Get idcomptable
      *
-     * @return string 
+     * @return \rvmg\GSBBundle\Entity\Comptable 
      */
-    public function getProfil()
+    public function getIdcomptable()
     {
-        return $this->profil;
+        return $this->idcomptable;
     }
 }

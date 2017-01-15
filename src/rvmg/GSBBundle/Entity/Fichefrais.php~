@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Fichefrais
  *
  * @ORM\Table(name="FicheFrais", indexes={@ORM\Index(name="idEtat", columns={"idEtat"}), @ORM\Index(name="idVisiteur", columns={"idVisiteur"})})
- * @ORM\Entity(repositoryClass="rvmg\GSBBundle\Entity\FichefraisRepository")
+ * @ORM\Entity(repositoryClass="rvmgGSBBundle\Entity\FichefraisRepository")
  */
 class Fichefrais
 {
@@ -22,9 +22,9 @@ class Fichefrais
     private $idfichefrais;
 
     /**
-     * @var string
+     * @var \DateTime
      *
-     * @ORM\Column(name="mois", type="string", length=9, nullable=false)
+     * @ORM\Column(name="mois", type="date", nullable=false)
      */
     private $mois;
 
@@ -70,152 +70,4 @@ class Fichefrais
     private $idvisiteur;
 
 
-
-    /**
-     * Get idfichefrais
-     *
-     * @return integer 
-     */
-    public function getIdfichefrais()
-    {
-        return $this->idfichefrais;
-    }
-
-    /**
-     * Set mois
-     *
-     * @param string $mois
-     * @return Fichefrais
-     */
-    public function setMois($mois)
-    {
-        $this->mois = $mois;
-
-        return $this;
-    }
-
-    /**
-     * Get mois
-     *
-     * @return string 
-     */
-    public function getMois()
-    {
-        return $this->mois;
-    }
-
-    /**
-     * Set nbjustificatifs
-     *
-     * @param integer $nbjustificatifs
-     * @return Fichefrais
-     */
-    public function setNbjustificatifs($nbjustificatifs)
-    {
-        $this->nbjustificatifs = $nbjustificatifs;
-
-        return $this;
-    }
-
-    /**
-     * Get nbjustificatifs
-     *
-     * @return integer 
-     */
-    public function getNbjustificatifs()
-    {
-        return $this->nbjustificatifs;
-    }
-
-    /**
-     * Set montantvalide
-     *
-     * @param string $montantvalide
-     * @return Fichefrais
-     */
-    public function setMontantvalide($montantvalide)
-    {
-        $this->montantvalide = $montantvalide;
-
-        return $this;
-    }
-
-    /**
-     * Get montantvalide
-     *
-     * @return string 
-     */
-    public function getMontantvalide()
-    {
-        return $this->montantvalide;
-    }
-
-    /**
-     * Set datemodif
-     *
-     * @param \DateTime $datemodif
-     * @return Fichefrais
-     */
-    public function setDatemodif($datemodif)
-    {
-        $this->datemodif = $datemodif;
-
-        return $this;
-    }
-
-    /**
-     * Get datemodif
-     *
-     * @return \DateTime 
-     */
-    public function getDatemodif()
-    {
-        return $this->datemodif;
-    }
-
-    /**
-     * Set idetat
-     *
-     * @param \rvmg\GSBBundle\Entity\Etat $idetat
-     * @return Fichefrais
-     */
-    public function setIdetat(\rvmg\GSBBundle\Entity\Etat $idetat = null)
-    {
-        $this->idetat = $idetat;
-
-        return $this;
-    }
-
-    /**
-     * Get idetat
-     *
-     * @return \rvmg\GSBBundle\Entity\Etat 
-     */
-    public function getIdetat()
-    {
-        return $this->idetat;
-    }
-
-    /**
-     * Set idvisiteur
-     *
-     * @param \rvmg\GSBBundle\Entity\Visiteur $idvisiteur
-     * @return Fichefrais
-     */
-    public function setIdvisiteur(\rvmg\GSBBundle\Entity\Visiteur $idvisiteur = null)
-    {
-        $this->idvisiteur = $idvisiteur;
-
-        return $this;
-    }
-
-    /**
-     * Get idvisiteur
-     *
-     * @return \rvmg\GSBBundle\Entity\Visiteur 
-     */
-    public function getIdvisiteur()
-    {
-        return $this->idvisiteur;
-    }
 }
