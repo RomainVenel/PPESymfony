@@ -8,5 +8,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  * @author eleve
  */
 class ComptableController extends Controller{
-    //put your code here
+    
+    public function validerAction(){
+        
+    }
+    
+    public function suivreAction(){
+        
+    }
+    
 }

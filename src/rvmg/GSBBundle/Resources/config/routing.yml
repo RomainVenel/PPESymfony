@@ -13,3 +13,11 @@ rvmg_gsb_deconnexion:
 rvmg_gsb_renseigner:
     path:     /renseigner/{type}
     defaults: { _controller: rvmgGSBBundle:Visiteur:renseigner }
+    
+rvmg_gsb_valider:
+    path:     /valider/
+    defaults: { _controller: rvmgGSBBundle:Comptable:valider }
+    
+rvmg_gsb_suivre:
+    path:     /suivre/
+    defaults: { _controller: rvmgGSBBundle:Comptable:suivre }
