@@ -44,6 +44,18 @@ h1{
     border-radius: 10px;
     margin: 0 auto;
     margin-top: 3%;
+    padding: 5px 15px 15px;
+}
+
+.containerForfait{
+    
+    width: 500px;
+    height: 320px;
+    background-color: rgba(180,40,40,0.7);
+    border-radius: 10px;
+    margin: 0 auto;
+    margin-top: 3%;
+    padding: 5px 15px 15px;
 }
 
 .ChampForm{

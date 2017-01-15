@@ -39,6 +39,7 @@
                                 </ul>
                             </li>
                         {% block identite %}
+                            <div class="CouleurConnecte">{{app.request.session.get('user_prenom')~ " " ~app.request.session.get('user_nom')}}</div>
                         {% endblock %}
                             <li id="Deco"><a href="{{ path('rvmg_gsb_deconnexion') }}">Déconnexion</a>
                         </ul>

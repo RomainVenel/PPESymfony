@@ -33,6 +33,8 @@ class AccueilController extends Controller{
                     }else{
                         $session = $request->getSession();
                         $session->set('user_login', $visiteur->getLogin());
+                        $session->set('user_prenom', $visiteur->getPrenom());
+                        $session->set('user_nom', $visiteur->getNom());
                         $session->set('user_profil', $visiteur->getProfil());
                         $repository->updateConnecteToTrue($connexion->getLogin());
               
@@ -47,6 +49,8 @@ class AccueilController extends Controller{
                     }else{
                         $session = $request->getSession();
                         $session->set('user_login', $comptable->getLogin());
+                        $session->set('user_prenom', $comptable->getPrenom());
+                        $session->set('user_nom', $comptable->getNom());
                         $session->set('user_profil', $comptable->getProfil());
                         $repository->updateConnecteToTrue($connexion->getLogin());
                         
