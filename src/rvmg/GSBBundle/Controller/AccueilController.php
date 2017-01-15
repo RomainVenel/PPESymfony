@@ -33,6 +33,8 @@ class AccueilController extends Controller{
                     }else{
                         $session = $request->getSession();
                         $session->set('user_login', $visiteur->getLogin());
+                        $session->set('user_prenom', $visiteur->getPrenom());
+                        $session->set('user_nom', $visiteur->getNom());
                         $session->set('user_profil', $visiteur->getProfil());
                         $session->set('user_firstname', $visiteur->getPrenom());
                         $session->set('user_lastname', $visiteur->getNom());
@@ -50,6 +52,8 @@ class AccueilController extends Controller{
                     }else{
                         $session = $request->getSession();
                         $session->set('user_login', $comptable->getLogin());
+                        $session->set('user_prenom', $comptable->getPrenom());
+                        $session->set('user_nom', $comptable->getNom());
                         $session->set('user_profil', $comptable->getProfil());
                         $session->set('user_firstname', $comptable->getPrenom());
                         $session->set('user_lastname', $comptable->getNom());

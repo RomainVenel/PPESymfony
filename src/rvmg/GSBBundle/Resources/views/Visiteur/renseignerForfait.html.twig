@@ -1,16 +1,16 @@
 {% extends "rvmgGSBBundle:Default:baseVisiteur.html.twig" %}
 
 {% block body %}
-    <div class="container">
+    <div class="containerForfait">
         
         {{ form_start(form) }}
             <div class="ChampForm">{{ form_label(form.quantite) }}</div>
            {{ form_widget(form.quantite) }}
-            <div class="ChampForm">{{ form_label(form.idfraisforfait) }}</div>
-            {{ form_widget(form.idfraisforfait) }}
+            <div class="ChampForm">{{ form_label(form.fraisforfait) }}</div>
+            {{ form_widget(form.fraisforfait) }}
 
-        <div class="BoutonForm"><input type="submit" value="Valider" class="btn btn-primary valider" />
-            <input type="reset" value="Annuler" class="btn btn-danger valider" /></div>
+        <div class="BoutonForm"><input type="submit" value="Valider" class="btn btn-primary" />
+            <input type="reset" value="Annuler" class="btn btn-danger" /></div>
         
        
         {{ form_end(form) }}

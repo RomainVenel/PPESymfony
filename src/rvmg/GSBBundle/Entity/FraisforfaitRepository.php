@@ -12,4 +12,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class FraisforfaitRepository extends EntityRepository
 {
+    
+    public function findAllFrais(){
+        
+        $queryBuilder = $this->createQueryBuilder('f');
+        return $queryBuilder->getQuery();
+    }
 }
