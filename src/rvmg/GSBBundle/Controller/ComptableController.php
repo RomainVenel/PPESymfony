@@ -22,7 +22,13 @@ class ComptableController extends Controller{
         $this->getRequest()->getSession()->clear();
         
         if ($form->isValid()){
+            $idVisiteur = $choose->getVisitor()->getIdVisiteur();
+            $month = $choose->getMonth()->format('m-y');
+            echo $idVisiteur." ".$month;
+            $data = $form->getData();
+            $em = $this->getDoctrine()->getManager();
             
+            $repository = $em->getRepository('rvmgGSBBundle:Fichefrais');
         }
         return $this->render('rvmgGSBBundle:Comptable:chooseMonthAndVisitor.html.twig', array('form'=>$form->createView()));
     }

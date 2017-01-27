@@ -22,7 +22,8 @@ class ChooseMonthAndVisitorType extends AbstractType{
                     'label'=>'Visiteur'
                 ))
                 ->add('month', 'date', array(
-                    
+                    'widget'=>'choice',
+                    'label'=>'Mois'
                 ));
     }
     
