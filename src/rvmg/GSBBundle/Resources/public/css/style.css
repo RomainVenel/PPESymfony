@@ -54,7 +54,7 @@ h1{
     background-color: rgba(180,40,40,0.7);
     border-radius: 10px;
     margin: 0 auto;
-    margin-top: 3%;
+    margin-top: 10%;
     padding: 5px 15px 15px;
 }
 
@@ -186,5 +186,26 @@ p{
 .table-fichefrais{
     border-radius: 5px;
     background-color: #FFFFFF;
+}
+
+.margin-bottom-20{
+    margin-bottom: 20px;
+}
+
+.margin-bottom-40{
+    margin-bottom: 40px;
+}
+
+.titreFicheFrais{
+    font-family: "TitreGSB";
+    font-weight: bold;
+    font-size: 30px
+}
+
+.champFicheFrais{
+    color: #FFF;
+    font-family: "ChampForm";
+    font-weight: bold;
+    font-size: 15px;
 }
 

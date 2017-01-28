@@ -30,11 +30,15 @@ class VisiteurController extends Controller{
         
         $request = $this->container->get('request');
         $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        
+        /* Récupération de tous les frais forfait */
+        $fraisForfait = $em->getRepository('rvmgGSBBundle:Fraisforfait')->findAll();
         
         if($form->isValid()){
-            $em = $this->getDoctrine()->getManager();
+            
             $visiteur = $em->getRepository('rvmgGSBBundle:Visiteur')->findOneBy($this->getRequest()->getSession()->get('user_id'));
-            $fichefrais = $em->getRepository('rvmgGSBBundle:Fichefrais')->findOneByCurrentMonth($visiteur);
+            $ficheFrais = $em->getRepository('rvmgGSBBundle:Fichefrais')->findOneByCurrentMonth($visiteur);
             
            
             $em->flush();
@@ -43,7 +47,8 @@ class VisiteurController extends Controller{
             
         }
         
-        return $this->render($vue, array('form'=>$form->createView()));
+        /* On envoie dans la vue le paramètre frais qui contient tous les frais forfait */
+        return $this->render($vue, array('frais'=>$fraisForfait));
     }
     
     public function consulterAction(){
