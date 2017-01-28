@@ -365,4 +365,8 @@ class Visiteur
     {
         return $this->idcomptable;
     }
+    
+    public function getCompleteName(){
+        return $this->prenom." ".$this->nom;
+    }
 }

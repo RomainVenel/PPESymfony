@@ -1,0 +1,48 @@
+{% extends "rvmgGSBBundle:Default:baseComptable.html.twig" %}
+{% block title %}
+    Valider fiche de frais
+{% endblock %}
+{% block body %}
+    <table class="table-responsive table-hover">
+        {% for list in tableForfait %}
+            <thead>
+                <tr>
+                    <th>{{ list.name }}</th>
+                </tr>
+                {% if list.type == "forfait" %}
+                    <tr>
+                        <th>Forfait</th>
+                        <th>Quantité</th>
+                    </tr>
+                {% elseif list.type == "horsforfait" %}
+                    <tr>
+                        <th>Libellé</th>
+                        <th>Date dépense</th>
+                        <th>Montant</th>
+                        <th></th>
+                    </tr>
+                {% endif %}
+            </thead>
+            <tbody>
+                {% for frais in list %}
+                    {% if list.type == "forfait" %}
+                        <tr>
+                            <td>{{frais.fraisforfait}}</td>
+                            <td>{{frais.quantite}}</td>
+                        </tr>
+                    {% endif %}
+                    {% if list.type == "horsforfait" %}
+                        <tr>
+                            <td>{{frais.libelle}}</td>
+                            <td>{{frais.datedepense}}</td>
+                            <td>{{frais.montant}}</td>
+                            <td>
+                                <button class="btn-danger">REFUSER</button>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        {% endfor %}
+    </table>
+{% endblock %}

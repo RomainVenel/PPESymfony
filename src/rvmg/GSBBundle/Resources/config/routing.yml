@@ -21,3 +21,7 @@ rvmg_gsb_valider:
 rvmg_gsb_suivre:
     path:     /suivre/
     defaults: { _controller: rvmgGSBBundle:Comptable:suivre }
+    
+rvmg_gsb_choose_month_visitor:
+    path:     /choisir/
+    defaults: { _controller: rvmgGSBBundle:Comptable:valider }
