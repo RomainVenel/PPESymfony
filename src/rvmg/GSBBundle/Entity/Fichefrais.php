@@ -156,9 +156,9 @@ class Fichefrais
      * @param \DateTime $datemodif
      * @return Fichefrais
      */
-    public function setDatemodif($datemodif)
+    public function setDatemodif()
     {
-        $this->datemodif = $datemodif;
+        $this->datemodif = new \DateTime();
 
         return $this;
     }
@@ -218,4 +218,5 @@ class Fichefrais
     {
         return $this->idvisiteur;
     }
+    
 }

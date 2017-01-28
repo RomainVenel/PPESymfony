@@ -14,18 +14,18 @@ rvmg_gsb_renseigner:
     path:     /renseigner/{type}
     defaults: { _controller: rvmgGSBBundle:Visiteur:renseigner }
     
-rvmg_gsb_valider:
-    path:     /valider/
-    defaults: { _controller: rvmgGSBBundle:Comptable:valider }
+rvmg_gsb_validate:
+    path:     /valider/{fichefrais}
+    defaults: { _controller: rvmgGSBBundle:Comptable:validate }
     
-rvmg_gsb_suivre:
+rvmg_gsb_follow:
     path:     /suivre/
-    defaults: { _controller: rvmgGSBBundle:Comptable:suivre }
+    defaults: { _controller: rvmgGSBBundle:Comptable:follow }
     
 rvmg_gsb_choose_month_visitor:
     path:     /choisir/
-    defaults: { _controller: rvmgGSBBundle:Comptable:valider }
+    defaults: { _controller: rvmgGSBBundle:Comptable:chooseMonthAndVisitor }
     
 rvmg_gsb_refuse_horsforfait:
-    path:     /refuser/{idLigne}
+    path:     /refuser/{fichefrais}/{ligne}
     defaults: { _controller: rvmgGSBBundle:Comptable:refuserHorsForfait }

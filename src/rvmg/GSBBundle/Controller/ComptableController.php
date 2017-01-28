@@ -5,6 +5,7 @@ namespace rvmg\GSBBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use rvmg\GSBBundle\Formulaires\Data\ChooseMonthAndVisitorClass;
 use rvmg\GSBBundle\Formulaires\Type\ChooseMonthAndVisitorType;
+use rvmg\GSBBundle\Entity\Fichefrais;
 /**
  * Description of ComptableController
  *
@@ -21,7 +22,9 @@ class ComptableController extends Controller{
      * Function that's let the comptable watch and choose about the differents
      * lignefraisforfait and lignefraishorsforfait
      */
-    public function validerAction(){
+
+    public function chooseMonthAndVisitorAction(){
+
         $choose = new ChooseMonthAndVisitorClass();
         $form = $this->createForm(new ChooseMonthAndVisitorType(),$choose);        
         
@@ -77,9 +80,32 @@ class ComptableController extends Controller{
     
     /**
      * 
+     * @param type $fichefrais
+     * 
+     * Function that's validate the fichefrais past in param
+     * Change it state at VALIDEE
+     */
+    public function validateAction($fichefrais){
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('rvmgGSBBundle:Fichefrais');
+        $currentFicheFrais = $repository->findOneByIdfichefrais($fichefrais);
+        
+        if($currentFicheFrais){
+            $state = $em->getRepository('rvmgGSBBundle:Etat')->findOneByIdetat('VA');
+            $currentFicheFrais->setIdetat($state);
+            $em->persist($currentFicheFrais);
+        }
+        $em->flush();
+        return $this->redirect($this->generateUrl('rvmg_gsb_choose_month_visitor'));
+
+    }
+    
+    /**
+     * 
      * Function that's suppose to let follow a fichefrais
      */
-    public function suivreAction(){
+
+    public function followAction(){
         
     }
     
@@ -88,9 +114,46 @@ class ComptableController extends Controller{
      * Function that's be called when the comptable want to refuse
      * some LigneFraisHorsForfait
      */
-    public function refuserHorsForfaitAction($ligne){
+    public function refuserHorsForfaitAction($ligne, $fichefrais){
         
-        echo $ligne;
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('rvmgGSBBundle:Lignefraishorsforfait');
+        //Get lignehorsforfait which must be remove of the fichefrais
+        $lignehorsforfait = $repository->findOneByIdAndIdFicheFrais($fichefrais, $ligne);
+        $currentFicheFrais = $em->getRepository('rvmgGSBBundle:Fichefrais')->findOneByIdfichefrais($fichefrais);
+        $visiteur = $currentFicheFrais->getIdvisiteur();
+        
+        if($lignehorsforfait){
+            //Affect the lignehorsforfait's label to a variable and concat it to 
+            // the string "REFUSE : " 
+            $libelle = $lignehorsforfait->getLibelle();
+            $lignehorsforfait->setLibelle("REFUSE : ".$libelle);
+            
+            //Try to search the next fichefrais. If it doesn't exist, we have to
+            //create it with empty values (0) and put in the lignehorsforfait
+            $month = new \DateTime('+1 month');
+            $repository = $em->getRepository('rvmgGSBBundle:Fichefrais');
+            $nextFicheFrais = $repository->findOneByNextMonth($visiteur, $month);
+            
+            //IF nextFicheFrais is empty
+            if($nextFicheFrais == null){
+                //Create new object
+                $nextFicheFrais = new Fichefrais();
+                $nextFicheFrais->setIdvisiteur($visiteur);
+                $nextFicheFrais->setMois(new \DateTime('+1 month'));
+                
+                $em->persist($nextFicheFrais);
+                $lignehorsforfait->setIdfichefrais($nextFicheFrais);
+                
+            }else{
+                //ELSE setFichefrais of the lignehorsforfait
+                $lignehorsforfait->setIdfichefrais($nextFicheFrais);
+            }
+            
+            $em->persist($lignehorsforfait);
+            $em->flush();
+        }
+        
         return $this->redirect($this->generateUrl('rvmg_gsb_choose_month_visitor'));
         
     }

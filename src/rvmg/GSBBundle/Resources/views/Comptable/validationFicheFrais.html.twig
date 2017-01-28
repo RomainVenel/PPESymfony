@@ -3,7 +3,8 @@
     Valider fiche de frais
 {% endblock %}
 {% block body %}
-   
+
+   {% set fichefrais = null %}
     <table class="table-responsive table-hover table-bordered" >
         {# foreach occurence in tableForfait#}
         {% for list in tableForfait %}
@@ -32,6 +33,8 @@
                             <td>{{frais.idFraisforfait}}</td>
                             <td>{{frais.quantite}}</td>
                         </tr>
+
+                        {% set fichefrais = frais.idFichefrais.idFichefrais %}
                     {% endif %}
                     {% if list.type == "horsforfait" %}
                         <tr>
@@ -40,7 +43,9 @@
                             <td>{{frais.montant}}</td>
                             <td>
                                 <a value="SUPPRIMER" 
-                                       href="{{ path('rvmg_gsb_refuse_horsforfait',{'idLigne':frais.idLignefraishorsforfait}) }}"
+
+                                       href="{{ path('rvmg_gsb_refuse_horsforfait',{'ligne':frais.idLignefraishorsforfait,
+                                                'fichefrais':frais.idFichefrais.idFichefrais}) }}"
                                        class="btn btn-danger">SUPPRIMER</a>
                             </td>
                         </tr>
@@ -49,4 +54,7 @@
             </tbody>
         {% endfor %}
     </table>
+    <a value="SUPPRIMER" 
+       href="{{ path('rvmg_gsb_validate',{'fichefrais':fichefrais}) }}"
+       class="btn btn-success">VALIDER</a>
 {% endblock %}

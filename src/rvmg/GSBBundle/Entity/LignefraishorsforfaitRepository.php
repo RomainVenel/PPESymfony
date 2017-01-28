@@ -12,4 +12,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class LignefraishorsforfaitRepository extends EntityRepository
 {
+    
+    public function findOneByIdAndIdFicheFrais($fichefrais, $idligne){
+        $queryBuilder = $this->createQueryBuilder('l');
+        $queryBuilder->where('l.idfichefrais = :fichefrais')->setParameter(':fichefrais', $fichefrais)
+                ->andWhere('l.idlignefraishorsforfait = :idligne')->setParameter(':idligne',$idligne);
+        return $queryBuilder->getQuery()->getOneOrNullResult();
+    }
+    
 }
