@@ -64,10 +64,10 @@ class Comptable extends \rvmg\GSBBundle\Entity\Comptable implements \Doctrine\OR
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', '' . "\0" . 'rvmg\\GSBBundle\\Entity\\Comptable' . "\0" . 'idcomptable', '' . "\0" . 'rvmg\\GSBBundle\\Entity\\Comptable' . "\0" . 'nom', '' . "\0" . 'rvmg\\GSBBundle\\Entity\\Comptable' . "\0" . 'prenom', '' . "\0" . 'rvmg\\GSBBundle\\Entity\\Comptable' . "\0" . 'login', '' . "\0" . 'rvmg\\GSBBundle\\Entity\\Comptable' . "\0" . 'mdp');
+            return array('__isInitialized__', '' . "\0" . 'rvmg\\GSBBundle\\Entity\\Comptable' . "\0" . 'idcomptable', '' . "\0" . 'rvmg\\GSBBundle\\Entity\\Comptable' . "\0" . 'nom', '' . "\0" . 'rvmg\\GSBBundle\\Entity\\Comptable' . "\0" . 'prenom', '' . "\0" . 'rvmg\\GSBBundle\\Entity\\Comptable' . "\0" . 'login', '' . "\0" . 'rvmg\\GSBBundle\\Entity\\Comptable' . "\0" . 'mdp', '' . "\0" . 'rvmg\\GSBBundle\\Entity\\Comptable' . "\0" . 'profil', '' . "\0" . 'rvmg\\GSBBundle\\Entity\\Comptable' . "\0" . 'connecte');
         }
 
-        return array('__isInitialized__', '' . "\0" . 'rvmg\\GSBBundle\\Entity\\Comptable' . "\0" . 'idcomptable', '' . "\0" . 'rvmg\\GSBBundle\\Entity\\Comptable' . "\0" . 'nom', '' . "\0" . 'rvmg\\GSBBundle\\Entity\\Comptable' . "\0" . 'prenom', '' . "\0" . 'rvmg\\GSBBundle\\Entity\\Comptable' . "\0" . 'login', '' . "\0" . 'rvmg\\GSBBundle\\Entity\\Comptable' . "\0" . 'mdp');
+        return array('__isInitialized__', '' . "\0" . 'rvmg\\GSBBundle\\Entity\\Comptable' . "\0" . 'idcomptable', '' . "\0" . 'rvmg\\GSBBundle\\Entity\\Comptable' . "\0" . 'nom', '' . "\0" . 'rvmg\\GSBBundle\\Entity\\Comptable' . "\0" . 'prenom', '' . "\0" . 'rvmg\\GSBBundle\\Entity\\Comptable' . "\0" . 'login', '' . "\0" . 'rvmg\\GSBBundle\\Entity\\Comptable' . "\0" . 'mdp', '' . "\0" . 'rvmg\\GSBBundle\\Entity\\Comptable' . "\0" . 'profil', '' . "\0" . 'rvmg\\GSBBundle\\Entity\\Comptable' . "\0" . 'connecte');
     }
 
     /**
@@ -274,6 +274,50 @@ class Comptable extends \rvmg\GSBBundle\Entity\Comptable implements \Doctrine\OR
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getMdp', array());
 
         return parent::getMdp();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setProfil($profil)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setProfil', array($profil));
+
+        return parent::setProfil($profil);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getProfil()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getProfil', array());
+
+        return parent::getProfil();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setConnecte($connecte)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setConnecte', array($connecte));
+
+        return parent::setConnecte($connecte);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getConnecte()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getConnecte', array());
+
+        return parent::getConnecte();
     }
 
 }
