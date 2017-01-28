@@ -39,7 +39,9 @@
                             <td>{{frais.dateDepense|date('d/m/y')}}</td>
                             <td>{{frais.montant}}</td>
                             <td>
-                                <button class="btn-danger">REFUSER</button>
+                                <a value="SUPPRIMER" 
+                                       href="{{ path('rvmg_gsb_refuse_horsforfait',{'idLigne':frais.idLignefraishorsforfait}) }}"
+                                       class="btn btn-danger">SUPPRIMER</a>
                             </td>
                         </tr>
                     {% endif %}

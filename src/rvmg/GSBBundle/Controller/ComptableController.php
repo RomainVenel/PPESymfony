@@ -88,7 +88,10 @@ class ComptableController extends Controller{
      * Function that's be called when the comptable want to refuse
      * some LigneFraisHorsForfait
      */
-    public function refuserHorsForfaitAction(){
+    public function refuserHorsForfaitAction($ligne){
+        
+        echo $ligne;
+        return $this->redirect($this->generateUrl('rvmg_gsb_choose_month_visitor'));
         
     }
     

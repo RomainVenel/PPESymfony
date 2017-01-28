@@ -25,3 +25,7 @@ rvmg_gsb_suivre:
 rvmg_gsb_choose_month_visitor:
     path:     /choisir/
     defaults: { _controller: rvmgGSBBundle:Comptable:valider }
+    
+rvmg_gsb_refuse_horsforfait:
+    path:     /refuser/{idLigne}
+    defaults: { _controller: rvmgGSBBundle:Comptable:refuserHorsForfait }
