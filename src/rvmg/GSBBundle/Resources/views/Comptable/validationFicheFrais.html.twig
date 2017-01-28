@@ -3,11 +3,13 @@
     Valider fiche de frais
 {% endblock %}
 {% block body %}
-    <table class="table-responsive table-hover">
+   
+    <table class="table-responsive table-hover table-bordered" >
+        {# foreach occurence in tableForfait#}
         {% for list in tableForfait %}
             <thead>
                 <tr>
-                    <th>{{ list.name }}</th>
+                    <th>{{ list.name }}</th>{# #}
                 </tr>
                 {% if list.type == "forfait" %}
                     <tr>
@@ -24,17 +26,17 @@
                 {% endif %}
             </thead>
             <tbody>
-                {% for frais in list %}
+                {% for frais in list.listForfait %}
                     {% if list.type == "forfait" %}
                         <tr>
-                            <td>{{frais.fraisforfait}}</td>
+                            <td>{{frais.idFraisforfait}}</td>
                             <td>{{frais.quantite}}</td>
                         </tr>
                     {% endif %}
                     {% if list.type == "horsforfait" %}
                         <tr>
                             <td>{{frais.libelle}}</td>
-                            <td>{{frais.datedepense}}</td>
+                            <td>{{frais.dateDepense|date('d/m/y')}}</td>
                             <td>{{frais.montant}}</td>
                             <td>
                                 <button class="btn-danger">REFUSER</button>

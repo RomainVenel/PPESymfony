@@ -92,4 +92,9 @@ class Fraisforfait
     {
         return $this->montant;
     }
+    
+    public function __toString() {
+        return $this->libelle;
+    }
+
 }
