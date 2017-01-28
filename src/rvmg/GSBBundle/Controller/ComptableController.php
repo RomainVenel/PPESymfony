@@ -75,7 +75,23 @@ class ComptableController extends Controller{
                 array('form'=>$form->createView()));
     }
     
+    /**
+     * 
+     * Function that's suppose to let follow a fichefrais
+     */
     public function suivreAction(){
+        
+    }
+    
+    /**
+     * 
+     * Function that's be called when the comptable want to refuse
+     * some LigneFraisHorsForfait
+     */
+    public function refuserHorsForfaitAction($ligne){
+        
+        echo $ligne;
+        return $this->redirect($this->generateUrl('rvmg_gsb_choose_month_visitor'));
         
     }
     
