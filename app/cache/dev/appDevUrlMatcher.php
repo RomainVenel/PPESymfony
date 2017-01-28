@@ -27,19 +27,6 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         $context = $this->context;
         $request = $this->request;
 
-        if (0 === strpos($pathinfo, '/css/0dacc62')) {
-            // _assetic_0dacc62
-            if ($pathinfo === '/css/0dacc62.css') {
-                return array (  '_controller' => 'assetic.controller:render',  'name' => '0dacc62',  'pos' => NULL,  '_format' => 'css',  '_route' => '_assetic_0dacc62',);
-            }
-
-            // _assetic_0dacc62_0
-            if ($pathinfo === '/css/0dacc62_bootstrap_1.css') {
-                return array (  '_controller' => 'assetic.controller:render',  'name' => '0dacc62',  'pos' => 0,  '_format' => 'css',  '_route' => '_assetic_0dacc62_0',);
-            }
-
-        }
-
         if (0 === strpos($pathinfo, '/_')) {
             // _wdt
             if (0 === strpos($pathinfo, '/_wdt') && preg_match('#^/_wdt/(?P<token>[^/]++)$#s', $pathinfo, $matches)) {
@@ -152,6 +139,43 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         // rvmg_gsb_connexionErreur
         if ($pathinfo === '/connexionErreur') {
             return array (  '_controller' => 'rvmg\\GSBBundle\\Controller\\AccueilController::connexionAccueilAction',  '_route' => 'rvmg_gsb_connexionErreur',);
+        }
+
+        // rvmg_gsb_deconnexion
+        if ($pathinfo === '/deconnexion') {
+            return array (  '_controller' => 'rvmg\\GSBBundle\\Controller\\AccueilController::deconnexionAction',  '_route' => 'rvmg_gsb_deconnexion',);
+        }
+
+        // rvmg_gsb_renseigner
+        if (0 === strpos($pathinfo, '/renseigner') && preg_match('#^/renseigner/(?P<type>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'rvmg_gsb_renseigner')), array (  '_controller' => 'rvmg\\GSBBundle\\Controller\\VisiteurController::renseignerAction',));
+        }
+
+        // rvmg_gsb_valider
+        if (rtrim($pathinfo, '/') === '/valider') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'rvmg_gsb_valider');
+            }
+
+            return array (  '_controller' => 'rvmg\\GSBBundle\\Controller\\ComptableController::validerAction',  '_route' => 'rvmg_gsb_valider',);
+        }
+
+        // rvmg_gsb_suivre
+        if (rtrim($pathinfo, '/') === '/suivre') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'rvmg_gsb_suivre');
+            }
+
+            return array (  '_controller' => 'rvmg\\GSBBundle\\Controller\\ComptableController::suivreAction',  '_route' => 'rvmg_gsb_suivre',);
+        }
+
+        // rvmg_gsb_choose_month_visitor
+        if (rtrim($pathinfo, '/') === '/choisir') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'rvmg_gsb_choose_month_visitor');
+            }
+
+            return array (  '_controller' => 'rvmg\\GSBBundle\\Controller\\ComptableController::validerAction',  '_route' => 'rvmg_gsb_choose_month_visitor',);
         }
 
         // homepage

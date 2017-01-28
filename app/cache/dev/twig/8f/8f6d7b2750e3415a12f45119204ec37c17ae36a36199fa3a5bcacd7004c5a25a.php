@@ -19,8 +19,8 @@ class __TwigTemplate_a35ceb76397a15937c976db2554002e63f869067b3c72dea68ce82e7973
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_9a308de53a8fbbb3e5f0dea128c643d86cafa61068f3a518c3b84d827eb38734 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_9a308de53a8fbbb3e5f0dea128c643d86cafa61068f3a518c3b84d827eb38734->enter($__internal_9a308de53a8fbbb3e5f0dea128c643d86cafa61068f3a518c3b84d827eb38734_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "rvmgGSBBundle:Default:base.html.twig"));
+        $__internal_9562c07426489eb04263cc77317319ba8f71c5a6c0f32ee3326afe3ccaebe82f = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_9562c07426489eb04263cc77317319ba8f71c5a6c0f32ee3326afe3ccaebe82f->enter($__internal_9562c07426489eb04263cc77317319ba8f71c5a6c0f32ee3326afe3ccaebe82f_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "rvmgGSBBundle:Default:base.html.twig"));
 
         // line 1
         echo "<! DOCTYPE html>
@@ -29,101 +29,101 @@ class __TwigTemplate_a35ceb76397a15937c976db2554002e63f869067b3c72dea68ce82e7973
         ";
         // line 4
         $this->displayBlock('head', $context, $blocks);
-        // line 12
+        // line 14
         echo "    </head>
     <body>
         <div id=\"header\">
         </div>
         <div id=\"content\">
             ";
-        // line 17
+        // line 19
         $this->displayBlock('body', $context, $blocks);
-        // line 18
+        // line 20
         echo "        </div>
         <div id=\"footer\">
             ";
-        // line 20
+        // line 22
         $this->displayBlock('footer', $context, $blocks);
-        // line 23
+        // line 25
         echo "        </div>
     </body>
 </html>";
         
-        $__internal_9a308de53a8fbbb3e5f0dea128c643d86cafa61068f3a518c3b84d827eb38734->leave($__internal_9a308de53a8fbbb3e5f0dea128c643d86cafa61068f3a518c3b84d827eb38734_prof);
+        $__internal_9562c07426489eb04263cc77317319ba8f71c5a6c0f32ee3326afe3ccaebe82f->leave($__internal_9562c07426489eb04263cc77317319ba8f71c5a6c0f32ee3326afe3ccaebe82f_prof);
 
     }
 
     // line 4
     public function block_head($context, array $blocks = array())
     {
-        $__internal_11627bce3a309b82294b5abc1096da240f698a5a68819ecc84dd57ae6fa2ba1a = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_11627bce3a309b82294b5abc1096da240f698a5a68819ecc84dd57ae6fa2ba1a->enter($__internal_11627bce3a309b82294b5abc1096da240f698a5a68819ecc84dd57ae6fa2ba1a_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "head"));
+        $__internal_fcf231b3a41573bd215df24cfade57d9b31de7b75e1ac9b6aaf1e94e8d2063d4 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_fcf231b3a41573bd215df24cfade57d9b31de7b75e1ac9b6aaf1e94e8d2063d4->enter($__internal_fcf231b3a41573bd215df24cfade57d9b31de7b75e1ac9b6aaf1e94e8d2063d4_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "head"));
 
         // line 5
-        echo "            ";
-        if (isset($context['assetic']['debug']) && $context['assetic']['debug']) {
-            // asset "0dacc62_0"
-            $context["asset_url"] = isset($context['assetic']['use_controller']) && $context['assetic']['use_controller'] ? $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("_assetic_0dacc62_0") : $this->env->getExtension('Symfony\Bridge\Twig\Extension\AssetExtension')->getAssetUrl("_controller/css/0dacc62_bootstrap_1.css");
-            // line 6
-            echo "                <link rel=\"stylesheet\" href=\"";
-            echo twig_escape_filter($this->env, (isset($context["asset_url"]) ? $context["asset_url"] : $this->getContext($context, "asset_url")), "html", null, true);
-            echo "\" type=\"text/css\"/>
-            ";
-        } else {
-            // asset "0dacc62"
-            $context["asset_url"] = isset($context['assetic']['use_controller']) && $context['assetic']['use_controller'] ? $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("_assetic_0dacc62") : $this->env->getExtension('Symfony\Bridge\Twig\Extension\AssetExtension')->getAssetUrl("_controller/css/0dacc62.css");
-            echo "                <link rel=\"stylesheet\" href=\"";
-            echo twig_escape_filter($this->env, (isset($context["asset_url"]) ? $context["asset_url"] : $this->getContext($context, "asset_url")), "html", null, true);
-            echo "\" type=\"text/css\"/>
-            ";
-        }
-        unset($context["asset_url"]);
+        echo "            <link href=\"";
+        echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\AssetExtension')->getAssetUrl("bundles/rvmggsb/css/bootstrap.css"), "html", null, true);
+        echo "\" rel=\"stylesheet\" type=\"text/css\" />
+            <link href=\"";
+        // line 6
+        echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\AssetExtension')->getAssetUrl("bundles/rvmggsb/css/style.css"), "html", null, true);
+        echo "\" rel=\"stylesheet\" type=\"text/css\" />
+            <link href=\"";
+        // line 7
+        echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\AssetExtension')->getAssetUrl("bundles/rvmggsb/css/font-awesome.css"), "html", null, true);
+        echo "\" rel=\"stylesheet\" type=\"text/css\" />
+            <script type=\"text/javascript\" src=\"";
         // line 8
-        echo "            <title>
-                ";
+        echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\AssetExtension')->getAssetUrl("bundles/rvmggsb/js/jquery.js"), "html", null, true);
+        echo "\"></script>
+            <script type=\"text/javascript\" src=\"";
         // line 9
+        echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\AssetExtension')->getAssetUrl("bundles/rvmggsb/js/bootstrap.js"), "html", null, true);
+        echo "\"></script>
+            <title>
+                ";
+        // line 11
         $this->displayBlock('title', $context, $blocks);
-        // line 10
+        // line 12
         echo "            </title>
         ";
         
-        $__internal_11627bce3a309b82294b5abc1096da240f698a5a68819ecc84dd57ae6fa2ba1a->leave($__internal_11627bce3a309b82294b5abc1096da240f698a5a68819ecc84dd57ae6fa2ba1a_prof);
+        $__internal_fcf231b3a41573bd215df24cfade57d9b31de7b75e1ac9b6aaf1e94e8d2063d4->leave($__internal_fcf231b3a41573bd215df24cfade57d9b31de7b75e1ac9b6aaf1e94e8d2063d4_prof);
 
     }
 
-    // line 9
+    // line 11
     public function block_title($context, array $blocks = array())
     {
-        $__internal_c227e8417ba9c1e4d8588c2b4675c242da7343ce9746c127ca6e36662c993d66 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_c227e8417ba9c1e4d8588c2b4675c242da7343ce9746c127ca6e36662c993d66->enter($__internal_c227e8417ba9c1e4d8588c2b4675c242da7343ce9746c127ca6e36662c993d66_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "title"));
+        $__internal_c51866fdc8f594d6d29bee71486dbe6a815af6fc219b22ac3eec5c5442d08858 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_c51866fdc8f594d6d29bee71486dbe6a815af6fc219b22ac3eec5c5442d08858->enter($__internal_c51866fdc8f594d6d29bee71486dbe6a815af6fc219b22ac3eec5c5442d08858_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "title"));
 
         
-        $__internal_c227e8417ba9c1e4d8588c2b4675c242da7343ce9746c127ca6e36662c993d66->leave($__internal_c227e8417ba9c1e4d8588c2b4675c242da7343ce9746c127ca6e36662c993d66_prof);
+        $__internal_c51866fdc8f594d6d29bee71486dbe6a815af6fc219b22ac3eec5c5442d08858->leave($__internal_c51866fdc8f594d6d29bee71486dbe6a815af6fc219b22ac3eec5c5442d08858_prof);
 
     }
 
-    // line 17
+    // line 19
     public function block_body($context, array $blocks = array())
     {
-        $__internal_160719e3a815e3b534814fb3ec0ebe84aadad68d74c45bc074db87d6fbf7c4f3 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_160719e3a815e3b534814fb3ec0ebe84aadad68d74c45bc074db87d6fbf7c4f3->enter($__internal_160719e3a815e3b534814fb3ec0ebe84aadad68d74c45bc074db87d6fbf7c4f3_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
+        $__internal_04d2f8d6ccd186f275eae316aa290264e386ffd6fd59e795c16868419848f0f8 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_04d2f8d6ccd186f275eae316aa290264e386ffd6fd59e795c16868419848f0f8->enter($__internal_04d2f8d6ccd186f275eae316aa290264e386ffd6fd59e795c16868419848f0f8_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
         
-        $__internal_160719e3a815e3b534814fb3ec0ebe84aadad68d74c45bc074db87d6fbf7c4f3->leave($__internal_160719e3a815e3b534814fb3ec0ebe84aadad68d74c45bc074db87d6fbf7c4f3_prof);
+        $__internal_04d2f8d6ccd186f275eae316aa290264e386ffd6fd59e795c16868419848f0f8->leave($__internal_04d2f8d6ccd186f275eae316aa290264e386ffd6fd59e795c16868419848f0f8_prof);
 
     }
 
-    // line 20
+    // line 22
     public function block_footer($context, array $blocks = array())
     {
-        $__internal_8f45d45900b80ea68591d357ff8c737648fc38fa30301d27cd3f21ec6112f36b = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_8f45d45900b80ea68591d357ff8c737648fc38fa30301d27cd3f21ec6112f36b->enter($__internal_8f45d45900b80ea68591d357ff8c737648fc38fa30301d27cd3f21ec6112f36b_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "footer"));
+        $__internal_6f20443593369092d7c1a7003f26274224c74c3a51b1f28559c302233f6d293c = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_6f20443593369092d7c1a7003f26274224c74c3a51b1f28559c302233f6d293c->enter($__internal_6f20443593369092d7c1a7003f26274224c74c3a51b1f28559c302233f6d293c_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "footer"));
 
-        // line 21
-        echo "                &copy; Copyright 2016 by Romain Venel & Maxime Genevier 
+        // line 23
+        echo "                <p>&copy; Copyright 2016 by Romain Venel & Maxime Genevier</p>
             ";
         
-        $__internal_8f45d45900b80ea68591d357ff8c737648fc38fa30301d27cd3f21ec6112f36b->leave($__internal_8f45d45900b80ea68591d357ff8c737648fc38fa30301d27cd3f21ec6112f36b_prof);
+        $__internal_6f20443593369092d7c1a7003f26274224c74c3a51b1f28559c302233f6d293c->leave($__internal_6f20443593369092d7c1a7003f26274224c74c3a51b1f28559c302233f6d293c_prof);
 
     }
 
@@ -134,7 +134,7 @@ class __TwigTemplate_a35ceb76397a15937c976db2554002e63f869067b3c72dea68ce82e7973
 
     public function getDebugInfo()
     {
-        return array (  123 => 21,  117 => 20,  106 => 17,  95 => 9,  87 => 10,  85 => 9,  82 => 8,  68 => 6,  63 => 5,  57 => 4,  48 => 23,  46 => 20,  42 => 18,  40 => 17,  33 => 12,  31 => 4,  26 => 1,);
+        return array (  123 => 23,  117 => 22,  106 => 19,  95 => 11,  87 => 12,  85 => 11,  80 => 9,  76 => 8,  72 => 7,  68 => 6,  63 => 5,  57 => 4,  48 => 25,  46 => 22,  42 => 20,  40 => 19,  33 => 14,  31 => 4,  26 => 1,);
     }
 
     public function getSource()
@@ -143,9 +143,11 @@ class __TwigTemplate_a35ceb76397a15937c976db2554002e63f869067b3c72dea68ce82e7973
 <html>
     <head>
         {% block head %}
-            {% stylesheets '@rvmgGSBBundle/Resources/public/css/bootstrap.css'%}
-                <link rel=\"stylesheet\" href=\"{{ asset_url }}\" type=\"text/css\"/>
-            {% endstylesheets %}
+            <link href=\"{{ asset('bundles/rvmggsb/css/bootstrap.css') }}\" rel=\"stylesheet\" type=\"text/css\" />
+            <link href=\"{{ asset('bundles/rvmggsb/css/style.css') }}\" rel=\"stylesheet\" type=\"text/css\" />
+            <link href=\"{{ asset('bundles/rvmggsb/css/font-awesome.css') }}\" rel=\"stylesheet\" type=\"text/css\" />
+            <script type=\"text/javascript\" src=\"{{ asset('bundles/rvmggsb/js/jquery.js') }}\"></script>
+            <script type=\"text/javascript\" src=\"{{ asset('bundles/rvmggsb/js/bootstrap.js') }}\"></script>
             <title>
                 {% block title %}{% endblock %}
             </title>
@@ -159,7 +161,7 @@ class __TwigTemplate_a35ceb76397a15937c976db2554002e63f869067b3c72dea68ce82e7973
         </div>
         <div id=\"footer\">
             {% block footer %}
-                &copy; Copyright 2016 by Romain Venel & Maxime Genevier 
+                <p>&copy; Copyright 2016 by Romain Venel & Maxime Genevier</p>
             {% endblock %}
         </div>
     </body>

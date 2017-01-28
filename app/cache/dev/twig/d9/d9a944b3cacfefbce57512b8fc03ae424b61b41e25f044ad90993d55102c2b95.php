@@ -1,6 +1,6 @@
 <?php
 
-/* WebProfilerBundle:Profiler:toolbar_js.html.twig */
+/* @WebProfiler/Profiler/toolbar_js.html.twig */
 class __TwigTemplate_327e09a9fceb10659a58fe9a701c5637a62ce89f790ce627283aeb6bef6077be extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
@@ -15,8 +15,8 @@ class __TwigTemplate_327e09a9fceb10659a58fe9a701c5637a62ce89f790ce627283aeb6bef6
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_21e1bf511f9cb4b075bdda77ef17d4524d079d619431efe86602c4e85037e93e = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_21e1bf511f9cb4b075bdda77ef17d4524d079d619431efe86602c4e85037e93e->enter($__internal_21e1bf511f9cb4b075bdda77ef17d4524d079d619431efe86602c4e85037e93e_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "WebProfilerBundle:Profiler:toolbar_js.html.twig"));
+        $__internal_f5c0bb3e5c03b0f2a30da79df6d4f9cf0031c3db613e99a97274719af38f6bd4 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_f5c0bb3e5c03b0f2a30da79df6d4f9cf0031c3db613e99a97274719af38f6bd4->enter($__internal_f5c0bb3e5c03b0f2a30da79df6d4f9cf0031c3db613e99a97274719af38f6bd4_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/toolbar_js.html.twig"));
 
         // line 1
         echo "<div id=\"sfwdt";
@@ -24,7 +24,7 @@ class __TwigTemplate_327e09a9fceb10659a58fe9a701c5637a62ce89f790ce627283aeb6bef6
         echo "\" class=\"sf-toolbar\" style=\"display: none\"></div>
 ";
         // line 2
-        $this->loadTemplate("@WebProfiler/Profiler/base_js.html.twig", "WebProfilerBundle:Profiler:toolbar_js.html.twig", 2)->display($context);
+        $this->loadTemplate("@WebProfiler/Profiler/base_js.html.twig", "@WebProfiler/Profiler/toolbar_js.html.twig", 2)->display($context);
         // line 3
         echo "<script>/*<![CDATA[*/
     (function () {
@@ -127,13 +127,13 @@ class __TwigTemplate_327e09a9fceb10659a58fe9a701c5637a62ce89f790ce627283aeb6bef6
 /*]]>*/</script>
 ";
         
-        $__internal_21e1bf511f9cb4b075bdda77ef17d4524d079d619431efe86602c4e85037e93e->leave($__internal_21e1bf511f9cb4b075bdda77ef17d4524d079d619431efe86602c4e85037e93e_prof);
+        $__internal_f5c0bb3e5c03b0f2a30da79df6d4f9cf0031c3db613e99a97274719af38f6bd4->leave($__internal_f5c0bb3e5c03b0f2a30da79df6d4f9cf0031c3db613e99a97274719af38f6bd4_prof);
 
     }
 
     public function getTemplateName()
     {
-        return "WebProfilerBundle:Profiler:toolbar_js.html.twig";
+        return "@WebProfiler/Profiler/toolbar_js.html.twig";
     }
 
     public function isTraitable()
