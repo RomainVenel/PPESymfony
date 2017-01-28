@@ -31,6 +31,8 @@ class VisiteurController extends Controller{
         $request = $this->container->get('request');
         $form->handleRequest($request);
         $em = $this->getDoctrine()->getManager();
+        
+        /* Récupération de tous les frais forfait */
         $fraisForfait = $em->getRepository('rvmgGSBBundle:Fraisforfait')->findAll();
         
         if($form->isValid()){
@@ -45,6 +47,7 @@ class VisiteurController extends Controller{
             
         }
         
+        /* On envoie dans la vue le paramètre frais qui contient tous les frais forfait */
         return $this->render($vue, array('frais'=>$fraisForfait));
     }
     
