@@ -40,4 +40,14 @@ class FichefraisRepository extends EntityRepository
         return $queryBuilder->getQuery()->getOneOrNullResult();
     }
     
+    public function findByStateAndVisitor($state, $visitors){
+        
+        $queryBuilder = $this->createQueryBuilder('f');
+        $queryBuilder->where('f.idetat = :state')->setParameter(':state', $state)
+                ->andWhere('f.idvisiteur IN (:visitors)')->setParameter(':visitors', $visitors);
+        
+        //Only return the queryBuilder for the form
+        return $queryBuilder;
+    }
+    
 }

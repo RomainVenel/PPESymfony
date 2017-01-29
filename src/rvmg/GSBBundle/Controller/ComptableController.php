@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use rvmg\GSBBundle\Formulaires\Data\ChooseMonthAndVisitorClass;
 use rvmg\GSBBundle\Formulaires\Type\ChooseMonthAndVisitorType;
+use rvmg\GSBBundle\Formulaires\Data\FollowClass;
+use rvmg\GSBBundle\Formulaires\Type\FollowType;
 use rvmg\GSBBundle\Entity\Fichefrais;
 use rvmg\GSBBundle\Entity\Comptable;
 /**
@@ -58,13 +60,13 @@ class ComptableController extends Controller{
                         array('form'=>$form->createView()));
             }
             //Check if the fiche was not validate yet
-            /*elseif($fichefrais->getIdetat()->getIdetat() == "VA"){
+            elseif($fichefrais->getIdetat()->getIdetat() == "VA"){
                 $request->getSession()
                     ->getFlashBag()
                     ->add('error', 'La fiche de frais pour ce mois et ce visiteur a déjà été validée.');
                 return $this->render('rvmgGSBBundle:Comptable:chooseMonthAndVisitor.html.twig',
                         array('form'=>$form->createView()));
-            }*/
+            }
             //In the other case, we search all Lignefraisforfait and Lignefraishorsforfait
             //to display them 
             else{
@@ -111,18 +113,7 @@ class ComptableController extends Controller{
         }
         $em->flush();
         return $this->redirect($this->generateUrl('rvmg_gsb_choose_month_visitor'));
-        
-        //TODO Lorsque le comptable valide la fiche de frais, envoyer une notification à l'application mobile
 
-    }
-    
-    /**
-     * 
-     * Function that's suppose to let follow a fichefrais
-     */
-
-    public function followAction(){
-        
     }
     
     /**
@@ -183,6 +174,94 @@ class ComptableController extends Controller{
             '<html><body>Variable: '.$month->format('d-m-Y')." ".$visiteur->getIdvisiteur().'</body></html>'
         );*/
         return $this->redirect($this->generateUrl('rvmg_gsb_choose_month_visitor'));
+        
+    }
+    
+    /**
+     * 
+     * Function that's suppose to let choose a fichefrais
+     */
+
+    public function chooseFicheFraisAction(){
+        
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('rvmgGSBBundle:Visiteur');
+        $visitors = $repository->findBy(array('idcomptable'=>
+            $this->getRequest()->getSession()->get('user_id')));
+        
+        $repository = $em->getRepository('rvmgGSBBundle:Etat');
+        $state = $repository->findOneBy(array('idetat'=>'VA'));
+        
+        $follow = new FollowClass();
+        //Form's construct get only the visistors of the comptable with the state 'VA'
+        $followType = new FollowType($visitors, $state);
+        $form = $this->createForm($followType,$follow);        
+        
+        if(!$followType){
+            
+            $request->getSession()
+                    ->getFlashBag()
+                    ->add('error', 'Il n\'y a pas de fiche de frais à mettre en remboursement actuellement.');
+                return $this->render('rvmgGSBBundle:Comptable:accueilComptable.html.twig',
+                        array('form'=>$form->createView()));
+            
+        }else{
+        
+            $request = $this->container->get('request');
+
+            $form->handleRequest($request);
+
+            if ($form->isValid()){
+
+                $fichefrais = $follow->getFichefrais();
+
+                $repositoryForfait = $em->getRepository('rvmgGSBBundle:Lignefraisforfait');
+                $repositoryHorsForfait = $em->getRepository('rvmgGSBBundle:Lignefraishorsforfait');
+
+                $listLigneForfait = $repositoryForfait->findByIdfichefrais($fichefrais);
+                $listLigneHorsForfait = $repositoryHorsForfait->findByIdfichefrais($fichefrais);
+
+                $tableForfait = array(array("name"=>"Frais forfait",
+                    "listForfait"=>$listLigneForfait,
+                    "type"=>"forfait"),
+                    array("name"=>"Frais hors forfait",
+                        "listForfait"=>$listLigneHorsForfait,
+                        "type"=>"horsforfait"));
+
+                /*return $this->render('rvmgGSBBundle:Comptable:followFicheFrais.html.twig',
+                            array('tableForfait'=>$tableForfait));*/
+            }
+        }
+        
+        return $this->render('rvmgGSBBundle:Comptable:chooseFicheFrais.html.twig', 
+                array('form'=>$form->createView()));
+        
+    }
+    
+    /**
+     * 
+     * @param type $fichefrais
+     * @return type
+     * 
+     * this method allows to change the state of the fiche to RB
+     */
+    public function followAction($fichefrais){
+        
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('rvmgGSBBundle:Fichefrais');
+        $currentFicheFrais = $repository->findOneByIdfichefrais($fichefrais);
+        $currentDate = new \DateTime();
+        if($currentFicheFrais){
+            $state = $em->getRepository('rvmgGSBBundle:Etat')->findOneByIdetat('RB');
+            $currentFicheFrais->setIdetat($state);
+            $currentFicheFrais->setDatemodif($currentDate);
+            $em->persist($currentFicheFrais);
+            
+        }
+        $em->flush();
+        
+        return $this->redirect($this->generateUrl('rvmg_gsb_choose_fiche_frais'));
+        //TODO Lorsque le comptable valide la fiche de frais, envoyer une notification à l'application mobile
         
     }
     

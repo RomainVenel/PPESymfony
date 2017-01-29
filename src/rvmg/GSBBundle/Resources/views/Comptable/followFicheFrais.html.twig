@@ -1,6 +1,6 @@
 {% extends "rvmgGSBBundle:Default:baseComptable.html.twig" %}
 {% block title %}
-    Valider fiche de frais
+    Mettre en paiement
 {% endblock %}
 {% block body %}
 
@@ -22,7 +22,6 @@
                         <th>Libellé</th>
                         <th>Date dépense</th>
                         <th>Montant</th>
-                        <th></th>
                     </tr>
                 {% endif %}
             </thead>
@@ -41,19 +40,12 @@
                             <td>{{frais.libelle}}</td>
                             <td>{{frais.dateDepense|date('d/m/y')}}</td>
                             <td>{{frais.montant}}</td>
-                            <td>
-                                <a value="SUPPRIMER" 
-
-                                       href="{{ path('rvmg_gsb_refuse_horsforfait',{'ligne':frais.idLignefraishorsforfait,
-                                                'fichefrais':frais.idFichefrais.idFichefrais}) }}"
-                                       class="btn btn-danger">SUPPRIMER</a>
-                            </td>
                         </tr>
                     {% endif %}
                 {% endfor %}
             </tbody>
         {% endfor %}
     </table>
-    <a href="{{ path('rvmg_gsb_validate',{'fichefrais':fichefrais}) }}"
-       class="btn btn-success">VALIDER</a>
+    <a href="{{ path('rvmg_gsb_follow',{'fichefrais':fichefrais}) }}"
+       class="btn btn-success">PAIEMENT</a>
 {% endblock %}

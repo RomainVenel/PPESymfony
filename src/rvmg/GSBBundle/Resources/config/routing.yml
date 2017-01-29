@@ -18,10 +18,6 @@ rvmg_gsb_validate:
     path:     /valider/{fichefrais}
     defaults: { _controller: rvmgGSBBundle:Comptable:validate }
     
-rvmg_gsb_follow:
-    path:     /suivre/
-    defaults: { _controller: rvmgGSBBundle:Comptable:follow }
-    
 rvmg_gsb_choose_month_visitor:
     path:     /choisir/
     defaults: { _controller: rvmgGSBBundle:Comptable:chooseMonthAndVisitor }
@@ -29,3 +25,11 @@ rvmg_gsb_choose_month_visitor:
 rvmg_gsb_refuse_horsforfait:
     path:     /refuser/{fichefrais}/{ligne}
     defaults: { _controller: rvmgGSBBundle:Comptable:refuserHorsForfait }
+
+rvmg_gsb_choose_fiche_frais:
+    path:     /choisir/fichefrais
+    defaults: { _controller: rvmgGSBBundle:Comptable:chooseFicheFrais }
+    
+rvmg_gsb_follow:
+    path:     /suivre/{fichefrais}
+    defaults: { _controller: rvmgGSBBundle:Comptable:follow }

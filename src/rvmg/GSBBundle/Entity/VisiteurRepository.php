@@ -46,6 +46,8 @@ class VisiteurRepository extends EntityRepository
         
         $queryBuilder = $this->createQueryBuilder('v');
         $queryBuilder->where('v.idcomptable = :comptable')->setParameter(':comptable', $comptable);
+        
+        //Return only the queryBuilder for the custom form ChooseMonthAndVisitorType
         return $queryBuilder;
         
     }
