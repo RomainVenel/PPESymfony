@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use rvmg\GSBBundle\Formulaires\Data\ChooseMonthAndVisitorClass;
 use rvmg\GSBBundle\Formulaires\Type\ChooseMonthAndVisitorType;
 use rvmg\GSBBundle\Entity\Fichefrais;
+use rvmg\GSBBundle\Entity\Comptable;
 /**
  * Description of ComptableController
  *
@@ -25,24 +26,27 @@ class ComptableController extends Controller{
 
     public function chooseMonthAndVisitorAction(){
 
+        //Get the current log in comptable
+        $em = $this->getDoctrine()->getManager();
+        $comptable = $em->getRepository('rvmgGSBBundle:Comptable')
+                ->findOneByIdcomptable($this->getRequest()->getSession()->get('user_id'));
+        
         $choose = new ChooseMonthAndVisitorClass();
-        $form = $this->createForm(new ChooseMonthAndVisitorType(),$choose);        
+        //Form's construct get only the visistors of the comptable
+        $form = $this->createForm(new ChooseMonthAndVisitorType($comptable),$choose);        
         
         $request = $this->container->get('request');
         
         $form->handleRequest($request);
-        $this->getRequest()->getSession()->clear();
         
         if ($form->isValid()){
             $visitor = $choose->getVisitor();
             $month = $choose->getMonth();
             $data = $form->getData();
-            $em = $this->getDoctrine()->getManager();
             
             //Try to find a Fichefrais
             $repository = $em->getRepository('rvmgGSBBundle:Fichefrais');
             $fichefrais = $repository->findOneByMonthAndVisitor($visitor, $month);
-            
             //If $fichefrais is empty, display a message at the user to inform him
             //that's there's no fichefrais for this month and visitor
             if(!$fichefrais){
@@ -52,6 +56,14 @@ class ComptableController extends Controller{
                 return $this->render('rvmgGSBBundle:Comptable:chooseMonthAndVisitor.html.twig',
                         array('form'=>$form->createView()));
             }
+            //Check if the fiche was not validate yet
+            /*elseif($fichefrais->getIdetat()->getIdetat() == "VA"){
+                $request->getSession()
+                    ->getFlashBag()
+                    ->add('error', 'La fiche de frais pour ce mois et ce visiteur a déjà été validée.');
+                return $this->render('rvmgGSBBundle:Comptable:chooseMonthAndVisitor.html.twig',
+                        array('form'=>$form->createView()));
+            }*/
             //In the other case, we search all Lignefraisforfait and Lignefraishorsforfait
             //to display them 
             else{
@@ -97,6 +109,8 @@ class ComptableController extends Controller{
         }
         $em->flush();
         return $this->redirect($this->generateUrl('rvmg_gsb_choose_month_visitor'));
+        
+        //TODO Lorsque le comptable valide la fiche de frais, envoyer une notification à l'application mobile
 
     }
     
@@ -122,16 +136,18 @@ class ComptableController extends Controller{
         $lignehorsforfait = $repository->findOneByIdAndIdFicheFrais($fichefrais, $ligne);
         $currentFicheFrais = $em->getRepository('rvmgGSBBundle:Fichefrais')->findOneByIdfichefrais($fichefrais);
         $visiteur = $currentFicheFrais->getIdvisiteur();
-        
         if($lignehorsforfait){
             //Affect the lignehorsforfait's label to a variable and concat it to 
             // the string "REFUSE : " 
             $libelle = $lignehorsforfait->getLibelle();
             $lignehorsforfait->setLibelle("REFUSE : ".$libelle);
             
+            //Create new date to get next month
+            $currentDate = new \DateTime();
+            $month = new \DateTime();
+            $month->setDate($currentDate->format('Y'), $currentDate->format('m')+1, 1);
             //Try to search the next fichefrais. If it doesn't exist, we have to
             //create it with empty values (0) and put in the lignehorsforfait
-            $month = new \DateTime('+1 month');
             $repository = $em->getRepository('rvmgGSBBundle:Fichefrais');
             $nextFicheFrais = $repository->findOneByNextMonth($visiteur, $month);
             
@@ -140,7 +156,9 @@ class ComptableController extends Controller{
                 //Create new object
                 $nextFicheFrais = new Fichefrais();
                 $nextFicheFrais->setIdvisiteur($visiteur);
-                $nextFicheFrais->setMois(new \DateTime('+1 month'));
+                $nextFicheFrais->setMois($month);
+                $etat = $em->getRepository('rvmgGSBBundle:Etat')->findOneByIdetat('CR');
+                $nextFicheFrais->setIdetat($etat);
                 
                 $em->persist($nextFicheFrais);
                 $lignehorsforfait->setIdfichefrais($nextFicheFrais);
@@ -148,8 +166,7 @@ class ComptableController extends Controller{
             }else{
                 //ELSE setFichefrais of the lignehorsforfait
                 $lignehorsforfait->setIdfichefrais($nextFicheFrais);
-            }
-            
+           }
             $em->persist($lignehorsforfait);
             $em->flush();
         }

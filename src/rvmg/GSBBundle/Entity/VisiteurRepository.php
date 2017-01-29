@@ -41,4 +41,12 @@ class VisiteurRepository extends EntityRepository
          
         $qB->getQuery()->execute();
     }
+    
+    public function findByComptable($comptable){
+        
+        $queryBuilder = $this->createQueryBuilder('v');
+        $queryBuilder->where('v.idcomptable = :comptable')->setParameter(':comptable', $comptable);
+        return $queryBuilder;
+        
+    }
 }
