@@ -3,6 +3,7 @@
 namespace rvmg\GSBBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use rvmg\GSBBundle\Formulaires\Data\ChooseMonthAndVisitorClass;
 use rvmg\GSBBundle\Formulaires\Type\ChooseMonthAndVisitorType;
 use rvmg\GSBBundle\Entity\Fichefrais;
@@ -101,10 +102,11 @@ class ComptableController extends Controller{
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('rvmgGSBBundle:Fichefrais');
         $currentFicheFrais = $repository->findOneByIdfichefrais($fichefrais);
-        
+        $currentDate = new \DateTime();
         if($currentFicheFrais){
             $state = $em->getRepository('rvmgGSBBundle:Etat')->findOneByIdetat('VA');
             $currentFicheFrais->setIdetat($state);
+            $currentFicheFrais->setDatemodif($currentDate);
             $em->persist($currentFicheFrais);
         }
         $em->flush();
@@ -132,10 +134,12 @@ class ComptableController extends Controller{
         
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('rvmgGSBBundle:Lignefraishorsforfait');
+        
         //Get lignehorsforfait which must be remove of the fichefrais
         $lignehorsforfait = $repository->findOneByIdAndIdFicheFrais($fichefrais, $ligne);
         $currentFicheFrais = $em->getRepository('rvmgGSBBundle:Fichefrais')->findOneByIdfichefrais($fichefrais);
         $visiteur = $currentFicheFrais->getIdvisiteur();
+        
         if($lignehorsforfait){
             //Affect the lignehorsforfait's label to a variable and concat it to 
             // the string "REFUSE : " 
@@ -149,16 +153,20 @@ class ComptableController extends Controller{
             //Try to search the next fichefrais. If it doesn't exist, we have to
             //create it with empty values (0) and put in the lignehorsforfait
             $repository = $em->getRepository('rvmgGSBBundle:Fichefrais');
-            $nextFicheFrais = $repository->findOneByNextMonth($visiteur, $month);
-            
+            //TODO Regarder la requête du repository l'utiliser
+            //$nextFicheFrais = $repository->findOneByNextMonth($visiteur,$month);
+            $nextFicheFrais = $repository->findOneBy(array('mois'=>$month,'idvisiteur'=>$visiteur));
             //IF nextFicheFrais is empty
-            if($nextFicheFrais == null){
+           if(!$nextFicheFrais){
+                
                 //Create new object
                 $nextFicheFrais = new Fichefrais();
                 $nextFicheFrais->setIdvisiteur($visiteur);
                 $nextFicheFrais->setMois($month);
                 $etat = $em->getRepository('rvmgGSBBundle:Etat')->findOneByIdetat('CR');
                 $nextFicheFrais->setIdetat($etat);
+                $nextFicheFrais->setMontantvalide(0);
+                $nextFicheFrais->setNbjustificatifs(0);
                 
                 $em->persist($nextFicheFrais);
                 $lignehorsforfait->setIdfichefrais($nextFicheFrais);
@@ -171,6 +179,9 @@ class ComptableController extends Controller{
             $em->flush();
         }
         
+        /*return new Response(
+            '<html><body>Variable: '.$month->format('d-m-Y')." ".$visiteur->getIdvisiteur().'</body></html>'
+        );*/
         return $this->redirect($this->generateUrl('rvmg_gsb_choose_month_visitor'));
         
     }
