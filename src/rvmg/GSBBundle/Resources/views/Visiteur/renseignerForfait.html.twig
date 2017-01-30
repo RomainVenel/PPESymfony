@@ -2,15 +2,14 @@
 
 {% block body %}
     <div class="containerForfait">
-        
-        
+            
         {# Tableau des Frais Forfait #}
         <div class="row">
             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                 <div class="text-center margin-bottom-40 titreFicheFrais">Fiche Frais - Forfait</div>
                 
                 <div class="row">
-                    {% for unFrais in frais %}
+                     {% for unFrais in frais %}
                     <div class="col-lg-5 col-sm-5 col-md-5 col-xs-5 margin-bottom-20 champFicheFrais">
                             {{ unFrais.libelle }}
                     </div>
@@ -27,7 +26,7 @@
                     <button class="btn btn-danger" type="reset">Annuler</button>
                 </div>
             </div>
-        </div>
+        </di
         
     </div>
 {% endblock %}
