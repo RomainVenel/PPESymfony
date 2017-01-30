@@ -77,12 +77,7 @@ class ComptableController extends Controller{
                 $listLigneForfait = $repositoryForfait->findByIdfichefrais($fichefrais);
                 $listLigneHorsForfait = $repositoryHorsForfait->findByIdfichefrais($fichefrais);
                 
-                $tableForfait = array(array("name"=>"Frais forfait",
-                    "listForfait"=>$listLigneForfait,
-                    "type"=>"forfait"),
-                    array("name"=>"Frais hors forfait",
-                        "listForfait"=>$listLigneHorsForfait,
-                        "type"=>"horsforfait"));
+                $tableForfait = $this->getLignes($fichefrais);
                 
                 return $this->render('rvmgGSBBundle:Comptable:validationFicheFrais.html.twig',
                         array('tableForfait'=>$tableForfait));
@@ -105,10 +100,40 @@ class ComptableController extends Controller{
         $repository = $em->getRepository('rvmgGSBBundle:Fichefrais');
         $currentFicheFrais = $repository->findOneByIdfichefrais($fichefrais);
         $currentDate = new \DateTime();
+        
         if($currentFicheFrais){
+            $montant = 0;
+            $nbJustificatifs = 0;
+            $frais = $this->getLignes($currentFicheFrais);
+            
+            foreach($frais as $oneFrais){
+                
+                if($oneFrais["type"]== "forfait"){
+                    
+                    foreach($oneFrais['listForfait'] as $oneLine){
+                        
+                        $montant = $montant 
+                                + ($oneLine->getIdfraisforfait()->getMontant()
+                                * $oneLine->getQuantite());
+                        $nbJustificatifs++;
+                        
+                    }
+                }else{
+                    foreach($oneFrais['listForfait'] as $oneLine){
+                        
+                        $montant = $montant + $oneLine->getMontant();
+                        $nbJustificatifs++;
+                        
+                    }
+                }
+                
+            }
+            
             $state = $em->getRepository('rvmgGSBBundle:Etat')->findOneByIdetat('VA');
             $currentFicheFrais->setIdetat($state);
             $currentFicheFrais->setDatemodif($currentDate);
+            $currentFicheFrais->setMontantvalide($montant);
+            $currentFicheFrais->setNbjustificatifs($nbJustificatifs);
             $em->persist($currentFicheFrais);
         }
         $em->flush();
@@ -170,9 +195,6 @@ class ComptableController extends Controller{
             $em->flush();
         }
         
-        /*return new Response(
-            '<html><body>Variable: '.$month->format('d-m-Y')." ".$visiteur->getIdvisiteur().'</body></html>'
-        );*/
         return $this->redirect($this->generateUrl('rvmg_gsb_choose_month_visitor'));
         
     }
@@ -190,23 +212,24 @@ class ComptableController extends Controller{
             $this->getRequest()->getSession()->get('user_id')));
         
         $repository = $em->getRepository('rvmgGSBBundle:Etat');
-        $state = $repository->findOneBy(array('idetat'=>'VA'));
+        $state = $repository->findOneBy(array('idetat'=>'VA')); 
         
-        $follow = new FollowClass();
-        //Form's construct get only the visistors of the comptable with the state 'VA'
-        $followType = new FollowType($visitors, $state);
-        $form = $this->createForm($followType,$follow);        
+        $fichefrais = $em->getRepository('rvmgGSBBundle:Fichefrais')
+                ->isExistFicheFrais($state, $visitors);
         
-        if(!$followType){
+        if(!$fichefrais){
             
-            $request->getSession()
+            $this->getRequest()->getSession()
                     ->getFlashBag()
                     ->add('error', 'Il n\'y a pas de fiche de frais à mettre en remboursement actuellement.');
-                return $this->render('rvmgGSBBundle:Comptable:accueilComptable.html.twig',
-                        array('form'=>$form->createView()));
+                return $this->render('rvmgGSBBundle:Comptable:accueilComptable.html.twig');
             
         }else{
         
+            $follow = new FollowClass();
+            //Form's construct get only the visistors of the comptable with the state 'VA'
+            $followType = new FollowType($visitors, $state);
+            $form = $this->createForm($followType,$follow);      
             $request = $this->container->get('request');
 
             $form->handleRequest($request);
@@ -228,8 +251,8 @@ class ComptableController extends Controller{
                         "listForfait"=>$listLigneHorsForfait,
                         "type"=>"horsforfait"));
 
-                /*return $this->render('rvmgGSBBundle:Comptable:followFicheFrais.html.twig',
-                            array('tableForfait'=>$tableForfait));*/
+                return $this->render('rvmgGSBBundle:Comptable:followFicheFrais.html.twig',
+                            array('tableForfait'=>$tableForfait));
             }
         }
         
@@ -262,6 +285,26 @@ class ComptableController extends Controller{
         
         return $this->redirect($this->generateUrl('rvmg_gsb_choose_fiche_frais'));
         //TODO Lorsque le comptable valide la fiche de frais, envoyer une notification à l'application mobile
+        
+    }
+    
+    public function getLignes($fichefrais){
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        $repositoryForfait = $em->getRepository('rvmgGSBBundle:Lignefraisforfait');
+        $repositoryHorsForfait = $em->getRepository('rvmgGSBBundle:Lignefraishorsforfait');
+
+        $listLigneForfait = $repositoryForfait->findByIdfichefrais($fichefrais);
+        $listLigneHorsForfait = $repositoryHorsForfait->findByIdfichefrais($fichefrais);
+
+        $tableForfait = array(array("name"=>"Frais forfait",
+            "listForfait"=>$listLigneForfait,
+            "type"=>"forfait"),
+            array("name"=>"Frais hors forfait",
+                "listForfait"=>$listLigneHorsForfait,
+                "type"=>"horsforfait"));
+        
+        return $tableForfait;
         
     }
     

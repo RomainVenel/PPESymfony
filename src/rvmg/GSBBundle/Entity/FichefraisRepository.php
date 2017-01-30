@@ -35,7 +35,8 @@ class FichefraisRepository extends EntityRepository
     public function findOneByMonthAndVisitor($visitor, $month){
         $queryBuilder = $this->createQueryBuilder('f');
         $queryBuilder->where('f.idvisiteur = :visiteur')->setParameter(':visiteur', $visitor)
-                ->andWhere('f.mois = :mois')->setParameter(':mois',$month);
+                ->andWhere('f.mois = :mois')->setParameter(':mois',$month)
+                ->andWhere('f.idetat = :idetat')->setParameter(':idetat', 'CL');
 
         return $queryBuilder->getQuery()->getOneOrNullResult();
     }
@@ -48,6 +49,32 @@ class FichefraisRepository extends EntityRepository
         
         //Only return the queryBuilder for the form
         return $queryBuilder;
+    }
+    
+    /**
+     * 
+     * @param type $state
+     * @param type $visitors
+     * @return type fichefrais
+     * 
+     * Let to know if the function findByStateAndVisitor return something
+     * It allows to haven't an empty form
+     */
+    public function isExistFicheFrais($state, $visitors){
+        
+        $queryBuilder = $this->createQueryBuilder('f');
+        $queryBuilder->where('f.idetat = :state')->setParameter(':state', $state)
+                ->andWhere('f.idvisiteur IN (:visitors)')->setParameter(':visitors', $visitors);
+        
+        return $queryBuilder->getQuery()->getOneOrNullResult();
+    }
+    
+    public function findByPreviousMonthAndVisitor($visitor, $month){
+        $queryBuilder = $this->createQueryBuilder('f');
+        $queryBuilder->where('f.idvisiteur = :visiteur')->setParameter(':visiteur', $visitor)
+                ->andWhere('f.mois = :month')->setParameter(':month', $month);
+        
+        return $queryBuilder->getQuery()->getOneOrNullResult();
     }
     
 }
