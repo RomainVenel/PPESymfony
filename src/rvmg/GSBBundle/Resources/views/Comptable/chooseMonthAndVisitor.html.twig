@@ -7,7 +7,7 @@
     <div class="container">
         {{form_start(form)}}
         {{form_widget(form.visitor)}}
-        {{form_widget(form.month, {'date_pattern': '{{ day }}</span> {{ month }} {{ year }}'})}}
+        {{form_widget(form.month, {'date_pattern': '<span style="display: none;">{{ day }}</span> {{ month }} {{ year }}'})}}
         <div class="BoutonForm"><input type="submit" value="Valider" class="btn btn-primary" />
         <input type="reset" value="Annuler" class="btn btn-danger" /></div>
         {{form_end(form)}}

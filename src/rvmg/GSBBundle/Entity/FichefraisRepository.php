@@ -13,11 +13,12 @@ use Doctrine\ORM\EntityRepository;
 class FichefraisRepository extends EntityRepository
 {
     
-    public function findOneByCurrentMonth($visiteur,$month){
+    public function findOneByCurrentMonth($visiteur,$mois){
         
-        $queryBuidler = $this->createQueryBuilder('f');
-        $queryBuidler->where('f.idvisiteur = :visiteur')->andWhere('f.mois = :month')
-                ->setParameter(':visiteur', $visiteur)->setParameter(':month', $month);
+        $queryBuilder = $this->createQueryBuilder('f');
+        $queryBuilder->where('f.idvisiteur = :visiteur')->setParameter(':visiteur', $visiteur)
+                ->andWhere('f.mois = :month')->setParameter(':month', $month);
+        
         return $queryBuilder->getQuery()->getOneOrNullResult();
         
     }
@@ -35,7 +36,18 @@ class FichefraisRepository extends EntityRepository
         $queryBuilder = $this->createQueryBuilder('f');
         $queryBuilder->where('f.idvisiteur = :visiteur')->setParameter(':visiteur', $visitor)
                 ->andWhere('f.mois = :mois')->setParameter(':mois',$month);
+
         return $queryBuilder->getQuery()->getOneOrNullResult();
+    }
+    
+    public function findByStateAndVisitor($state, $visitors){
+        
+        $queryBuilder = $this->createQueryBuilder('f');
+        $queryBuilder->where('f.idetat = :state')->setParameter(':state', $state)
+                ->andWhere('f.idvisiteur IN (:visitors)')->setParameter(':visitors', $visitors);
+        
+        //Only return the queryBuilder for the form
+        return $queryBuilder;
     }
     
 }
