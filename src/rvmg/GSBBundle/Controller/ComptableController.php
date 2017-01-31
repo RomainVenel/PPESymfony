@@ -45,11 +45,10 @@ class ComptableController extends Controller{
         if ($form->isValid()){
             $visitor = $choose->getVisitor();
             $month = $choose->getMonth();
-            $data = $form->getData();
             
             //Try to find a Fichefrais
             $repository = $em->getRepository('rvmgGSBBundle:Fichefrais');
-            $fichefrais = $repository->findOneByMonthAndVisitor($visitor, $month);
+            $fichefrais = $repository->findOneByMonthAndVisitorAndState($visitor, $month);
             //If $fichefrais is empty, display a message at the user to inform him
             //that's there's no fichefrais for this month and visitor
             if(!$fichefrais){
@@ -96,16 +95,28 @@ class ComptableController extends Controller{
      * Change it state at VALIDEE
      */
     public function validateAction($fichefrais){
+        
+        //get the current fiche
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('rvmgGSBBundle:Fichefrais');
         $currentFicheFrais = $repository->findOneByIdfichefrais($fichefrais);
+        //get the current date
         $currentDate = new \DateTime();
         
+        //IF the current fiche is not empty
         if($currentFicheFrais){
+            
+            //initialize the variable to 0
             $montant = 0;
             $nbJustificatifs = 0;
             $frais = $this->getLignes($currentFicheFrais);
             
+            /*
+             * foreach frais which the type is forfait or hors forfait,
+             * get the amount and add it to the variable $montant
+             * 
+             * also increase $nbJustificatifs of one
+             */
             foreach($frais as $oneFrais){
                 
                 if($oneFrais["type"]== "forfait"){
@@ -129,6 +140,7 @@ class ComptableController extends Controller{
                 
             }
             
+            //set the values define before and affect these to the current fiche
             $state = $em->getRepository('rvmgGSBBundle:Etat')->findOneByIdetat('VA');
             $currentFicheFrais->setIdetat($state);
             $currentFicheFrais->setDatemodif($currentDate);
@@ -136,6 +148,7 @@ class ComptableController extends Controller{
             $currentFicheFrais->setNbjustificatifs($nbJustificatifs);
             $em->persist($currentFicheFrais);
         }
+        //then, flush all inside database
         $em->flush();
         return $this->redirect($this->generateUrl('rvmg_gsb_choose_month_visitor'));
 
@@ -206,19 +219,23 @@ class ComptableController extends Controller{
 
     public function chooseFicheFraisAction(){
         
+        //Get the visitor
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('rvmgGSBBundle:Visiteur');
         $visitors = $repository->findBy(array('idcomptable'=>
             $this->getRequest()->getSession()->get('user_id')));
         
+        //Find fichefrais which the state is "VA"
         $repository = $em->getRepository('rvmgGSBBundle:Etat');
         $state = $repository->findOneBy(array('idetat'=>'VA')); 
         
         $fichefrais = $em->getRepository('rvmgGSBBundle:Fichefrais')
                 ->isExistFicheFrais($state, $visitors);
         
+        //IF $fichefrais is empty
         if(!$fichefrais){
             
+            //Display a message to the user to inform him there is no fiche to put in remboursement
             $this->getRequest()->getSession()
                     ->getFlashBag()
                     ->add('error', 'Il n\'y a pas de fiche de frais à mettre en remboursement actuellement.');
@@ -236,14 +253,17 @@ class ComptableController extends Controller{
 
             if ($form->isValid()){
 
+                //get the fichefrais
                 $fichefrais = $follow->getFichefrais();
 
+                //get all the lines of the fiche
                 $repositoryForfait = $em->getRepository('rvmgGSBBundle:Lignefraisforfait');
                 $repositoryHorsForfait = $em->getRepository('rvmgGSBBundle:Lignefraishorsforfait');
 
                 $listLigneForfait = $repositoryForfait->findByIdfichefrais($fichefrais);
                 $listLigneHorsForfait = $repositoryHorsForfait->findByIdfichefrais($fichefrais);
 
+                //Put these into a variable
                 $tableForfait = array(array("name"=>"Frais forfait",
                     "listForfait"=>$listLigneForfait,
                     "type"=>"forfait"),
@@ -288,6 +308,14 @@ class ComptableController extends Controller{
         
     }
     
+    /**
+     * 
+     * @param type $fichefrais
+     * @return array array of fichefrais's lines
+     * 
+     * Function which is suppose to return the lines of the fichefrais
+     * gived in argument
+     */
     public function getLignes($fichefrais){
         
         $em = $this->getDoctrine()->getEntityManager();

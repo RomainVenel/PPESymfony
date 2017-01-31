@@ -13,6 +13,10 @@ rvmg_gsb_deconnexion:
 rvmg_gsb_renseigner:
     path:     /renseigner/{type}
     defaults: { _controller: rvmgGSBBundle:Visiteur:renseigner }
+
+rvmg_gsb_consulter:
+    path:     /consulter
+    defaults: { _controller: rvmgGSBBundle:Visiteur:consulter }
     
 rvmg_gsb_validate:
     path:     /valider/{fichefrais}

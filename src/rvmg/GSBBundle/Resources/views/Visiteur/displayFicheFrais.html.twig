@@ -1,0 +1,65 @@
+{% extends "rvmgGSBBundle:Default:baseVisiteur.html.twig" %}
+{% block title %}
+    Consulter une fiche de frais
+{% endblock %}
+{% block body %}
+    <table class="table-responsive table-hover table-bordered">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Nombre de justificatifs</th>
+                <th>Etat</th>
+                <th>Montant validé</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{fichefrais.getMois|date("d-m-Y")}}</td>
+                <td>{{fichefrais.getNbjustificatifs}}</td>
+                <td>{{fichefrais.getIdetat.getLibelle}}</td>
+                <td>{{fichefrais.getMontantvalide}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table-responsive table-hover table-bordered" >
+        {# foreach occurence in tableForfait#}
+        {% for list in tableForfait %}
+            <thead>
+                <tr>
+                    <th>{{ list.name }}</th>{# #}
+                </tr>
+                {% if list.type == "forfait" %}
+                    <tr>
+                        <th>Forfait</th>
+                        <th>Quantité</th>
+                    </tr>
+                {% elseif list.type == "horsforfait" %}
+                    <tr>
+                        <th>Libellé</th>
+                        <th>Date dépense</th>
+                        <th>Montant</th>
+                    </tr>
+                {% endif %}
+            </thead>
+            <tbody>
+                {% for frais in list.listForfait %}
+                    {% if list.type == "forfait" %}
+                        <tr>
+                            <td>{{frais.idFraisforfait}}</td>
+                            <td>{{frais.quantite}}</td>
+                        </tr>
+
+                        {% set fichefrais = frais.idFichefrais.idFichefrais %}
+                    {% endif %}
+                    {% if list.type == "horsforfait" %}
+                        <tr>
+                            <td>{{frais.libelle}}</td>
+                            <td>{{frais.dateDepense|date('d/m/y')}}</td>
+                            <td>{{frais.montant}}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        {% endfor %}
+    </table>
+{% endblock %}

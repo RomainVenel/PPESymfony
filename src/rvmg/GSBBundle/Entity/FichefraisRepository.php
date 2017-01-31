@@ -32,11 +32,19 @@ class FichefraisRepository extends EntityRepository
        
     }
     
-    public function findOneByMonthAndVisitor($visitor, $month){
+    public function findOneByMonthAndVisitorAndState($visitor, $month){
         $queryBuilder = $this->createQueryBuilder('f');
         $queryBuilder->where('f.idvisiteur = :visiteur')->setParameter(':visiteur', $visitor)
                 ->andWhere('f.mois = :mois')->setParameter(':mois',$month)
                 ->andWhere('f.idetat = :idetat')->setParameter(':idetat', 'CL');
+
+        return $queryBuilder->getQuery()->getOneOrNullResult();
+    }
+    
+    public function findOneByMonthAndVisitor($visitor, $month){
+        $queryBuilder = $this->createQueryBuilder('f');
+        $queryBuilder->where('f.idvisiteur = :visiteur')->setParameter(':visiteur', $visitor)
+                ->andWhere('f.mois = :mois')->setParameter(':mois',$month);
 
         return $queryBuilder->getQuery()->getOneOrNullResult();
     }
