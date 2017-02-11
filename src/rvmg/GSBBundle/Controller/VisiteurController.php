@@ -48,7 +48,7 @@ class VisiteurController extends Controller{
         }
         
         /* On envoie dans la vue le paramètre frais qui contient tous les frais forfait */
-        return $this->render($vue, array('frais'=>$fraisForfait));
+        return $this->render($vue, array('frais'=>$fraisForfait, 'form'=>$form->createView()));
     }
     
     public function consulterAction(){

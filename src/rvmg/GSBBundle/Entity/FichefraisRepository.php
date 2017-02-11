@@ -50,4 +50,12 @@ class FichefraisRepository extends EntityRepository
         return $queryBuilder;
     }
     
+    public function findByPreviousMonthAndVisitor($visitor, $month){
+        $queryBuilder = $this->createQueryBuilder('f');
+        $queryBuilder->where('f.idvisiteur = :visiteur')->setParameter(':visiteur', $visitor)
+                ->andWhere('f.mois = :month')->setParameter(':month', $month);
+        
+        return $queryBuilder->getQuery()->getOneOrNullResult();
+    }
+    
 }
