@@ -18,8 +18,7 @@ class LignefraisforfaitType extends AbstractType
             ->add('quantite')
             ->add('idfraisforfait', 'entity', array(
                 'class' => 'rvmgGSBBundle:Fraisforfait',
-                'property' => 'libelle',
-                
+                'property' => 'libelle',  
             ))
         ;
     }
