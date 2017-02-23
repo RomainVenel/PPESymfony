@@ -34,18 +34,108 @@ class VisiteurController extends Controller{
         $form->handleRequest($request);
         $em = $this->getDoctrine()->getManager();
         
-        /* Récupération de tous les frais forfait */
+        // Récupération de tous les frais forfait 
         $fraisForfait = $em->getRepository('rvmgGSBBundle:Fraisforfait')->findAll();
         
-        if($form->isValid()){
+        // Si le formulaire s'est bien envoyée 
+        if($request->getMethod() == 'POST'){
             
-            $visiteur = $em->getRepository('rvmgGSBBundle:Visiteur')->findOneBy($this->getRequest()->getSession()->get('user_id'));
-            $ficheFrais = $em->getRepository('rvmgGSBBundle:Fichefrais')->findOneByCurrentMonth($visiteur);
+            // On récupère la date sous le format 'Année-Mois-Jour' 
+            $currentDate = new \DateTime();
+            $mois = $currentDate->format('Y-m-d');
             
-           
-            $em->flush();
+            // On récupère le visiteur dont la session est ouverte 
+            $visiteur = $em->getRepository('rvmgGSBBundle:Visiteur')->findOneByIdvisiteur($this->getRequest()->getSession()->get('user_id'));
             
-            return $this->render($vue, array('form'=>$form->createView()));
+            // Fiche frais du visiteur pour le mois donné 
+            $repository = $em->getRepository('rvmgGSBBundle:Fichefrais');
+            $ficheFrais = $repository->findOneByCurrentMonth($visiteur, $mois);
+            
+            //if(!is_null($ficheFrais)){echo 'ALERTE ROUGE';}
+            
+            $repositoryForfait = $em->getRepository('rvmgGSBBundle:Lignefraisforfait');
+            
+            // Si la fiche de frais existe pour ce visiteur
+            if($repositoryForfait->findByIdfichefrais($ficheFrais)){
+                
+                $listLigneForfait = $repositoryForfait->findByIdfichefrais($ficheFrais);
+
+                // On récupère les données du formulaire des frais forfait
+                $quantiteETP = $_POST['ETP'];
+                $quantiteKM = $_POST['KM'];
+                $quantiteNUI = $_POST['NUI'];
+                $quantiteREP = $_POST['REP'];
+                
+                // On initialise la variable $i à 0
+                $i = 0;
+
+                /* Pour chaque ligne, on regarde si le visiteur a rentré une quantité
+                 * et si elle est numérique. Si oui, la donnée est persistée,
+                 * sinon on passe à la ligne suivante
+                 */
+                foreach ($listLigneForfait as $uneLigne){
+
+                    if ($i == 0){
+
+                        if (is_numeric($quantiteETP)){
+                            $libelle = $_POST['libETP'];
+                            $uneLigne->setQuantite($quantiteETP);
+                        }else{
+                            echo 'Erreur';
+                        }
+
+                        $em->persist($ficheFrais);
+                        $em->persist($uneLigne);
+
+
+                    }else if($i == 1){
+
+                        if (is_numeric($quantiteKM)){
+                            $libelle = $_POST['libKM'];
+                            $uneLigne->setQuantite($quantiteKM);
+                        }
+
+                        $em->persist($ficheFrais);
+                        $em->persist($uneLigne);
+
+
+                    }else if($i == 2){
+
+                        if (is_numeric($quantiteNUI)){
+                            $libelle = $_POST['libNUI'];
+                            $uneLigne->setQuantite($quantiteNUI);
+                        }
+
+                        $em->persist($ficheFrais);
+                        $em->persist($uneLigne);
+
+
+                    }else{
+
+                        if (is_numeric($quantiteREP)){
+                            $libelle = $_POST['libREP'];
+                            $uneLigne->setQuantite($quantiteREP);
+                        }
+
+                        $em->persist($ficheFrais);
+                        $em->persist($uneLigne);
+
+
+                    }
+
+                    $i++;
+                }
+
+                $em->flush();
+
+                die("C'est fait !");
+            
+            // Si la fiche de frais n'existe pas, on la crée
+            }else{
+                
+                
+                
+            }
             
         }
         

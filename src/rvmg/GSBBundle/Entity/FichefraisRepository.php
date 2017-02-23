@@ -13,7 +13,7 @@ use Doctrine\ORM\EntityRepository;
 class FichefraisRepository extends EntityRepository
 {
     
-    public function findOneByCurrentMonth($visiteur,$mois){
+    public function findOneByCurrentMonth($visiteur,$month){
         
         $queryBuilder = $this->createQueryBuilder('f');
         $queryBuilder->where('f.idvisiteur = :visiteur')->setParameter(':visiteur', $visiteur)

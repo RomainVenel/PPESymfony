@@ -17,8 +17,14 @@ body{
 
 @font-face{
     
-    ont-family: "ChampForm";
+    font-family: "ChampForm";
     src: url('../fonts/Insanibu.ttf');
+}
+
+@font-face{
+    
+    font-family: "DateGSB";
+    src: url('../fonts/AlexandriaFLF-Bold.ttf');
 }
              
 h1{
@@ -36,7 +42,7 @@ h1{
     color: red;
 }
 
-.container{
+.containerAccueil{
     
     width: 500px;
     height: 320px;
@@ -94,11 +100,16 @@ h1{
 
 #footer{
 
-    background: #d0e9c6;
+    background: #111;
     position:absolute;
-    bottom:25px;
+    bottom:0;
     width:100%;
     height:50px;
+}
+
+#footer p{
+    color: #FFF;
+    vertical-align: middle;
 }
 
 p{
@@ -196,10 +207,25 @@ p{
     margin-bottom: 40px;
 }
 
+.margin-top-20{
+    margin-top: 20px;
+}
+
 .titreFicheFrais{
     font-family: "TitreGSB";
     font-weight: bold;
-    font-size: 30px
+    font-size: 30px;
+}
+
+.titreDate{
+    font-family: "DateGSB";
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.titreDate2{
+    font-family: "DateGSB";
+    font-size: 18px;
 }
 
 .champFicheFrais{
@@ -207,5 +233,18 @@ p{
     font-family: "ChampForm";
     font-weight: bold;
     font-size: 15px;
+}
+
+.bottom{
+    margin-top: 20px;
+    text-align: center;
+    bottom: 0;
+}
+
+@media(min-height:700px){
+    .traitOrange{
+        border-right: solid orange 5px;
+        height: 500px;
+    }
 }
 

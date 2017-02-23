@@ -1,6 +1,8 @@
 {% extends "rvmgGSBBundle:Default:baseVisiteur.html.twig" %}
 
 {% block body %}
+    
+    <form action="{{ path('rvmg_gsb_renseigner',{'type':'forfait'}) }}" method="post">
     <div class="containerForfait">
             
         {# Tableau des Frais Forfait #}
@@ -9,16 +11,55 @@
                 <div class="text-center margin-bottom-40 titreFicheFrais">Fiche Frais - Forfait</div>
                 
                 <div class="row">
-                     {% for unFrais in frais %}
-                    <div class="col-lg-5 col-sm-5 col-md-5 col-xs-5 margin-bottom-20 champFicheFrais">
-                            {{ unFrais.libelle }}
-                    </div>
-                    <div class="col-lg-4 col-sm-4 col-md-4 col-xs-4 margin-bottom-20 text-right">
-                        Quantité
-                    </div>
-                    <div class="col-lg-3 col-sm-3 col-md-3 col-xs-3 margin-bottom-20">
-                        <input class="number" size="10px">                        
-                    </div>
+                    {% for unFrais in frais %}
+                        {% if loop.index == 1 %}
+                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6 margin-bottom-20 champFicheFrais">
+                                <input type="hidden" name="libETP">
+                                {{ unFrais.libelle }}
+                            </div>
+                            <div class="col-lg-3 col-sm-3 col-md-3 col-xs-3 margin-bottom-20 text-right">
+                                Quantité
+                            </div>
+                            <div class="col-lg-3 col-sm-3 col-md-3 col-xs-3 margin-bottom-20">
+                                <input class="number" name="ETP" size="10px">                        
+                            </div>
+                        {% endif %}
+                        {% if loop.index == 2 %}
+                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6 margin-bottom-20 champFicheFrais">
+                                <input type="hidden" name="libKM">
+                                {{ unFrais.libelle }}
+                            </div>
+                            <div class="col-lg-3 col-sm-3 col-md-3 col-xs-3 margin-bottom-20 text-right">
+                                Quantité
+                            </div>
+                            <div class="col-lg-3 col-sm-3 col-md-3 col-xs-3 margin-bottom-20">
+                                <input class="number" name="KM" size="10px">                        
+                            </div>
+                        {% endif %}
+                        {% if loop.index == 3 %}
+                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6 margin-bottom-20 champFicheFrais">
+                                <input type="hidden" name="libNUI">
+                                {{ unFrais.libelle }}
+                            </div>
+                            <div class="col-lg-3 col-sm-3 col-md-3 col-xs-3 margin-bottom-20 text-right">
+                                Quantité
+                            </div>
+                            <div class="col-lg-3 col-sm-3 col-md-3 col-xs-3 margin-bottom-20">
+                                <input class="number" name="NUI" size="10px">                        
+                            </div>
+                        {% endif %}
+                        {% if loop.index == 4 %}
+                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6 margin-bottom-20 champFicheFrais">
+                                <input type="hidden" name="libREP">
+                                {{ unFrais.libelle }}
+                            </div>
+                            <div class="col-lg-3 col-sm-3 col-md-3 col-xs-3 margin-bottom-20 text-right">
+                                Quantité
+                            </div>
+                            <div class="col-lg-3 col-sm-3 col-md-3 col-xs-3 margin-bottom-20">
+                                <input class="number" name="REP" size="10px">                        
+                            </div>
+                        {% endif %}
                     {% endfor %}
                 </div>
                 <div class="text-center">
@@ -26,7 +67,13 @@
                     <button class="btn btn-danger" type="reset">Annuler</button>
                 </div>
             </div>
-        </di
+        </div>
         
     </div>
+    </form>
+    
+    {# Revenir à la page précédente en javascript #}
+    <div class="text-center">
+        <a href="" onClick="javascript:window.history.go(-1)"><button type="submit" class="btn btn-primary">Retour</button></a>                       
+    </div>                
 {% endblock %}
