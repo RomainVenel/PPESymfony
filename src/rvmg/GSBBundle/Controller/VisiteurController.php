@@ -17,130 +17,117 @@ use rvmg\GSBBundle\Formulaires\Type\ChooseMonthAndVisitorType;
  */
 class VisiteurController extends Controller{
     
-    public function renseignerAction($type){
+    public function renseignerForfaitAction(){
         
-        if($type == 'forfait'){
-            $ligneForfait = new Lignefraisforfait();
-            $form = $this->createForm(new LignefraisforfaitType(), $ligneForfait);
-            $vue = 'rvmgGSBBundle:Visiteur:renseignerForfait.html.twig';
-        }
-        if($type == 'horsforfait'){
-            $ligneHorsForfait = new Lignefraishorsforfait();
-            $form = $this->createForm(new LignefraishorsforfaitType(), $ligneHorsForfait);
-            $vue = 'rvmgGSBBundle:Visiteur:renseignerHorsForfait.html.twig';
-        }
-        
-        $request = $this->container->get('request');
-        $form->handleRequest($request);
         $em = $this->getDoctrine()->getManager();
         
-        // Récupération de tous les frais forfait 
-        $fraisForfait = $em->getRepository('rvmgGSBBundle:Fraisforfait')->findAll();
+        $ligneForfaitForm = new Lignefraisforfait();
+        $form = $this->createForm(new LignefraisforfaitType(), $ligneForfaitForm);
+
+        $request = $this->container->get('request');
+        $form->handleRequest($request);
         
-        // Si le formulaire s'est bien envoyée 
-        if($request->getMethod() == 'POST'){
+        $visiteur = $em->getRepository('rvmgGSBBundle:Visiteur')
+                    ->findOneBy(array('idvisiteur'=>$this->getRequest()->getSession()->get('user_id')
+                ));
+        
+        $now = new \DateTime();
+        $currentMonth = new \DateTime();
+        $currentMonth->setDate($now->format('Y'), $now->format('m'), 1);
+
+        $fichefrais = $em->getRepository('rvmgGSBBundle:FicheFrais')
+                ->findOneBy(array('idvisiteur'=>$visiteur,
+                    'mois'=>$currentMonth));    
+        
+        if($fichefrais){
+            $lignesFraisForfait = $em->getRepository('rvmgGSBBundle:lignefraisforfait')
+                ->findBy(array('idfichefrais'=>$fichefrais));
+        }else{
+            $lignesFraisForfait = null;
+        }
+        
+        if($form->isValid()){
             
-            // On récupère la date sous le format 'Année-Mois-Jour' 
-            $currentDate = new \DateTime();
-            $mois = $currentDate->format('Y-m-d');
-            
-            // On récupère le visiteur dont la session est ouverte 
-            $visiteur = $em->getRepository('rvmgGSBBundle:Visiteur')->findOneByIdvisiteur($this->getRequest()->getSession()->get('user_id'));
-            
-            // Fiche frais du visiteur pour le mois donné 
-            $repository = $em->getRepository('rvmgGSBBundle:Fichefrais');
-            $ficheFrais = $repository->findOneByCurrentMonth($visiteur, $mois);
-            
-            //if(!is_null($ficheFrais)){echo 'ALERTE ROUGE';}
-            
-            $repositoryForfait = $em->getRepository('rvmgGSBBundle:Lignefraisforfait');
-            
-            // Si la fiche de frais existe pour ce visiteur
-            if($repositoryForfait->findByIdfichefrais($ficheFrais)){
+            if(!$fichefrais){
                 
-                $listLigneForfait = $repositoryForfait->findByIdfichefrais($ficheFrais);
-
-                // On récupère les données du formulaire des frais forfait
-                $quantiteETP = $_POST['ETP'];
-                $quantiteKM = $_POST['KM'];
-                $quantiteNUI = $_POST['NUI'];
-                $quantiteREP = $_POST['REP'];
+                $fichefrais = $this->creerFicheFrais($visiteur, $currentMonth, $now);
                 
-                // On initialise la variable $i à 0
-                $i = 0;
-
-                /* Pour chaque ligne, on regarde si le visiteur a rentré une quantité
-                 * et si elle est numérique. Si oui, la donnée est persistée,
-                 * sinon on passe à la ligne suivante
-                 */
-                foreach ($listLigneForfait as $uneLigne){
-
-                    if ($i == 0){
-
-                        if (is_numeric($quantiteETP)){
-                            $libelle = $_POST['libETP'];
-                            $uneLigne->setQuantite($quantiteETP);
-                        }else{
-                            echo 'Erreur';
-                        }
-
-                        $em->persist($ficheFrais);
-                        $em->persist($uneLigne);
-
-
-                    }else if($i == 1){
-
-                        if (is_numeric($quantiteKM)){
-                            $libelle = $_POST['libKM'];
-                            $uneLigne->setQuantite($quantiteKM);
-                        }
-
-                        $em->persist($ficheFrais);
-                        $em->persist($uneLigne);
-
-
-                    }else if($i == 2){
-
-                        if (is_numeric($quantiteNUI)){
-                            $libelle = $_POST['libNUI'];
-                            $uneLigne->setQuantite($quantiteNUI);
-                        }
-
-                        $em->persist($ficheFrais);
-                        $em->persist($uneLigne);
-
-
-                    }else{
-
-                        if (is_numeric($quantiteREP)){
-                            $libelle = $_POST['libREP'];
-                            $uneLigne->setQuantite($quantiteREP);
-                        }
-
-                        $em->persist($ficheFrais);
-                        $em->persist($uneLigne);
-
-
-                    }
-
-                    $i++;
-                }
-
-                $em->flush();
-
-                die("C'est fait !");
-            
-            // Si la fiche de frais n'existe pas, on la crée
+                $ligneForfaitForm->setIdfichefrais($fichefrais);
+                $this->getDoctrine()->getManager()->persist($ligneForfaitForm);
             }else{
                 
+                $ligneFrais = $em->getRepository('rvmgGSBBundle:Lignefraisforfait')
+                        ->findOneBy(array('idfichefrais' =>$fichefrais,
+                            'idfraisforfait'=>$ligneForfaitForm->getIdfraisforfait()));
+                
+                if(!$ligneFrais){
+                    $ligneForfaitForm->setIdfichefrais($fichefrais);
+                    $em->persist($ligneForfaitForm);
+                }else{
+                    $quantite = $ligneForfaitForm->getQuantite();
+                    $ligneFrais->setQuantite($quantite);
+                    
+                    $em->persist($ligneFrais);
+                }
                 
                 
-            }
-            
+                $em->flush();
+                return $this->redirect($this->generateUrl('rvmg_gsb_renseigner_forfait'));
+            }  
         }
         
         /* On envoie dans la vue le paramètre frais qui contient tous les frais forfait */
-        return $this->render($vue, array('frais'=>$fraisForfait, 'form'=>$form->createView()));
+        return $this->render('rvmgGSBBundle:Visiteur:renseignerForfait.html.twig'
+                , array('form'=>$form->createView(),
+                    'lignesFraisForfait'=>$lignesFraisForfait));
+    }
+    
+    public function renseignerHorsForfaitAction(){
+        
+        $em = $this->getDoctrine()->getManager();
+        
+        $ligneHorsForfaitForm = new Lignefraishorsforfait();
+        $form = $this->createForm(new LignefraishorsforfaitType(), $ligneHorsForfaitForm);
+        
+        $visiteur = $em->getRepository('rvmgGSBBundle:Visiteur')
+                    ->findOneBy(array('idvisiteur'=>$this->getRequest()->getSession()->get('user_id')
+                ));
+        
+        $request = $this->container->get('request');
+        $form->handleRequest($request);
+        
+        $now = new \DateTime();
+        $currentMonth = new \DateTime();
+        $currentMonth->setDate($now->format('Y'), $now->format('m'), 1);
+
+        $fichefrais = $em->getRepository('rvmgGSBBundle:FicheFrais')
+                ->findOneBy(array('idvisiteur'=>$visiteur,
+                    'mois'=>$currentMonth)); 
+        
+        if($fichefrais){
+            $lignesFraisHorsForfait = $em->getRepository('rvmgGSBBundle:lignefraishorsforfait')
+                ->findBy(array('idfichefrais'=>$fichefrais));
+        }else{
+            $lignesFraisHorsForfait = null;
+        }
+        
+        if($form->isValid()){
+            if(!$fichefrais){
+                $fichefrais = $this->creerFicheFrais($visiteur, $currentMonth, $now);
+                $ligneHorsForfaitForm->setIdfichefrais($fichefrais);
+            }else{
+                $ligneHorsForfaitForm->setIdfichefrais($fichefrais);
+            }
+            
+            $em->persist($ligneHorsForfaitForm);
+            $em->flush();
+            
+            return $this->redirect($this->generateUrl('rvmg_gsb_renseigner_horsforfait'));
+        }
+        
+        return $this->render('rvmgGSBBundle:Visiteur:renseignerHorsForfait.html.twig'
+                , array('form'=>$form->createView(),
+                    'lignesFraisHorsForfait'=>$lignesFraisHorsForfait));
     }
     
     /**
@@ -158,8 +145,7 @@ class VisiteurController extends Controller{
         $em = $this->getDoctrine()->getManager();
         $visiteur = $em->getRepository('rvmgGSBBundle:Visiteur')
                 ->findOneByIdvisiteur($this->getRequest()->getSession()->get('user_id'));
-        $comptable = $em->getRepository('rvmgGSBBundle:Comptable')
-                ->findOneByIdcomptable($visiteur->getIdcomptable());
+        $comptable = $visiteur->getIdComptable();
         
         $choose = new ChooseMonthAndVisitorClass();
         //Temporaire le temps de trouver une alternative
@@ -235,6 +221,28 @@ class VisiteurController extends Controller{
                 "type"=>"horsforfait"));
         
         return $tableForfait;
+        
+    }
+    
+    public function creerFicheFrais($visiteur,$currentMonth, $now){
+        
+        $fichefrais = new Fichefrais();
+        $fichefrais->setIdvisiteur($visiteur);
+        $fichefrais->setMontantvalide(0);
+        $fichefrais->setNbjustificatifs(0);
+        $fichefrais->setMois($currentMonth);
+        $fichefrais->setDatemodif($now);
+        $state = $em->getRepository('rvmgGSBBundle:Etat')->findOneByIdetat('CR');
+        $fichefrais->setIdetat($state);
+
+        $this->getDoctrine()->getManager()->persist($fichefrais);
+        $this->getDoctrine()->getManager()->flush();
+
+        $fichefrais = $em->getRepository('rvmgGSBBundle:FicheFrais')
+            ->findOneBy(array('idvisiteur'=>$visiteur,
+                'mois'=>$currentMonth));
+
+        return $fichefrais;
         
     }
     

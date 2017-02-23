@@ -10,9 +10,13 @@ rvmg_gsb_deconnexion:
     path:   /deconnexion
     defaults: { _controller: rvmgGSBBundle:Accueil:deconnexion }
     
-rvmg_gsb_renseigner:
-    path:     /renseigner/{type}
-    defaults: { _controller: rvmgGSBBundle:Visiteur:renseigner }
+rvmg_gsb_renseigner_forfait:
+    path:     /renseigner/forfait
+    defaults: { _controller: rvmgGSBBundle:Visiteur:renseignerForfait }
+    
+rvmg_gsb_renseigner_horsforfait:
+    path:     /renseigner/horsforfait
+    defaults: { _controller: rvmgGSBBundle:Visiteur:renseignerHorsForfait }
 
 rvmg_gsb_consulter:
     path:     /consulter
