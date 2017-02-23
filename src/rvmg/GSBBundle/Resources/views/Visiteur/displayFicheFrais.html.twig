@@ -3,68 +3,101 @@
     Consulter une fiche de frais
 {% endblock %}
 {% block body %}
-    <table class="table-responsive table-hover table-bordered">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Nombre de justificatifs</th>
-                <th>Etat</th>
-                <th>Montant validé</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{fichefrais.getMois|date("d-m-Y")}}</td>
-                <td>{{fichefrais.getNbjustificatifs}}</td>
-                <td>{{fichefrais.getIdetat.getLibelle}}</td>
-                <td>{{fichefrais.getMontantvalide}}</td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table-responsive table-hover table-bordered" >
-        {# foreach occurence in tableForfait#}
-        {% for list in tableForfait %}
-            <thead>
-                <tr>
-                    <th>{{ list.name }}</th>{# #}
-                </tr>
+    
+    <h1 class="titreConsulterFrais">Fiche de Frais pour ce mois</h1>
+    
+    <div class="margin-bottom-20" style="background-color: #1b6d85">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-3">
+                        Date
+                    </div>
+                    <div class="col-lg-3">
+                        Nombre de justificatifs
+                    </div>
+                    <div class="col-lg-3">
+                        Etat
+                    </div>
+                    <div class="col-lg-3">
+                        Montant validé
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        {{fichefrais.getMois|date('d-m-Y')}}
+                    </div>
+                    <div class="col-lg-3">
+                        {{fichefrais.getNbjustificatifs}}
+                    </div>
+                    <div class="col-lg-3">
+                        {{fichefrais.getIdetat.getLibelle}}
+                    </div>
+                    <div class="col-lg-3">
+                        {{fichefrais.getMontantvalide}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            {# foreach occurence in tableForfait#}
+            {% for list in tableForfait %}
                 {% if list.type == "forfait" %}
-                    <tr>
-                        <th>Forfait</th>
-                        <th>Quantité</th>
-                    </tr>
+                    <h1 class="titreFicheFrais">{{list.name}}</h1>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            Type de forfait
+                        </div>
+                        <div class="col-lg-6">
+                            Quantité
+                        </div>
+                    </div>
                 {% elseif list.type == "horsforfait" %}
-                    <tr>
-                        <th>Libellé</th>
-                        <th>Date dépense</th>
-                        <th>Montant</th>
-                    </tr>
+                    <h1 class="titreFicheFrais">{{list.name}}</h1>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            Libellé
+                        </div>
+                        <div class="col-lg-4">
+                            Date dépense
+                        </div>
+                        <div class="col-lg-4">
+                            Montant
+                        </div>
+                    </div>
                 {% endif %}
-            </thead>
-            <tbody>
                 {% for frais in list.listForfait %}
                     {% if list.type == "forfait" %}
-                        <tr>
-                            <td>{{frais.idFraisforfait}}</td>
-                            <td>{{frais.quantite}}</td>
-                        </tr>
-
-                        {% set fichefrais = frais.idFichefrais.idFichefrais %}
+                        <div class="row">
+                            <div class="col-lg-6">
+                                {{frais.idFraisforfait}}
+                            </div>
+                            <div class="col-lg-6">
+                                {{frais.quantite}}
+                            </div>
+                            {% set fichefrais = frais.idFichefrais.idFichefrais %}
+                        </div>
+                    {% elseif list.type == "horsforfait" %}
+                        <div class="row">
+                            <div class="col-lg-4">
+                                {{frais.libelle}}
+                            </div>
+                            <div class="col-lg-4">
+                                {{frais.dateDepense|date('d/m/y')}}
+                            </div>
+                            <div class="col-lg-4">
+                                {{frais.montant}}
+                            </div>
+                        </div>
                     {% endif %}
-                    {% if list.type == "horsforfait" %}
-                        <tr>
-                            <td>{{frais.libelle}}</td>
-                            <td>{{frais.dateDepense|date('d/m/y')}}</td>
-                            <td>{{frais.montant}}</td>
-                        </tr>
-                    {% endif %}
-                {% endfor %}
-            </tbody>
-        {% endfor %}
-    </table>
-        
+                {% endfor %}  
+            {% endfor %}
+        </div>
+    </div>
     {# Revenir à la page précédente en javascript #}
     <div class="text-center">
         <a href="" onClick="javascript:window.history.go(-1)"><button type="submit" class="btn btn-primary">Retour</button></a>                       
-    </div>    
-{% endblock %}
+    </div>  
+    {% endblock %}

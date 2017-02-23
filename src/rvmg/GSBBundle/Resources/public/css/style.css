@@ -217,6 +217,13 @@ p{
     font-size: 30px;
 }
 
+.titreConsulterFrais{
+    font-family: "TitreGSB";
+    font-weight: bold;
+    font-size: 35px;
+    text-align: center;
+}
+
 .titreDate{
     font-family: "DateGSB";
     font-weight: bold;
