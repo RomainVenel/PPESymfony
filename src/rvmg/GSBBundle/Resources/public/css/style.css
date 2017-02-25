@@ -26,6 +26,18 @@ body{
     font-family: "DateGSB";
     src: url('../fonts/AlexandriaFLF-Bold.ttf');
 }
+
+@font-face{
+    
+    font-family: "ChampFiche";
+    src: url('../fonts/CaslonCP.otf');
+}
+
+@font-face{
+    
+    font-family: "FicheAffichage";
+    src: url('../fonts/CaslonCP.otf');
+}
              
 h1{
     
@@ -219,6 +231,14 @@ p{
 
 .titreConsulterFrais{
     font-family: "TitreGSB";
+    font-weight: bold;
+    font-size: 35px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.titreChampFiche{
+    font-family: "ChampFiche";
     font-weight: bold;
     font-size: 35px;
     text-align: center;
