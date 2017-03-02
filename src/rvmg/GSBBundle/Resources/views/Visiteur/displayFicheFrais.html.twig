@@ -3,68 +3,117 @@
     Consulter une fiche de frais
 {% endblock %}
 {% block body %}
-    <table class="table-responsive table-hover table-bordered">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Nombre de justificatifs</th>
-                <th>Etat</th>
-                <th>Montant validé</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{fichefrais.getMois|date("d-m-Y")}}</td>
-                <td>{{fichefrais.getNbjustificatifs}}</td>
-                <td>{{fichefrais.getIdetat.getLibelle}}</td>
-                <td>{{fichefrais.getMontantvalide}}</td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table-responsive table-hover table-bordered" >
+    <h1 class="titreConsulterFrais">Fiche de Frais du {{fichefrais.getMois|date('m-Y')}}</h1>
+    
+    <div class="margin-bottom-20 margin-top--20">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
+                        <i class="fa fa-calendar fa-3x" aria-hidden="true"></i>
+                        <h2 class="titreChampFiche">Date</h2>
+                        <i class="fa fa-arrow-down fa-2x" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
+                        <i class="fa fa-file-text-o fa-3x" aria-hidden="true"></i>
+                        <h2 class="titreChampFiche">Justificatifs</h2>
+                        <i class="fa fa-arrow-down fa-2x" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
+                        <i class="fa fa-battery-half fa-3x" aria-hidden="true"></i>
+                        <h2 class="titreChampFiche">Etat</h2>
+                        <i class="fa fa-arrow-down fa-2x" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
+                        <i class="fa fa-thumbs-o-up fa-3x" aria-hidden="true"></i>
+                        <h2 class="titreChampFiche">Montant validé</h2>
+                        <i class="fa fa-arrow-down fa-2x" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center margin-top-20">
+                        <span class="ficheAffichageHaut">{{fichefrais.getMois|date('d-m-Y')}}</span>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center margin-top-20">
+                        <span class="ficheAffichageHaut">{{fichefrais.getNbjustificatifs}}</span>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center margin-top-20">
+                        <span class="ficheAffichageHaut">{{fichefrais.getIdetat.getLibelle}}</span>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center margin-top-20">
+                        <span class="ficheAffichageHaut">{{fichefrais.getMontantvalide}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         {# foreach occurence in tableForfait#}
         {% for list in tableForfait %}
-            <thead>
-                <tr>
-                    <th>{{ list.name }}</th>{# #}
-                </tr>
-                {% if list.type == "forfait" %}
-                    <tr>
-                        <th>Forfait</th>
-                        <th>Quantité</th>
-                    </tr>
-                {% elseif list.type == "horsforfait" %}
-                    <tr>
-                        <th>Libellé</th>
-                        <th>Date dépense</th>
-                        <th>Montant</th>
-                    </tr>
-                {% endif %}
-            </thead>
-            <tbody>
-                {% for frais in list.listForfait %}
-                    {% if list.type == "forfait" %}
-                        <tr>
-                            <td>{{frais.idFraisforfait}}</td>
-                            <td>{{frais.quantite}}</td>
-                        </tr>
-
-                        {% set fichefrais = frais.idFichefrais.idFichefrais %}
-                    {% endif %}
-                    {% if list.type == "horsforfait" %}
-                        <tr>
-                            <td>{{frais.libelle}}</td>
-                            <td>{{frais.dateDepense|date('d/m/y')}}</td>
-                            <td>{{frais.montant}}</td>
-                        </tr>
-                    {% endif %}
-                {% endfor %}
-            </tbody>
+            {% if list.type == "forfait" %}
+                <div class="col-lg-6 col-ms-6 col-sm-6 col-xs-6">
+                    <h1 class="titreFicheFrais text-center">{{list.name}}</h1>
+                    <div class="containerFiche">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
+                                <h2 class="titreChampFiche">Type de forfait</h2>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
+                                <h2 class="titreChampFiche">Quantité</h2>
+                            </div>
+                        </div>
+                        {% for frais in list.listForfait %}
+                            <div class="text-center">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <span class="ficheAffichage">{{frais.idFraisforfait}}</span>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <span class="ficheAffichage">{{frais.quantite}}</span>
+                                    </div>
+                                    {% set fichefrais = frais.idFichefrais.idFichefrais %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% elseif list.type == "horsforfait" %}
+                <div class="col-lg-6 col-ms-6 col-sm-6 col-xs-6">
+                    <h1 class="titreFicheFrais text-center">{{list.name}}</h1>
+                    <div class="containerFiche">    
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                <h2 class="titreChampFiche">Libellé</h2>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                <h2 class="titreChampFiche">Date dépense</h2>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                <h2 class="titreChampFiche">Montant</h2>
+                            </div>
+                        </div>
+                        {% for frais in list.listForfait %}
+                            <div class="text-center">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                        <span class="ficheAffichageHaut">{{frais.libelle}}</span>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                        <span class="ficheAffichageHaut">{{frais.dateDepense|date('d/m/y')}}</span>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                        <span class="ficheAffichageHaut">{{frais.montant}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
         {% endfor %}
-    </table>
-        
+    </div>
     {# Revenir à la page précédente en javascript #}
     <div class="text-center">
         <a href="" onClick="javascript:window.history.go(-1)"><button type="submit" class="btn btn-primary">Retour</button></a>                       
-    </div>    
-{% endblock %}
+    </div>  
+    {% endblock %}
