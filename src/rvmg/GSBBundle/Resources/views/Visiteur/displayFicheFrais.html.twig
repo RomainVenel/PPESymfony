@@ -3,30 +3,29 @@
     Consulter une fiche de frais
 {% endblock %}
 {% block body %}
-    
     <h1 class="titreConsulterFrais">Fiche de Frais du {{fichefrais.getMois|date('m-Y')}}</h1>
     
-    <div class="margin-bottom-20">
+    <div class="margin-bottom-20 margin-top--20">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="row">
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
-                        <i class="fa fa-calendar fa-4x" aria-hidden="true"></i>
+                        <i class="fa fa-calendar fa-3x" aria-hidden="true"></i>
                         <h2 class="titreChampFiche">Date</h2>
                         <i class="fa fa-arrow-down fa-2x" aria-hidden="true"></i>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
-                        <i class="fa fa-file-text-o fa-4x" aria-hidden="true"></i>
+                        <i class="fa fa-file-text-o fa-3x" aria-hidden="true"></i>
                         <h2 class="titreChampFiche">Justificatifs</h2>
                         <i class="fa fa-arrow-down fa-2x" aria-hidden="true"></i>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
-                        <i class="fa fa-battery-half fa-4x" aria-hidden="true"></i>
+                        <i class="fa fa-battery-half fa-3x" aria-hidden="true"></i>
                         <h2 class="titreChampFiche">Etat</h2>
                         <i class="fa fa-arrow-down fa-2x" aria-hidden="true"></i>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
-                        <i class="fa fa-thumbs-o-up fa-4x" aria-hidden="true"></i>
+                        <i class="fa fa-thumbs-o-up fa-3x" aria-hidden="true"></i>
                         <h2 class="titreChampFiche">Montant validé</h2>
                         <i class="fa fa-arrow-down fa-2x" aria-hidden="true"></i>
                     </div>
@@ -49,10 +48,10 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-12 col-ms-12 col-sm-12 col-xs-12">
-            {# foreach occurence in tableForfait#}
-            {% for list in tableForfait %}
-                {% if list.type == "forfait" %}
+        {# foreach occurence in tableForfait#}
+        {% for list in tableForfait %}
+            {% if list.type == "forfait" %}
+                <div class="col-lg-6 col-ms-6 col-sm-6 col-xs-6">
                     <h1 class="titreFicheFrais text-center">{{list.name}}</h1>
                     <div class="containerFiche">
                         <div class="row">
@@ -77,7 +76,9 @@
                             </div>
                         {% endfor %}
                     </div>
-                {% elseif list.type == "horsforfait" %}
+                </div>
+            {% elseif list.type == "horsforfait" %}
+                <div class="col-lg-6 col-ms-6 col-sm-6 col-xs-6">
                     <h1 class="titreFicheFrais text-center">{{list.name}}</h1>
                     <div class="containerFiche">    
                         <div class="row">
@@ -95,21 +96,21 @@
                             <div class="text-center">
                                 <div class="row">
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <span class="ficheAffichage">{{frais.libelle}}</span>
+                                        <span class="ficheAffichageHaut">{{frais.libelle}}</span>
                                     </div>
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <span class="ficheAffichage">{{frais.dateDepense|date('d/m/y')}}</span>
+                                        <span class="ficheAffichageHaut">{{frais.dateDepense|date('d/m/y')}}</span>
                                     </div>
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <span class="ficheAffichage">{{frais.montant}}</span>
+                                        <span class="ficheAffichageHaut">{{frais.montant}}</span>
                                     </div>
                                 </div>
                             </div>
                         {% endfor %}
                     </div>
-                {% endif %}
-            {% endfor %}
-        </div>
+                </div>
+            {% endif %}
+        {% endfor %}
     </div>
     {# Revenir à la page précédente en javascript #}
     <div class="text-center">

@@ -226,6 +226,8 @@ class VisiteurController extends Controller{
     
     public function creerFicheFrais($visiteur,$currentMonth, $now){
         
+        $em = $this->getDoctrine()->getManager();
+        
         $fichefrais = new Fichefrais();
         $fichefrais->setIdvisiteur($visiteur);
         $fichefrais->setMontantvalide(0);
