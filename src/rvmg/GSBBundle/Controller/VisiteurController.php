@@ -45,7 +45,7 @@ class VisiteurController extends Controller{
         }else{
             $lignesFraisForfait = null;
         }
-        
+                
         if($form->isValid()){
             
             if(!$fichefrais){
@@ -54,6 +54,10 @@ class VisiteurController extends Controller{
                 
                 $ligneForfaitForm->setIdfichefrais($fichefrais);
                 $this->getDoctrine()->getManager()->persist($ligneForfaitForm);
+                
+                $em->flush();
+                return $this->redirect($this->generateUrl('rvmg_gsb_renseigner_forfait'));
+                
             }else{
                 
                 $ligneFrais = $em->getRepository('rvmgGSBBundle:Lignefraisforfait')
@@ -76,10 +80,12 @@ class VisiteurController extends Controller{
             }  
         }
         
+        $id = $em->getConnection()->lastInsertId('rvmgGSBBundle:Lignefraisforfait');
         /* On envoie dans la vue le paramètre frais qui contient tous les frais forfait */
         return $this->render('rvmgGSBBundle:Visiteur:renseignerForfait.html.twig'
                 , array('form'=>$form->createView(),
-                    'lignesFraisForfait'=>$lignesFraisForfait));
+                    'lignesFraisForfait'=>$lignesFraisForfait,
+                    'idLigne'=>$id));
     }
     
     public function renseignerHorsForfaitAction(){
@@ -246,6 +252,37 @@ class VisiteurController extends Controller{
 
         return $fichefrais;
         
+    }
+    
+    public function annulerForfaitAction($id){
+        
+        $request = $this->container->get('request');
+        echo $id;
+        if($id == -1){
+            $request->getSession()
+                    ->getFlashBag()
+                    ->add('error', 'Vous n\'avez pas encore ajouté de frais pour cette session.');
+            return $this->redirect($this->generateUrl('rvmg_gsb_renseigner_forfait'));
+        }else{
+            
+            $em = $this->getDoctrine()->getManager();
+            $ligne = $em->getRepository('rvmgGSBBundle:Lignefraisforfait')
+                    ->findOneByIdlignefraisforfait($id);
+            $em->remove($ligne);
+            $em->flush();
+            
+            return $this->redirect($this->generateUrl('rvmg_gsb_renseigner_forfait'));
+        }
+        
+    }
+    
+    public function supprimerForfaitAction(){
+        
+        $em = $this->getDoctrine()->getManager()->getRepository('rvmgGSBBundle:Lignefraisforfait')
+                ->removeAll();
+        
+        return $this->redirect($this->generateUrl('rvmg_gsb_renseigner_forfait'));
+       
     }
     
 }

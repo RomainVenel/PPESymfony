@@ -14,6 +14,14 @@ rvmg_gsb_renseigner_forfait:
     path:     /renseigner/forfait
     defaults: { _controller: rvmgGSBBundle:Visiteur:renseignerForfait }
     
+rvmg_gsb_annuler_forfait:
+    path:   /annuler/forfait/{id}
+    defaults: { _controller: rvmgGSBBundle:Visiteur:annulerForfait }
+    
+rvmg_gsb_supprimer_forfait:
+    path:   /supprimer/forfait
+    defaults: { _controller: rvmgGSBBundle:Visiteur:supprimerForfait }
+    
 rvmg_gsb_renseigner_horsforfait:
     path:     /renseigner/horsforfait
     defaults: { _controller: rvmgGSBBundle:Visiteur:renseignerHorsForfait }

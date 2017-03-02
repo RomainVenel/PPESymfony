@@ -10,7 +10,8 @@
                     {{form_row(form.idfraisforfait)}}
                     {{form_row(form.quantite)}}
                     <input type="submit" class="btn btn-success" value="Valider"/>
-                    <input type="reset" class="btn btn-danger" />
+                    <a href="{{ path('rvmg_gsb_annuler_forfait',{'id':idLigne}) }}" class="btn btn-warning">Annuler</a>
+                    <a href="{{ path('rvmg_gsb_supprimer_forfait')}}" class="btn btn-danger">Supprimer</a>
                     {{form_end(form)}}
 
                 </div>
