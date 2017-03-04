@@ -11,20 +11,24 @@ rvmg_gsb_deconnexion:
     defaults: { _controller: rvmgGSBBundle:Accueil:deconnexion }
     
 rvmg_gsb_renseigner_forfait:
-    path:     /renseigner/forfait
-    defaults: { _controller: rvmgGSBBundle:Visiteur:renseignerForfait }
+    path:     /renseigner/forfait/{id}
+    defaults: { _controller: rvmgGSBBundle:Visiteur:renseignerForfait, id:-1 }
     
 rvmg_gsb_annuler_forfait:
     path:   /annuler/forfait/{id}
     defaults: { _controller: rvmgGSBBundle:Visiteur:annulerForfait }
     
 rvmg_gsb_supprimer_forfait:
-    path:   /supprimer/forfait
+    path:   /supprimer/forfait/{id}
     defaults: { _controller: rvmgGSBBundle:Visiteur:supprimerForfait }
     
 rvmg_gsb_renseigner_horsforfait:
-    path:     /renseigner/horsforfait
-    defaults: { _controller: rvmgGSBBundle:Visiteur:renseignerHorsForfait }
+    path:     /renseigner/horsforfait/{id}
+    defaults: { _controller: rvmgGSBBundle:Visiteur:renseignerHorsForfait, id:-1 }
+    
+rvmg_gsb_annuler_horsforfait:
+    path:   /annuler/horsforfait/{id}
+    defaults: { _controller: rvmgGSBBundle:Visiteur:annulerHorsForfait }
 
 rvmg_gsb_consulter:
     path:     /consulter
