@@ -51,4 +51,13 @@ class VisiteurRepository extends EntityRepository
         return $queryBuilder;
         
     }
+    
+    public function changeMdp($mdp){
+        
+        $queryBuilder = $this->createQueryBuilder('v');
+        $queryBuilder->where('v.mdp = :mdp')->setParameter(':mdp', $mdp);
+        
+        return $queryBuilder;
+        
+    }
 }

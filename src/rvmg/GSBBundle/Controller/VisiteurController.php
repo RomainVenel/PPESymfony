@@ -10,6 +10,9 @@ use rvmg\GSBBundle\Entity\Lignefraishorsforfait;
 use rvmg\GSBBundle\Entity\Fichefrais;
 use rvmg\GSBBundle\Formulaires\Data\ChooseMonthAndVisitorClass;
 use rvmg\GSBBundle\Formulaires\Type\ChooseMonthAndVisitorType;
+use rvmg\GSBBundle\Formulaires\Data\ChangeMdpClass;
+use rvmg\GSBBundle\Formulaires\Type\ChangeMdpType;
+
 /**
  * Description of VisiteurController
  *
@@ -246,6 +249,22 @@ class VisiteurController extends Controller{
 
         return $fichefrais;
         
+    }
+    
+    public function changeMDPAction(){
+        
+        $em = $this->getDoctrine()->getManager();
+        
+        $changeMdpForm = new ChangeMdpClass();
+
+        $form = $this->createForm(new ChangeMdpType(), $changeMdpForm);
+
+        $request = $this->container->get('request');
+        $form->handleRequest($request);
+        
+        return $this->render('rvmgGSBBundle:Visiteur:changeMdp.html.twig'
+                , array('form'=>$form->createView()));
+                   
     }
     
 }
