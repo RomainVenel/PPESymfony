@@ -1,53 +1,51 @@
-body{
-  
-    background-image: url("../images/labo.jpg");
-    position:absolute;
-    height:100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
-
 @font-face{
-    
+   
     font-family: "TitreGSB";
     src: url('../fonts/BubaDEMO-Outline.otf');
-        
+       
 }
 
 @font-face{
-    
+   
     font-family: "ChampForm";
     src: url('../fonts/Insanibu.ttf');
 }
 
 @font-face{
-    
+   
     font-family: "DateGSB";
     src: url('../fonts/AlexandriaFLF-Bold.ttf');
 }
 
 @font-face{
-    
+   
     font-family: "ChampFiche";
     src: url('../fonts/CaslonCP.otf');
 }
 
 @font-face{
-    
+   
     font-family: "FicheAffichage";
-    src: url('../fonts/CaslonCP.otf');
+    src: url('../fonts/Typo_Round_Bold_Demo.otf');
 }
-             
+
+@font-face{
+   
+    font-family: "FicheAffichageHaut";
+    src: url('../fonts/Mermaid1001.ttf');
+}
+
+
+            
 h1{
-    
+   
     font-family: "TitreGSB";
     font-weight: bold;
     font-size: 50px
 }
 
 #Deco{
-    
+   
     right: 0;
     position: absolute;
     top: 0;
@@ -55,7 +53,7 @@ h1{
 }
 
 .containerAccueil{
-    
+   
     width: 500px;
     height: 320px;
     background-color: rgba(52,73,94,0.7);
@@ -66,7 +64,7 @@ h1{
 }
 
 .containerForfait{
-    
+   
     width: 500px;
     height: 320px;
     background-color: rgba(180,40,40,0.7);
@@ -76,8 +74,16 @@ h1{
     padding: 5px 15px 15px;
 }
 
+.containerFiche{
+   
+    border-radius: 10px;
+    margin: 0 auto;
+    margin-top: 3%;
+    padding: 5px 15px 15px;
+}
+
 .ChampForm{
-    
+   
     color: #FFF;
     font-family: "ChampForm";
     font-weight: bold;
@@ -87,14 +93,14 @@ h1{
 }
 
 .BoutonForm{
-    
+   
     display: block;
     display: inline-block;
     margin-left: 37%;
 }
 
-.radioButton{   
-    
+.radioButton{  
+   
     display:ruby;
     color:white;
     font-size:1.5em;
@@ -103,7 +109,7 @@ h1{
 }
 
 .CouleurConnecte{
-    
+   
     color: #FFF;
     right: 120px;
     position: absolute;
@@ -125,35 +131,35 @@ h1{
 }
 
 p{
-    
+   
     font-size: 15px;
     text-align: center;
 }
 
 .navbar-default{
-    
+   
     background-color: #ff6666;
 }
 
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
-    
+   
     color: #FFF;
 }
 
 .navbar-default .navbar-brand {
-    
+   
     color: #222222;
 }
 
 .navbar-default .navbar-nav > li > a {
-    
+   
     color: #222222;
 }
 
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-    
+   
     color: #FFF;
 }
 
@@ -223,10 +229,15 @@ p{
     margin-top: 20px;
 }
 
+.margin-top--20{
+    margin-top: -20px;
+}
+
 .titreFicheFrais{
     font-family: "TitreGSB";
     font-weight: bold;
     font-size: 30px;
+    margin-bottom: -30px;
 }
 
 .titreConsulterFrais{
@@ -262,6 +273,12 @@ p{
     font-size: 15px;
 }
 
+.ficheAffichageHaut{
+    font-family: "FicheAffichageHaut";
+    font-weight: bold;
+    font-size: 20px;
+}
+
 .bottom{
     margin-top: 20px;
     text-align: center;
@@ -274,4 +291,3 @@ p{
         height: 500px;
     }
 }
-

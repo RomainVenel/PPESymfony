@@ -12,4 +12,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class LignefraisforfaitRepository extends EntityRepository
 {
+    public function removeAll(){
+        $query = $this->createQueryBuilder('l')
+                ->delete()->getQuery()->execute();
+        
+        return $query;
+    }
 }

@@ -10,7 +10,8 @@
                     {{form_row(form.idfraisforfait)}}
                     {{form_row(form.quantite)}}
                     <input type="submit" class="btn btn-success" value="Valider"/>
-                    <input type="reset" class="btn btn-danger" />
+                    <a href="{{ path('rvmg_gsb_annuler_forfait',{'id':idLigne}) }}" class="btn btn-warning">Annuler</a>
+                    <a href="{{ path('rvmg_gsb_supprimer_forfait',{'id':idLigne})}}" class="btn btn-danger">Supprimer</a>
                     {{form_end(form)}}
 
                 </div>
@@ -40,6 +41,14 @@
             </div>
         </div>
     </div>
+    {% if app.session.flashBag.has('error') %}
+        <div class="alert alert-info">
+            {% for msg in app.session.flashBag.get('error') %}
+                {{ msg }}
+            {% endfor %}
+        </div>
+    {% endif %}    
+                    
     {# Revenir à la page précédente en javascript #}
     <div class="text-center">
         <a href="" onClick="javascript:window.history.go(-1)"><button type="submit" class="btn btn-primary">Retour</button></a>                       
