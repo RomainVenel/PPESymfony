@@ -53,3 +53,7 @@ rvmg_gsb_choose_fiche_frais:
 rvmg_gsb_follow:
     path:     /suivre/{fichefrais}
     defaults: { _controller: rvmgGSBBundle:Comptable:follow }
+    
+rvmg_gsb_change_mdp:
+    path:     /changeMdp
+    defaults: { _controller: rvmgGSBBundle:Visiteur:changeMdp }

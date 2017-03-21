@@ -16,7 +16,7 @@ class VisiteurRepository extends EntityRepository
     public function findByMdpAndLogin($login, $mdp){
         
         $queryBuilder = $this->createQueryBuilder('v');
-        $queryBuilder->where('v.login = :login')->setParameter('login',$login)->andWhere('v.mdp = :mdp')->setParameter('mdp',$mdp);
+        $queryBuilder->where('v.login = :login')->setParameter('login',$login)->andWhere('v.mdp = :mdp')->setParameter('mdp', $mdp);
         return $queryBuilder->getQuery()->getOneOrNullResult();
     }
     
@@ -48,6 +48,15 @@ class VisiteurRepository extends EntityRepository
         $queryBuilder->where('v.idcomptable = :comptable')->setParameter(':comptable', $comptable);
         
         //Return only the queryBuilder for the custom form ChooseMonthAndVisitorType
+        return $queryBuilder;
+        
+    }
+    
+    public function changeMdp($mdp){
+        
+        $queryBuilder = $this->createQueryBuilder('v');
+        $queryBuilder->where('v.mdp = :mdp')->setParameter(':mdp', $mdp);
+        
         return $queryBuilder;
         
     }

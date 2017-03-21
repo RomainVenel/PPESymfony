@@ -50,7 +50,10 @@ class AccueilController extends Controller{
                     //IF the visitor is empty
                     if(!$visiteur){
                         //Redirect the user to the error view
-                        return $this->render('rvmgGSBBundle:Accueil:vueConnexionErreur.html.twig', array('data'=>$data));
+                        $request->getSession()
+                        ->getFlashBag()
+                        ->add('error', 'Login et/ou mdp incorrect(s)');
+                        return $this->render('rvmgGSBBundle:Accueil:index.html.twig', array('form'=>$form->createView()));
                     }
                     //ELSE
                     else{
@@ -81,7 +84,10 @@ class AccueilController extends Controller{
                     //IF the comptable is empty
                     if(!$comptable){
                         //Redirect user to error page
-                        return $this->render('rvmgGSBBundle:Accueil:vueConnexionErreur.html.twig', array('data'=>$data));
+                        $request->getSession()
+                        ->getFlashBag()
+                        ->add('error', 'Login et/ou mdp inccorect(s)');
+                        return $this->render('rvmgGSBBundle:Accueil:index.html.twig', array('form'=>$form->createView()));
                     }
                     //ELSE
                     else{
