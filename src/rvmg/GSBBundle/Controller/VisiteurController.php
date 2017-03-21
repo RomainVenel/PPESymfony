@@ -53,12 +53,18 @@ class VisiteurController extends Controller{
         //Make a second variable to get the currentMonth
         $currentMonth = new \DateTime();
         $currentMonth->setDate($now->format('Y'), $now->format('m'), 1);
+        
+        $lastMonth = new \DateTime();
+        $lastMonth->setDate($currentMonth->format('Y'), ($currentMonth->format('m')-1), 1);
 
         //Try to find a FicheFrais with visitor and currentMonth past in params
-        $fichefrais = $em->getRepository('rvmgGSBBundle:FicheFrais')
+        $fichefrais = $em->getRepository('rvmgGSBBundle:Fichefrais')
                 ->findOneBy(array('idvisiteur'=>$visiteur,
                     'mois'=>$currentMonth));
         
+        $lastFichefrais = $em->getRepository('rvmgGSBBundle:Fichefrais')
+                ->findOneBy(array('idvisiteur'=>$visiteur,
+                    'mois'=>$lastMonth));
         //IF the fiche is not empty
         if($fichefrais){
             //We retrieve all the ligne which correspond to that fiche
@@ -69,6 +75,14 @@ class VisiteurController extends Controller{
         else{
             //Affect NULL value to the variable
             $lignesFraisForfait = null;
+        }
+        
+        if($lastFichefrais){
+            $state = $em->getRepository('rvmgGSBBundle:Etat')->findOneByIdetat('CL');
+            $lastFichefrais->setIdetat($state);
+            
+            $em->persist($lastFichefrais);
+            $em->flush();
         }
                
         //IF the form is valid
@@ -100,45 +114,45 @@ class VisiteurController extends Controller{
             }
             //ELSE
             else{
-                
                 //Try to find a ligne from the FicheFrais that has the same idForfait
                 $ligneFrais = $em->getRepository('rvmgGSBBundle:Lignefraisforfait')
                         ->findOneBy(array('idfichefrais' =>$fichefrais,
                             'idfraisforfait'=>$ligneForfaitForm->getIdfraisforfait()));
-                
+
                 //IF ligneFrais is empty
                 if(!$ligneFrais){
-                    
+
                     //Just set the idFicheFrais of it
                     $ligneForfaitForm->setIdfichefrais($fichefrais);
-                    
+
                     //And persist
                     $em->persist($ligneForfaitForm);
-                    
+
                     $em->flush();
-                    
+
                     $id = $ligneForfaitForm->getIdlignefraisforfait();
-                    
+
                 }
                 //ELSE
                 else{
-                    
+
                     //Get the quantite of the ligne
                     $quantite = $ligneForfaitForm->getQuantite();
                     //Update it with the value pick by the user
                     $ligneFrais->setQuantite($quantite);
-                    
+
                     //Persist
                     $em->persist($ligneFrais);
-                    
+
                     $em->flush();
-                    
+
                     $id = $ligneFrais->getIdlignefraisforfait();
-                    
+
                 }
-               
+
                 //Redirect the user to the form, that  allows to refresh the table
                 return $this->redirect($this->generateUrl('rvmg_gsb_renseigner_forfait', array('id'=>$id)));
+                
             }  
         }
         
@@ -182,10 +196,17 @@ class VisiteurController extends Controller{
         $currentMonth = new \DateTime();
         $currentMonth->setDate($now->format('Y'), $now->format('m'), 1);
 
+        $lastMonth = new \DateTime();
+        $lastMonth->setDate($currentMonth->format('Y'), ($currentMonth->format('m')-1), 1);
+        
         //Try to find the FicheFrais
         $fichefrais = $em->getRepository('rvmgGSBBundle:FicheFrais')
                 ->findOneBy(array('idvisiteur'=>$visiteur,
                     'mois'=>$currentMonth)); 
+        
+        $lastFichefrais = $em->getRepository('rvmgGSBBundle:Fichefrais')
+                ->findOneBy(array('idvisiteur'=>$visiteur,
+                    'mois'=>$lastMonth));
         
         //IF the fiche exists
         if($fichefrais){
@@ -199,6 +220,14 @@ class VisiteurController extends Controller{
             $lignesFraisHorsForfait = null;
         }
         
+        if($lastFichefrais){
+            $state = $em->getRepository('rvmgGSBBundle:Etat')->findOneByIdetat('CL');
+            $lastFichefrais->setIdetat($state);
+            
+            $em->persist($lastFichefrais);
+            $em->flush();
+        }
+        
         //IF the form is valid
         if($form->isValid()){
             //IF there's not fiche
@@ -208,6 +237,8 @@ class VisiteurController extends Controller{
                 $fichefrais = $this->creerFicheFrais($visiteur, $currentMonth, $now);
                 //And set the ID to the ligne
                 $ligneHorsForfaitForm->setIdfichefrais($fichefrais);
+                $nb = $fichefrais->getNbjustificatifs();
+                $fichrefais->setNbjustificatifs($nb++);
                 
             }
             //ELSE
@@ -215,10 +246,13 @@ class VisiteurController extends Controller{
                 
                 //Only set idFichefrais of the ligne
                 $ligneHorsForfaitForm->setIdfichefrais($fichefrais);
+                $nb = $fichefrais->getNbjustificatifs();
+                $fichrefais->setNbjustificatifs($nb++);
                 
             }
             
             //Persist and flush 
+            $em->persist($fichrefais);
             $em->persist($ligneHorsForfaitForm);
             $em->flush();
             
@@ -344,7 +378,7 @@ class VisiteurController extends Controller{
      * 
      * Function to create a new FicheFrais
      */
-    public function creerFicheFrais($visiteur,$currentMonth, $now){
+    public function creerFicheFrais($visiteur,$month, $now){
         
         //Get Doctrine Manager
         $em = $this->getDoctrine()->getManager();
@@ -354,7 +388,7 @@ class VisiteurController extends Controller{
         $fichefrais->setIdvisiteur($visiteur);
         $fichefrais->setMontantvalide(0);
         $fichefrais->setNbjustificatifs(0);
-        $fichefrais->setMois($currentMonth);
+        $fichefrais->setMois($month);
         $fichefrais->setDatemodif($now);
         //Get the state from database and define the fichefrais's state
         $state = $em->getRepository('rvmgGSBBundle:Etat')->findOneByIdetat('CR');
@@ -363,15 +397,7 @@ class VisiteurController extends Controller{
         //Persist and flush
         $em->persist($fichefrais);
         $em->flush();
-
-        /*      COMMENTE POUR TEST
-        //Get the fichefrais which was just create
-        $fichefrais = $em->getRepository('rvmgGSBBundle:FicheFrais')
-            ->findOneBy(array('idvisiteur'=>$visiteur,
-                'mois'=>$currentMonth));
-        */
-
-        //Return it
+        
         return $fichefrais;
         
     }
