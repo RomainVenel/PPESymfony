@@ -9,6 +9,13 @@
 {% block body %}
     <h1 align="center">Galaxy Swiss Bourdin</h1>
     <br/>
+    {% if app.session.flashBag.has('error') %}
+        <div class="alert alert-info">
+            {% for msg in app.session.flashBag.get('error') %}
+                {{ msg }}
+            {% endfor %}
+        </div>
+    {% endif %}
     <div class="containerAccueil">
         {{ form_start(form) }}
         <div class="ChampForm">{{ form_label(form.login) }}</div>

@@ -387,8 +387,36 @@ class VisiteurController extends Controller{
         $request = $this->container->get('request');
         $form->handleRequest($request);
         
-        return $this->render('rvmgGSBBundle:Visiteur:changeMdp.html.twig'
-                , array('form'=>$form->createView()));
+        if($form->isValid()){
+            
+            $visiteur = $em->getRepository('rvmgGSBBundle:Visiteur')
+                    ->findOneBy(array('idvisiteur'=>$this->getRequest()->getSession()->get('user_id')));
+            
+            $ancienMdp = ($form["ancienMdp"]->getData());
+            $nouveauMdp = ($form["nouveauMdp"]->getData());
+            
+            if($ancienMdp == $visiteur->getMdp()){
+
+                $visiteur->setMdp(($nouveauMdp));
+
+                $em->persist($visiteur);
+                $em->flush();
+                
+                $request->getSession()
+                    ->getFlashBag()
+                    ->add('error', 'Changement de mot de passe effectué');
+                return $this->render('rvmgGSBBundle:Visiteur:changeMdp.html.twig', array('form'=>$form->createView()));
+             
+            }else{
+             
+                $request->getSession()
+                    ->getFlashBag()
+                    ->add('error', 'Ancien mot de passe incorrect');
+                return $this->render('rvmgGSBBundle:Visiteur:changeMdp.html.twig', array('form'=>$form->createView()));
+            }
+        }
+            
+        return $this->render('rvmgGSBBundle:Visiteur:changeMdp.html.twig', array('form'=>$form->createView()));
     }
                    
     /**

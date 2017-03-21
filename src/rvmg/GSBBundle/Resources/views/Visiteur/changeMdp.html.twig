@@ -7,6 +7,21 @@
 {% block body %}
     
     <h1>Changement de mot de passe</h1>
-    {{ form(form) }}
+    
+    <div class="containerAccueil">
+    {{ form_start(form) }}
+    {{ form_row(form.ancienMdp) }}
+    {{ form_row(form.nouveauMdp) }}
+    <div class="BoutonForm"><input type="submit" value="Valider" class="btn btn-primary" />
+            <input type="reset" value="Annuler" class="btn btn-danger" /></div>
+    {{ form_end(form) }}
+    </div>
+    {% if app.session.flashBag.has('error') %}
+        <div class="alert alert-info">
+            {% for msg in app.session.flashBag.get('error') %}
+                {{ msg }}
+            {% endfor %}
+        </div>
+    {% endif %}
     
 {% endblock %}

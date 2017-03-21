@@ -16,7 +16,7 @@ class VisiteurRepository extends EntityRepository
     public function findByMdpAndLogin($login, $mdp){
         
         $queryBuilder = $this->createQueryBuilder('v');
-        $queryBuilder->where('v.login = :login')->setParameter('login',$login)->andWhere('v.mdp = :mdp')->setParameter('mdp',$mdp);
+        $queryBuilder->where('v.login = :login')->setParameter('login',$login)->andWhere('v.mdp = :mdp')->setParameter('mdp', $mdp);
         return $queryBuilder->getQuery()->getOneOrNullResult();
     }
     
