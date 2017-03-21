@@ -187,7 +187,7 @@ class VisiteurController extends Controller{
         //IF the fiche exists
         if($fichefrais){
             //Get all the ligneHorsForfait whith the ficheFrais's ID past in params
-            $lignesFraisHorsForfait = $em->getRepository('rvmgGSBBundle:lignefraishorsforfait')
+            $lignesFraisHorsForfait = $em->getRepository('rvmgGSBBundle:Lignefraishorsforfait')
                 ->findBy(array('idfichefrais'=>$fichefrais));
         }
         //ELSE
