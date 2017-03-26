@@ -124,15 +124,17 @@ class ComptableController extends Controller{
                     
                     foreach($oneFrais['listForfait'] as $oneLine){
                         
+                        //Increase montant with amount of frais multiply by forfait price
                         $montant = $montant 
                                 + ($oneLine->getIdfraisforfait()->getMontant()
                                 * $oneLine->getQuantite());
+                        //Increase 
                         $nbJustificatifs++;
                         
                     }
                 }else{
                     foreach($oneFrais['listForfait'] as $oneLine){
-                        
+                        //Increase amount of justificatif and cost amount
                         $montant = $montant + $oneLine->getMontant();
                         $nbJustificatifs++;
                         
@@ -293,9 +295,11 @@ class ComptableController extends Controller{
         
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('rvmgGSBBundle:Fichefrais');
+        //Find current fiche
         $currentFicheFrais = $repository->findOneByIdfichefrais($fichefrais);
         $currentDate = new \DateTime();
         if($currentFicheFrais){
+            //Set state to RB
             $state = $em->getRepository('rvmgGSBBundle:Etat')->findOneByIdetat('RB');
             $currentFicheFrais->setIdetat($state);
             $currentFicheFrais->setDatemodif($currentDate);
@@ -306,6 +310,7 @@ class ComptableController extends Controller{
         
         return $this->redirect($this->generateUrl('rvmg_gsb_choose_fiche_frais'));
         //TODO Lorsque le comptable valide la fiche de frais, envoyer une notification à l'application mobile
+        //External link
         
     }
     
@@ -319,6 +324,7 @@ class ComptableController extends Controller{
      */
     public function getLignes($fichefrais){
         
+        //Retrieve all lines of fichefrais
         $em = $this->getDoctrine()->getEntityManager();
         $repositoryForfait = $em->getRepository('rvmgGSBBundle:Lignefraisforfait');
         $repositoryHorsForfait = $em->getRepository('rvmgGSBBundle:Lignefraishorsforfait');

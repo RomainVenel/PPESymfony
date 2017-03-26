@@ -402,12 +402,20 @@ class VisiteurController extends Controller{
         
     }
     
+    /**
+     * 
+     * @return type
+     * Allow to change password
+     */
     public function changeMDPAction(){
         
+        //Get EntityManager from Doctrine
         $em = $this->getDoctrine()->getManager();
         
+        //Instantiate ChangeMdpClass
         $changeMdpForm = new ChangeMdpClass();
 
+        //Create form with it
         $form = $this->createForm(new ChangeMdpType(), $changeMdpForm);
 
         $request = $this->container->get('request');
@@ -415,19 +423,24 @@ class VisiteurController extends Controller{
         
         if($form->isValid()){
             
+            //Retrieve the visiteur from the database with his ID
             $visiteur = $em->getRepository('rvmgGSBBundle:Visiteur')
                     ->findOneBy(array('idvisiteur'=>$this->getRequest()->getSession()->get('user_id')));
             
+            //get the passwords
             $ancienMdp = ($form["ancienMdp"]->getData());
             $nouveauMdp = ($form["nouveauMdp"]->getData());
             
+            //Compare the older password inside the database and the one is input
             if($ancienMdp == $visiteur->getMdp()){
 
+                //Define the new password
                 $visiteur->setMdp(($nouveauMdp));
 
                 $em->persist($visiteur);
                 $em->flush();
                 
+                //Inform user
                 $request->getSession()
                     ->getFlashBag()
                     ->add('error', 'Changement de mot de passe effectué');
@@ -435,6 +448,7 @@ class VisiteurController extends Controller{
              
             }else{
              
+                //Inform user
                 $request->getSession()
                     ->getFlashBag()
                     ->add('error', 'Ancien mot de passe incorrect');
@@ -454,14 +468,17 @@ class VisiteurController extends Controller{
      */
     public function annulerForfaitAction($id){
         
+        
         $request = $this->container->get('request');
         if($id == -1){
+            //Inform user
             $request->getSession()
                     ->getFlashBag()
                     ->add('error', 'Vous n\'avez pas encore ajouté de frais pour cette session.');
             return $this->redirect($this->generateUrl('rvmg_gsb_renseigner_forfait'));
         }else{
             
+            //deincrease the lastest insert ligne 
             $em = $this->getDoctrine()->getManager();
             $ligne = $em->getRepository('rvmgGSBBundle:Lignefraisforfait')
                     ->findOneByIdlignefraisforfait($id);
@@ -491,6 +508,7 @@ class VisiteurController extends Controller{
             return $this->redirect($this->generateUrl('rvmg_gsb_renseigner_forfait'));
         }else{
             
+            //Remove all frais inside the database
             $em = $this->getDoctrine()->getManager();
             $ligne = $em->getRepository('rvmgGSBBundle:Lignefraisforfait')
                     ->findOneByIdlignefraisforfait($id);
@@ -518,7 +536,7 @@ class VisiteurController extends Controller{
                     ->add('error', 'Vous n\'avez pas encore ajouté de frais pour cette session.');
             return $this->redirect($this->generateUrl('rvmg_gsb_renseigner_horsforfait'));
         }else{
-            
+            //Remove the lastest insert ligne
             $em = $this->getDoctrine()->getManager();
             $ligne = $em->getRepository('rvmgGSBBundle:Lignefraishorsforfait')
                     ->findOneByIdlignefraishorsforfait($id);
