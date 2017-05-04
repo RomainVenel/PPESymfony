@@ -45,11 +45,9 @@ class ComptableController extends Controller{
         if ($form->isValid()){
             $visitor = $choose->getVisitor();
             $month = $choose->getMonth();
-            echo $month->format('d-m-Y');
             //Try to find a Fichefrais
             $repository = $em->getRepository('rvmgGSBBundle:Fichefrais');
             $fichefrais = $repository->findOneByMonthAndVisitorAndState($visitor, $month);
-            echo $fichefrais;
             //If $fichefrais is empty, display a message at the user to inform him
             //that's there's no fichefrais for this month and visitor
             if(!$fichefrais){

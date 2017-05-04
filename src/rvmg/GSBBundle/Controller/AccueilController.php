@@ -154,4 +154,11 @@ class AccueilController extends Controller{
         //Render the view disconnected
         return $this->render('rvmgGSBBundle:Accueil:vueDeconnexion.html.twig');
     }
+    
+    public function aProposAction(){
+        
+        $em = $this->getDoctrine()->getManager();
+        
+        return $this->render('rvmgGSBBundle:Accueil:aPropos.html.twig');
+    }
 }

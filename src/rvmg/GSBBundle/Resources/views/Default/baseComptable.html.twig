@@ -27,7 +27,7 @@
                                     <li><a href="{{ path('rvmg_gsb_choose_fiche_frais')}}">Suivre</a></li>
                                 </ul>
                             </li>
-                            <li><a href="#">Paramètres</a></li>
+                            <li><a href="{{ path('rvmg_gsb_apropos') }}">À propos</a></li>
                             {% block identite %}
                                 <div class="CouleurConnecte">{{ app.session.get('user_firstname')~ " " ~app.session.get('user_lastname') }}</div>
                             {% endblock %}

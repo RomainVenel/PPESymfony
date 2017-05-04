@@ -57,3 +57,7 @@ rvmg_gsb_follow:
 rvmg_gsb_change_mdp:
     path:     /changeMdp
     defaults: { _controller: rvmgGSBBundle:Visiteur:changeMdp }
+    
+rvmg_gsb_apropos:
+    path:   /aPropos
+    defaults: { _controller: rvmgGSBBundle:Accueil:aPropos }

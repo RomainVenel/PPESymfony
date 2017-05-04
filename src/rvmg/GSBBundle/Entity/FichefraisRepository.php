@@ -74,7 +74,7 @@ class FichefraisRepository extends EntityRepository
         $queryBuilder->where('f.idetat = :state')->setParameter(':state', $state)
                 ->andWhere('f.idvisiteur IN (:visitors)')->setParameter(':visitors', $visitors);
         
-        return $queryBuilder->getQuery()->getOneOrNullResult();
+        return $queryBuilder->getQuery()->getResult();
     }
     
 

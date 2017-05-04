@@ -64,7 +64,8 @@ class VisiteurController extends Controller{
         
         $lastFichefrais = $em->getRepository('rvmgGSBBundle:Fichefrais')
                 ->findOneBy(array('idvisiteur'=>$visiteur,
-                    'mois'=>$lastMonth));
+                    'mois'=>$lastMonth,
+                    'idetat'=>'CR'));
         //IF the fiche is not empty
         if($fichefrais){
             //We retrieve all the ligne which correspond to that fiche
@@ -238,7 +239,7 @@ class VisiteurController extends Controller{
                 //And set the ID to the ligne
                 $ligneHorsForfaitForm->setIdfichefrais($fichefrais);
                 $nb = $fichefrais->getNbjustificatifs();
-                $fichrefais->setNbjustificatifs($nb++);
+                $fichefrais->setNbjustificatifs($nb++);
                 
             }
             //ELSE
@@ -247,12 +248,12 @@ class VisiteurController extends Controller{
                 //Only set idFichefrais of the ligne
                 $ligneHorsForfaitForm->setIdfichefrais($fichefrais);
                 $nb = $fichefrais->getNbjustificatifs();
-                $fichrefais->setNbjustificatifs($nb++);
+                $fichefrais->setNbjustificatifs($nb++);
                 
             }
             
             //Persist and flush 
-            $em->persist($fichrefais);
+            $em->persist($fichefrais);
             $em->persist($ligneHorsForfaitForm);
             $em->flush();
             
@@ -372,7 +373,7 @@ class VisiteurController extends Controller{
     /**
      * 
      * @param type $visiteur connected Visitor
-     * @param type $currentMonth current month and year
+     * @param type $month current month and year
      * @param type $now current date
      * @return type FicheFrais
      * 
