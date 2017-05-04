@@ -273,7 +273,7 @@ class ComptableController extends Controller{
                         "type"=>"horsforfait"));
 
                 return $this->render('rvmgGSBBundle:Comptable:followFicheFrais.html.twig',
-                            array('tableForfait'=>$tableForfait));
+                            array('tableForfait'=>$tableForfait, 'fichefrais' => $fichefrais));
             }
         }
         

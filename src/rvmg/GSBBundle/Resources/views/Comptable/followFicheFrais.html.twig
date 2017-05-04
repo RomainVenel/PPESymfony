@@ -4,7 +4,7 @@
 {% endblock %}
 {% block body %}
 
-   {% set fichefrais = null %}
+   {% set fichefrais = fichefrais.idFichefrais %}
    
     <table class="table table-bordered" >
         {# foreach occurence in tableForfait#}
@@ -34,7 +34,6 @@
                             <td>{{frais.quantite}}</td>
                         </tr>
 
-                        {% set fichefrais = frais.idFichefrais.idFichefrais %}
                     {% endif %}
                     {% if list.type == "horsforfait" %}
                         <tr>
